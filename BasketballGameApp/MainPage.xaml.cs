@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using BasketballGameApp.Services;
 
 namespace BasketballGameApp
 {
@@ -13,6 +14,12 @@ namespace BasketballGameApp
         public MainPage()
         {
             InitializeComponent();
+        }
+
+        private async void Button_Clicked(object sender, EventArgs e)
+        {
+            BasketballGameAPIProxy proxy =  BasketballGameAPIProxy.CreateProxy();
+          lbl_txt.Text= await proxy.GetHello();
         }
     }
 }

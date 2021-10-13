@@ -68,34 +68,7 @@ namespace BasketballGameApp.ViewModels
                 ServerStatus = "קורא נתונים...";
                 App theApp = (App)App.Current;
                 theApp.CurrentUser = user;
-                //bool success = await LoadPhoneTypes(theApp);
-                //if (!success)
-                //{
-                //    await App.Current.MainPage.Navigation.PopModalAsync();
-                //    await App.Current.MainPage.DisplayAlert("שגיאה", "קריאת נתונים נכשלה. נסה שוב מאוחר יותר", "בסדר");
-                //}
-                //else
-                //{
-                //    //Initiate all phone types refrence to the same objects of PhoneTypes
-                //    foreach (UserContact uc in user.UserContacts)
-                //    {
-                //        foreach (Models.ContactPhone cp in uc.ContactPhones)
-                //            cp.PhoneType = theApp.PhoneTypes.Where(pt => pt.TypeId == cp.PhoneTypeId).FirstOrDefault();
-                //    }
-
-                //    Page p = new NavigationPage(new Views.ContactsList());
-                //    App.Current.MainPage = p;
-                //}
-
-
             }
-        }
-
-        private async Task<bool> LoadPhoneTypes(App theApp)
-        {
-            BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
-            theApp.PhoneTypes = await proxy.GetPhoneTypesAsync();
-            return theApp.PhoneTypes != null;
         }
     }
 }
