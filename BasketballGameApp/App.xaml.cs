@@ -1,6 +1,9 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using BasketballGameApp.Models;
+using BasketballGameApp.Views;
+using System.Collections.Generic;
 
 namespace BasketballGameApp
 {
@@ -13,11 +16,19 @@ namespace BasketballGameApp
                 return true; //change this before release!
             }
         }
+
+        //The current logged in user
+        public User CurrentUser { get; set; }
+
+        //The list of phone types
+        //public List<PhoneType> PhoneTypes { get; set; }
+
         public App()
         {
             InitializeComponent();
-
-            MainPage = new MainPage();
+            CurrentUser = null;
+            //PhoneTypes = new List<PhoneType>();
+            MainPage = new Login();
         }
 
         protected override void OnStart()
