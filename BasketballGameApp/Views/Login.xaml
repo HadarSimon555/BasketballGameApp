@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BasketballGameApp.Views.Login">
+             x:Class="BasketballGameApp.Views.Login" 
+             NavigationPage.HasNavigationBar="True">
     <ContentPage.Resources>
         <Style TargetType="StackLayout" x:Key="LoginStack">
             <Setter Property="Orientation" Value="Vertical"/>
@@ -24,18 +25,17 @@
             <Setter Property="FontSize" Value="Large"/>
             <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
             <Setter Property="TextColor" Value="White"/>
-            <Setter Property="BackgroundColor" Value="#088da5"/>
+            <Setter Property="BackgroundColor" Value="#f9690e"/>
         </Style>
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout Style="{StaticResource LoginStack}">
-            <Label Text="אנשי קשר" Style="{StaticResource FormTitle}"></Label>
-            <Frame BackgroundColor="#BF043055" HasShadow="False">
+            <Frame BackgroundColor="#f9690e" HasShadow="False">
                 <StackLayout>
                     <Entry x:Name="Email" Text="{Binding Email}" Placeholder="דואר אלקטרוני"   
                            Keyboard="Email"  
                            Style="{StaticResource LoginEntry}"/>
-                    <Entry x:Name="Password" Text="{Binding Password}" Placeholder="סיסמה" Focused="Password_Focused" 
+                    <Entry x:Name="Password" Text="{Binding Password}" Placeholder="סיסמה"
                            Style="{StaticResource LoginEntry}"/>
                 </StackLayout>
             </Frame>
