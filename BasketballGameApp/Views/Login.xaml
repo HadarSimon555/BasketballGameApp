@@ -25,12 +25,12 @@
             <Setter Property="FontSize" Value="Large"/>
             <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
             <Setter Property="TextColor" Value="White"/>
-            <Setter Property="BackgroundColor" Value="#f9690e"/>
+            <Setter Property="BackgroundColor" Value="#f27935"/>
         </Style>
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout Style="{StaticResource LoginStack}">
-            <Frame BackgroundColor="#f9690e" HasShadow="False">
+            <Frame BackgroundColor="#f27935" HasShadow="False">
                 <StackLayout>
                     <Entry x:Name="Email" Text="{Binding Email}" Placeholder="דואר אלקטרוני"   
                            Keyboard="Email"  
