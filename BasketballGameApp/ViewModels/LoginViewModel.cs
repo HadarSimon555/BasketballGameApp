@@ -9,6 +9,7 @@ using BasketballGameApp.Services;
 using BasketballGameApp.Models;
 using Xamarin.Essentials;
 using System.Linq;
+using BasketballGameApp.DTO;
 
 namespace BasketballGameApp.ViewModels
 {
@@ -57,7 +58,8 @@ namespace BasketballGameApp.ViewModels
             ServerStatus = "מתחבר לשרת...";
             //await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatusPage(this));
             BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
-            User user = await proxy.LoginAsync(Email, Password);
+
+            UserDTO user = await proxy.LoginAsync(new UserDTO() { Email = "", Pass = "" }); ;
             if (user == null)
             {
                 await App.Current.MainPage.Navigation.PopModalAsync();

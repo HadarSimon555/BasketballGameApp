@@ -11,6 +11,7 @@ using System.Text.Encodings.Web;
 using Xamarin.Forms;
 using Xamarin.Essentials;
 using System.IO;
+using BasketballGameApp.DTO;
 
 namespace BasketballGameApp.Services
 {
@@ -66,7 +67,6 @@ namespace BasketballGameApp.Services
             return proxy;
         }
 
-
         private BasketballGameAPIProxy(string baseUri, string basePhotosUri)
         {
             //Set client handler to support cookies!!
@@ -79,6 +79,7 @@ namespace BasketballGameApp.Services
             this.basePhotosUri = basePhotosUri;
         }
 
+        #region GetHello
         public async Task<string> GetHello()
         {
             try
@@ -96,29 +97,30 @@ namespace BasketballGameApp.Services
 
             }
         }
-        public string GetBasePhotoUri() { return this.basePhotosUri; }
+        #endregion
 
-        //Login!
-        public async Task<User> LoginAsync(string email, string pass)
+        #region GetBasePhotoUri
+        public string GetBasePhotoUri() { return this.basePhotosUri; }
+        #endregion
+
+        #region LoginAsync
+        public async Task<UserDTO> LoginAsync(UserDTO userDTO)
         {
             try
             {
-                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/Login?email={email}&pass={pass}");
+                string json = JsonSerializer.Serialize(userDTO);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/Login", content);
                 if (response.IsSuccessStatusCode)
                 {
                     JsonSerializerOptions options = new JsonSerializerOptions
                     {
-                        ReferenceHandler = ReferenceHandler.Preserve, //avoid reference loops!
                         PropertyNameCaseInsensitive = true
                     };
-                    string content = await response.Content.ReadAsStringAsync();
-                    User u = JsonSerializer.Deserialize<User>(content, options);
-                    return u;
+                    string res = await response.Content.ReadAsStringAsync();
+                    return JsonSerializer.Deserialize<UserDTO>(res, options);
                 }
-                else
-                {
-                    return null;
-                }
+                return null;
             }
             catch (Exception e)
             {
@@ -126,6 +128,7 @@ namespace BasketballGameApp.Services
                 return null;
             }
         }
+        #endregion
 
         //Upload file to server (only images!)
         //public async Task<bool> UploadImage(Models.FileInfo fileInfo, string targetFileName)
