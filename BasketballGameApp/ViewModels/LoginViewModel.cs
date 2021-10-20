@@ -55,19 +55,19 @@ namespace BasketballGameApp.ViewModels
 
         public async void OnSubmit()
         {
-            ServerStatus = "מתחבר לשרת...";
+            //ServerStatus = "מתחבר לשרת...";
             //await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatusPage(this));
             BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
 
-            UserDTO user = await proxy.LoginAsync(new UserDTO() { Email = "", Pass = "" }); ;
+            User user = await proxy.LoginAsync(new UserDTO() { Email = this.Email, Pass = this.Password }); ;
             if (user == null)
             {
-                await App.Current.MainPage.Navigation.PopModalAsync();
+                //    await App.Current.MainPage.Navigation.PopModalAsync();
                 await App.Current.MainPage.DisplayAlert("שגיאה", "התחברות נכשלה, בדוק שם משתמש וסיסמה ונסה שוב", "בסדר");
             }
             else
             {
-                ServerStatus = "קורא נתונים...";
+                //ServerStatus = "קורא נתונים...";
                 App theApp = (App)App.Current;
                 theApp.CurrentUser = user;
             }

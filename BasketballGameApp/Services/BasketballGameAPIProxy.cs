@@ -104,7 +104,7 @@ namespace BasketballGameApp.Services
         #endregion
 
         #region LoginAsync
-        public async Task<UserDTO> LoginAsync(UserDTO userDTO)
+        public async Task<User> LoginAsync(UserDTO userDTO)
         {
             try
             {
@@ -118,7 +118,7 @@ namespace BasketballGameApp.Services
                         PropertyNameCaseInsensitive = true
                     };
                     string res = await response.Content.ReadAsStringAsync();
-                    return JsonSerializer.Deserialize<UserDTO>(res, options);
+                    return JsonSerializer.Deserialize<User>(res, options);
                 }
                 return null;
             }
