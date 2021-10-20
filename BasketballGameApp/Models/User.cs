@@ -16,7 +16,7 @@ namespace BasketballGameApp.Models
         public string Pass { get; set; }
         public DateTime BirthDate { get; set; }
         public string Image { get; set; }
-        public bool Gender { get; set; }
+        public string Gender { get; set; }
         public string City { get; set; }
 
         public virtual List<Coach> Coaches { get; set; }

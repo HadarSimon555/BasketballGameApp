@@ -115,6 +115,7 @@ namespace BasketballGameApp.Services
                 {
                     JsonSerializerOptions options = new JsonSerializerOptions
                     {
+                        ReferenceHandler = ReferenceHandler.Preserve,
                         PropertyNameCaseInsensitive = true
                     };
                     string res = await response.Content.ReadAsStringAsync();
