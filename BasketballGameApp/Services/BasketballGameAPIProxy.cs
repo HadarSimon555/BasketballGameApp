@@ -131,6 +131,34 @@ namespace BasketballGameApp.Services
         }
         #endregion
 
+        #region Signup
+        public async Task<User> SigninAsync(string animalName)
+        {
+            try
+            {
+                string json = JsonSerializer.Serialize(animalName);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/Signin", content);
+                if (response.IsSuccessStatusCode)
+                {
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    };
+                    string res = await response.Content.ReadAsStringAsync();
+                    return JsonSerializer.Deserialize<User>(res, options);
+                }
+                return null;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+        #endregion
+
+        #region UploadImage
         //Upload file to server (only images!)
         //public async Task<bool> UploadImage(Models.FileInfo fileInfo, string targetFileName)
         //{
@@ -153,6 +181,7 @@ namespace BasketballGameApp.Services
         //        return false;
         //    }
         //}
+        #endregion
     }
 }
 

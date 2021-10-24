@@ -28,7 +28,7 @@ namespace BasketballGameApp
             InitializeComponent();
             CurrentUser = null;
             //PhoneTypes = new List<PhoneType>();
-            MainPage = new NavigationPage(new Signup());
+            MainPage = new NavigationPage(new Login());
         }
 
         protected override void OnStart()
