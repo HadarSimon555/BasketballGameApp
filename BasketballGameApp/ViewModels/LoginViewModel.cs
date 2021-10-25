@@ -55,6 +55,9 @@ namespace BasketballGameApp.ViewModels
 
         public async void OnSubmit()
         {
+            ServerStatus = "מתחבר לשרת...";
+            await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatusPage(this));
+
             BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
 
             User user = await proxy.LoginAsync(new UserDTO() { Email = this.Email, Pass = this.Password }); ;
@@ -64,6 +67,7 @@ namespace BasketballGameApp.ViewModels
             }
             else
             {
+                ServerStatus = "קורא נתונים...";
                 App theApp = (App)App.Current;
                 theApp.CurrentUser = user;
             }

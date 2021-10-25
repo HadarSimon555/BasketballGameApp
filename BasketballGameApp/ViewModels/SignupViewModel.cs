@@ -18,6 +18,9 @@ namespace BasketballGameApp.ViewModels
     {
         public const string REQUIRED_FIELD = "זהו שדה חובה";
         public const string BAD_EMAIL = "מייל לא תקין";
+        public const string SHORT_PASS = "סיסמה חייבת להכיל לפחות 6 תווים";
+        public const string BAD_DATE = "המשתמש חייב להיות מעל גיל 12";
+        public const string BAD_HEIGHT = "המשתמש חייב להיות מעל 1.5 מטרים";
     }
     class SignupViewModel : BaseViewModel
     {
@@ -64,7 +67,20 @@ namespace BasketballGameApp.ViewModels
         #endregion
 
         #region BirthDate
+        private bool showBirthDateError;
+
+        public bool ShowBirthDateError
+        {
+            get => showBirthDateError;
+            set
+            {
+                showBirthDateError = value;
+                OnPropertyChanged("ShowBirthDateError");
+            }
+        }
+
         private DateTime birthDate;
+
         public DateTime BirthDate
         {
             get => birthDate;
@@ -76,9 +92,9 @@ namespace BasketballGameApp.ViewModels
             }
         }
 
-        private DateTime birthDateError;
+        private string birthDateError;
 
-        public DateTime BirthDateError
+        public string BirthDateError
         {
             get => birthDateError;
             set
@@ -88,77 +104,27 @@ namespace BasketballGameApp.ViewModels
             }
         }
 
+        private const int MIN_AGE = 12;
         private void ValidateBirthDate()
         {
-            this.ShowBirthDateError = DateTime.IsNullOrEmpty(BirthDate);
-        }
-
-        private bool showBirthDateError;
-        public bool ShowBirthDateError
-        {
-            get => showBirthDateError;
-            set
-            {
-                showBirthDateError = value;
-                OnPropertyChanged("ShowBirthDateError");
-            }
+            TimeSpan ts = DateTime.Now - this.BirthDate;
+            this.ShowBirthDateError = ts.TotalDays < (MIN_AGE * 365);
         }
         #endregion
 
-        #region Image
-        private string imgSrc;
+        #region UserImgSrc
+        private string userImgSrc;
 
-        public string ImgSrc
+        public string UserImgSrc
         {
-            get => imgSrc;
+            get => userImgSrc;
             set
             {
-                imgSrc = value;
-                OnPropertyChanged("imgSrc");
+                userImgSrc = value;
+                OnPropertyChanged("UserImgSrc");
             }
         }
         private const string DEFAULT_PHOTO_SRC = "defaultphoto.jpg";
-
-        ///The following command handle the pick photo button
-        FileResult imageFileResult;
-        public event Action<ImageSource> SetImageSourceEvent;
-        public ICommand PickImageCommand => new Command(OnPickImage);
-        public async void OnPickImage()
-        {
-            FileResult result = await MediaPicker.PickPhotoAsync(new MediaPickerOptions()
-            {
-                Title = "בחר תמונה"
-            });
-
-            if (result != null)
-            {
-                this.imageFileResult = result;
-
-                var stream = await result.OpenReadAsync();
-                ImageSource imgSource = ImageSource.FromStream(() => stream);
-                if (SetImageSourceEvent != null)
-                    SetImageSourceEvent(imgSource);
-            }
-        }
-
-        ///The following command handle the take photo button
-        public ICommand CameraImageCommand => new Command(OnCameraImage);
-        public async void OnCameraImage()
-        {
-            var result = await MediaPicker.CapturePhotoAsync(new MediaPickerOptions()
-            {
-                Title = "צלם תמונה"
-            });
-
-            if (result != null)
-            {
-                this.imageFileResult = result;
-                var stream = await result.OpenReadAsync();
-                ImageSource imgSource = ImageSource.FromStream(() => stream);
-                if (SetImageSourceEvent != null)
-                    SetImageSourceEvent(imgSource);
-            }
-        }
         #endregion
 
         #region Height
@@ -174,9 +140,9 @@ namespace BasketballGameApp.ViewModels
             }
         }
 
-        private double heightError;
+        private string heightError;
 
-        public double HeightError
+        public string HeightError
         {
             get => heightError;
             set
@@ -186,9 +152,16 @@ namespace BasketballGameApp.ViewModels
             }
         }
 
+        private const double MIN_HEIGHT = 1.5;
         private void ValidateHeight()
         {
-            this.ShowHeightError = double.IsNullOrEmpty(Height);
+            if (this.Height < MIN_HEIGHT)
+            {
+                this.ShowHeightError = true;
+                this.HeightError = ERROR_MESSAGES.BAD_HEIGHT;
+            }
+            else
+                this.HeightError = ERROR_MESSAGES.REQUIRED_FIELD;
         }
 
         private bool showHeightError;
@@ -342,44 +315,120 @@ namespace BasketballGameApp.ViewModels
         #endregion
 
         #region Password
-        private string pass;
-        public string Pass
+        private bool showPasswordError;
+
+        public bool ShowPasswordError
         {
-            get => pass;
+            get => showPasswordError;
             set
             {
-                pass = value;
-                ValidatePass();
-                OnPropertyChanged("Pass");
+                showPasswordError = value;
+                OnPropertyChanged("ShowPasswordError");
             }
         }
 
-        private string passError;
+        private string password;
 
-        public string PassError
+        public string Password
         {
-            get => passError;
+            get => password;
             set
             {
-                passError = value;
-                OnPropertyChanged("PassError");
+                password = value;
+                ValidatePassword();
+                OnPropertyChanged("Password");
             }
         }
 
-        private void ValidatePass()
-        {
-            this.ShowPassError = string.IsNullOrEmpty(Pass);
-        }
+        private string passwordError;
 
-        private bool showPassError;
-        public bool ShowPassError
+        public string PasswordError
         {
-            get => showPassError;
+            get => passwordError;
             set
             {
-                showPassError = value;
-                OnPropertyChanged("ShowPassError");
+                passwordError = value;
+                OnPropertyChanged("PasswordError");
             }
+        }
+
+        private void ValidatePassword()
+        {
+            this.ShowPasswordError = string.IsNullOrEmpty(Password);
+            if (!this.ShowPasswordError)
+            {
+                if (this.Password.Length < 6)
+                {
+                    this.ShowPasswordError = true;
+                    this.PasswordError = ERROR_MESSAGES.SHORT_PASS;
+                }
+            }
+            else
+                this.PasswordError = ERROR_MESSAGES.REQUIRED_FIELD;
+        }
+        #endregion
+
+        #region Constructor
+        //This contact is a reference to the updated or new created contact
+        private Player thePlayer;
+        //For adding a new contact, uc will be null
+        //For updates the user contact object should be sent to the constructor
+        public SignupViewModel(Player p = null)
+        {
+            //create a new user contact if this is an add operation
+            if (p == null)
+            {
+                App theApp = (App)App.Current;
+                User u = new User()
+                {
+                    Id = theApp.CurrentUser.Id,
+                    Email = "",
+                    Pass = "",
+                    BirthDate = DateTime.Now,
+                    Image = "",
+                    Gender = "",
+                    City = ""
+                };
+
+                p = new Player()
+                {
+                    Height = 0,
+                    Name = "",
+                    UserId = u.Id
+                };
+
+                //Setup default image photo
+                this.UserImgSrc = DEFAULT_PHOTO_SRC;
+                this.imageFileResult = null; //mark that no picture was chosen
+
+            }
+            else
+            {
+                //set the path url to the contact photo
+                BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
+                //Create a source with cache busting!
+                Random r = new Random();
+                this.UserImgSrc = proxy.GetBasePhotoUri() + p.Id + $".jpg?{r.Next()}";
+            }
+
+            this.thePlayer = p;
+            this.NameError = ERROR_MESSAGES.REQUIRED_FIELD;
+            this.BirthDateError = ERROR_MESSAGES.BAD_DATE;
+            this.HeightError = ERROR_MESSAGES.BAD_HEIGHT;
+            this.PasswordError = ERROR_MESSAGES.SHORT_PASS;
+            this.EmailError = ERROR_MESSAGES.BAD_EMAIL;
+
+            this.ShowNameError = false;
+            this.ShowBirthDateError = false;
+            this.ShowHeightError = false;
+            this.ShowGenderError = false;
+            this.showCityError = false;
+            this.ShowEmailError = false;
+            this.ShowPasswordError = false;
+
+            this.SaveDataCommand = new Command(() => SaveData());
+
+            this.Name = p.Name;
         }
         #endregion
     }
