@@ -392,6 +392,7 @@ namespace BasketballGameApp.ViewModels
 
                 p = new Player()
                 {
+                    User = u,
                     Height = 0,
                     Name = "",
                     UserId = u.Id
@@ -429,6 +430,152 @@ namespace BasketballGameApp.ViewModels
             this.SaveDataCommand = new Command(() => SaveData());
 
             this.Name = p.Name;
+            this.BirthDate = p.User.BirthDate;
+            this.Height = p.Height;
+            this.Gender = p.User.Gender;
+            this.City = p.User.City;
+            this.Email = p.User.Email;
+            this.Password = p.User.Pass;
+        }
+        #endregion
+
+        #region ValidateForm
+        //This function validate the entire form upon submit!
+        private bool ValidateForm()
+        {
+            //Validate all fields first
+            ValidateName();
+            ValidateBirthDate();
+            ValidateHeight();
+            ValidateGender();
+            ValidateCity();
+            ValidateEmail();
+            ValidatePassword();
+
+            //check if any validation failed
+            if (ShowNameError || ShowBirthDateError || ShowHeightError || ShowGenderError
+                || ShowCityError || ShowEmailError || ShowPasswordError)
+                return false;
+            return true;
+        }
+        #endregion
+
+        #region ServerStatus
+        private string serverStatus;
+        public string ServerStatus
+        {
+            get { return serverStatus; }
+            set
+            {
+                serverStatus = value;
+                OnPropertyChanged("ServerStatus");
+            }
+        }
+        #endregion
+
+        #region SaveData
+        //This event is fired after the new contact is generated in the system so it can be added to the list of contacts
+        public event Action<Player, Player> ContactUpdatedEvent;
+
+        //The command for saving the contact
+        public Command SaveDataCommand { protected set; get; }
+        private async void SaveData()
+        {
+            if (ValidateForm())
+            {
+                this.thePlayer.Name = this.Name;
+                this.thePlayer.User.BirthDate = this.BirthDate;
+                this.thePlayer.Height = this.Height;
+                this.thePlayer.User.Gender = this.Gender;
+                this.thePlayer.User.City = this.City;
+                this.thePlayer.User.Email = this.Email;
+                this.thePlayer.User.Pass = this.Password;
+
+                ServerStatus = "Connecting to server...";
+                await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatusPage(this));
+                BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
+                Player newPlayer = await proxy.PlayerSignUpAsync(this.thePlayer);
+                if (newPlayer == null)
+                {
+                    await App.Current.MainPage.DisplayAlert("Error", "Sign Up faild", "OK");
+                    await App.Current.MainPage.Navigation.PopModalAsync();
+                }
+                else
+                {
+                    if (this.imageFileResult != null)
+                    {
+                        ServerStatus = "Uploading photo";
+
+                        bool success = await proxy.UploadImage(new FileInfo()
+                        {
+                            Name = this.imageFileResult.FullPath
+                        }, $"{newPlayer.Id}.jpg");
+                    }
+                    ServerStatus = "Saving data...";
+                    //if someone registered to get the contact added event, fire the event
+                    if (this.ContactUpdatedEvent != null)
+                    {
+                        this.ContactUpdatedEvent(newPlayer, this.thePlayer);
+                    }
+
+                    //close the message and add contact windows!
+                    await App.Current.MainPage.Navigation.PopAsync();
+                    await App.Current.MainPage.Navigation.PopModalAsync();
+
+                    App a = (App)App.Current;
+                    PlayerPage ap = new PlayerPage();
+                    ap.Title = "Player Page";
+                    a.MainPage = ap;
+                    //await App.Current.MainPage.Navigation.PushAsync(ap);
+                }
+            }
+            else
+                await App.Current.MainPage.DisplayAlert("Save data", "There is a problen with the data, please try again", "OK");
+        }
+        #endregion
+
+        #region OnPickImage
+        //The following command handle the pick photo button
+        FileResult imageFileResult;
+        public event Action<ImageSource> SetImageSourceEvent;
+        public ICommand PickImageCommand => new Command(OnPickImage);
+        public async void OnPickImage()
+        {
+            FileResult result = await MediaPicker.PickPhotoAsync(new MediaPickerOptions()
+            {
+                Title = "Pick a photo"
+            });
+
+            if (result != null)
+            {
+                this.imageFileResult = result;
+
+                var stream = await result.OpenReadAsync();
+                ImageSource imgSource = ImageSource.FromStream(() => stream);
+                if (SetImageSourceEvent != null)
+                    SetImageSourceEvent(imgSource);
+            }
+        }
+        #endregion
+
+        #region OnCameraImage
+        //The following command handle the take photo button
+        public ICommand CameraImageCommand => new Command(OnCameraImage);
+        public async void OnCameraImage()
+        {
+            var result = await MediaPicker.CapturePhotoAsync(new MediaPickerOptions()
+            {
+                Title = "Take a photo"
+            });
+
+            if (result != null)
+            {
+                this.imageFileResult = result;
+                var stream = await result.OpenReadAsync();
+                ImageSource imgSource = ImageSource.FromStream(() => stream);
+                if (SetImageSourceEvent != null)
+                    SetImageSourceEvent(imgSource);
+            }
         }
         #endregion
     }

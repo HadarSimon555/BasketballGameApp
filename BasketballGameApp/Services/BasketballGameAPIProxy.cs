@@ -31,6 +31,7 @@ namespace BasketballGameApp.Services
         private string basePhotosUri;
         private static BasketballGameAPIProxy proxy = null;
 
+        #region CreateProxy
         public static BasketballGameAPIProxy CreateProxy()
         {
             string baseUri;
@@ -66,7 +67,9 @@ namespace BasketballGameApp.Services
                 proxy = new BasketballGameAPIProxy(baseUri, basePhotosUri);
             return proxy;
         }
+        #endregion
 
+        #region Constructor
         private BasketballGameAPIProxy(string baseUri, string basePhotosUri)
         {
             //Set client handler to support cookies!!
@@ -78,6 +81,7 @@ namespace BasketballGameApp.Services
             this.baseUri = baseUri;
             this.basePhotosUri = basePhotosUri;
         }
+        #endregion
 
         #region GetHello
         public async Task<string> GetHello()
@@ -131,24 +135,31 @@ namespace BasketballGameApp.Services
         }
         #endregion
 
-        #region Signup
-        public async Task<User> SigninAsync(string animalName)
+        #region PlayerSignUpAsync
+        public async Task<Player> PlayerSignUpAsync(Player Player)
         {
             try
             {
-                string json = JsonSerializer.Serialize(animalName);
-                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/Signin", content);
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    ReferenceHandler = ReferenceHandler.Preserve,
+                    Encoder = JavaScriptEncoder.Create(UnicodeRanges.Hebrew, UnicodeRanges.BasicLatin),
+                    PropertyNameCaseInsensitive = true
+                };
+                string jsonObject = JsonSerializer.Serialize<Player>(Player, options);
+                StringContent content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/PlayerSignUp", content);
                 if (response.IsSuccessStatusCode)
                 {
-                    JsonSerializerOptions options = new JsonSerializerOptions
-                    {
-                        PropertyNameCaseInsensitive = true
-                    };
-                    string res = await response.Content.ReadAsStringAsync();
-                    return JsonSerializer.Deserialize<User>(res, options);
+                    jsonObject = await response.Content.ReadAsStringAsync();
+                    Player a = JsonSerializer.Deserialize<Player>(jsonObject, options);
+                    return a;
                 }
-                return null;
+                else
+                {
+                    return null;
+                }
             }
             catch (Exception e)
             {
@@ -160,27 +171,27 @@ namespace BasketballGameApp.Services
 
         #region UploadImage
         //Upload file to server (only images!)
-        //public async Task<bool> UploadImage(Models.FileInfo fileInfo, string targetFileName)
-        //{
-        //    try
-        //    {
-        //        var multipartFormDataContent = new MultipartFormDataContent();
-        //        var fileContent = new ByteArrayContent(File.ReadAllBytes(fileInfo.Name));
-        //        multipartFormDataContent.Add(fileContent, "file", targetFileName);
-        //        HttpResponseMessage response = await client.PostAsync($"{this.baseUri}/UploadImage", multipartFormDataContent);
-        //        if (response.IsSuccessStatusCode)
-        //        {
-        //            return true;
-        //        }
-        //        else
-        //            return false;
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Console.WriteLine(e.Message);
-        //        return false;
-        //    }
-        //}
+        public async Task<bool> UploadImage(Models.FileInfo fileInfo, string targetFileName)
+        {
+            try
+            {
+                var multipartFormDataContent = new MultipartFormDataContent();
+                var fileContent = new ByteArrayContent(File.ReadAllBytes(fileInfo.Name));
+                multipartFormDataContent.Add(fileContent, "file", targetFileName);
+                HttpResponseMessage response = await client.PostAsync($"{this.baseUri}/UploadImage", multipartFormDataContent);
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                    return false;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+        }
         #endregion
     }
 }
