@@ -12,6 +12,8 @@
         <StackLayout>
             <ScrollView>
                 <StackLayout Padding="0,20,0,0">
+                    <Label Text="אני רוצה להיות שחקן"></Label>
+                    <Switch x:Name="PlayerOrCoach" IsToggled="{Binding IsPlayer}" />
 
                     <!-- Name -->
                     <Grid>
@@ -57,7 +59,7 @@
                     </Grid>
 
                     <!-- Height -->
-                    <Grid>
+                    <Grid IsVisible="{Binding IsPlayer}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
@@ -65,7 +67,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
-                        <Label Text="גובה" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
+                        <Label Text="גובה" Grid.Column="0"  Style="{StaticResource labelNameStyle}"/>
                         <Label Text="{Binding HeightError}" IsVisible="{Binding ShowHeightError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
                     </Grid>
                     <Entry Placeholder="הכנס גובה" Text="{Binding Height}" Style="{StaticResource entryStyle}"/>

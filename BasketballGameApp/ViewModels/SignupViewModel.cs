@@ -314,6 +314,7 @@ namespace BasketballGameApp.ViewModels
         }
         #endregion
 
+        FileResult imageFileResult;
         #region Password
         private bool showPasswordError;
 
@@ -368,51 +369,82 @@ namespace BasketballGameApp.ViewModels
         }
         #endregion
 
+        Player p;
+        Coach coach;
+        User u;
+        private bool isPlayer;
+        public bool IsPlayer
+        {
+            get => isPlayer; set
+            {
+                isPlayer = value;
+                if (isPlayer == false)
+                    Height = 0;
+
+                OnPropertyChanged("IsPlayer");
+            }
+        }
+
+
+
         #region Constructor
         //This contact is a reference to the updated or new created contact
-        private Player thePlayer;
+        //private Player thePlayer;
         //For adding a new contact, uc will be null
         //For updates the user contact object should be sent to the constructor
-        public SignupViewModel(Player p = null)
+        public SignupViewModel()
         {
-            //create a new user contact if this is an add operation
-            if (p == null)
-            {
-                App theApp = (App)App.Current;
-                User u = new User()
-                {
-                    Id = theApp.CurrentUser.Id,
-                    Email = "",
-                    Pass = "",
-                    BirthDate = DateTime.Now,
-                    Image = "",
-                    Gender = "",
-                    City = ""
-                };
+            IsPlayer = true;
 
-                p = new Player()
+            //create a new user contact if this is an add operation
+
+            App theApp = (App)App.Current;
+             u = new User()
+            {
+                Id = theApp.CurrentUser.Id,
+                Email = "",
+                Pass = "",
+                BirthDate = DateTime.Now,
+                Image = "",
+                Gender = "",
+                City = ""
+            };
+
+            if (IsPlayer)
+            {
+                 p = new Player()
                 {
                     User = u,
                     Height = 0,
-                    Name = "",
-                    UserId = u.Id
+                    Name = ""
                 };
-
-                //Setup default image photo
-                this.UserImgSrc = DEFAULT_PHOTO_SRC;
-                this.imageFileResult = null; //mark that no picture was chosen
-
             }
             else
             {
-                //set the path url to the contact photo
-                BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
-                //Create a source with cache busting!
-                Random r = new Random();
-                this.UserImgSrc = proxy.GetBasePhotoUri() + p.Id + $".jpg?{r.Next()}";
+                 coach = new Coach()
+                {
+                    User = u,
+                    Name = ""
+                };
             }
 
-            this.thePlayer = p;
+
+            //Setup default image photo
+            this.UserImgSrc = DEFAULT_PHOTO_SRC;
+            this.imageFileResult = null; //mark that no picture was chosen
+
+
+
+            //else
+            //{
+            //    //set the path url to the contact photo
+            //    BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
+            //    //Create a source with cache busting!
+            //    Random r = new Random();
+            //    this.UserImgSrc = proxy.GetBasePhotoUri() + p.Id + $".jpg?{r.Next()}";
+            //}
+
+            //this.thePlayer = p;
             this.NameError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.BirthDateError = ERROR_MESSAGES.BAD_DATE;
             this.HeightError = ERROR_MESSAGES.BAD_HEIGHT;
@@ -429,13 +461,13 @@ namespace BasketballGameApp.ViewModels
 
             this.SaveDataCommand = new Command(() => SaveData());
 
-            this.Name = p.Name;
-            this.BirthDate = p.User.BirthDate;
-            this.Height = p.Height;
-            this.Gender = p.User.Gender;
-            this.City = p.User.City;
-            this.Email = p.User.Email;
-            this.Password = p.User.Pass;
+            //this.Name = p.Name;
+            //this.BirthDate = p.User.BirthDate;
+            //this.Height = p.Height;
+            //this.Gender = p.User.Gender;
+            //this.City = p.User.City;
+            //this.Email = p.User.Email;
+            //this.Password = p.User.Pass;
         }
         #endregion
 
@@ -446,7 +478,8 @@ namespace BasketballGameApp.ViewModels
             //Validate all fields first
             ValidateName();
             ValidateBirthDate();
-            ValidateHeight();
+            if (isPlayer)
+                ValidateHeight();
             ValidateGender();
             ValidateCity();
             ValidateEmail();
@@ -483,60 +516,85 @@ namespace BasketballGameApp.ViewModels
         {
             if (ValidateForm())
             {
-                this.thePlayer.Name = this.Name;
-                this.thePlayer.User.BirthDate = this.BirthDate;
-                this.thePlayer.Height = this.Height;
-                this.thePlayer.User.Gender = this.Gender;
-                this.thePlayer.User.City = this.City;
-                this.thePlayer.User.Email = this.Email;
-                this.thePlayer.User.Pass = this.Password;
-
-                ServerStatus = "Connecting to server...";
-                await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatusPage(this));
-                BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
-                Player newPlayer = await proxy.PlayerSignUpAsync(this.thePlayer);
-                if (newPlayer == null)
+                if (IsPlayer)
                 {
-                    await App.Current.MainPage.DisplayAlert("Error", "Sign Up faild", "OK");
-                    await App.Current.MainPage.Navigation.PopModalAsync();
+                    this.p.Height = this.Height;
+                    p.Name = this.Name;
                 }
                 else
+                    coach.Name = this.Name;
+                u.BirthDate = this.BirthDate;
+                this.u.Gender = this.Gender;
+                this.u.City = this.City;
+                this.u.Email = this.Email;
+                this.u.Pass = this.Password;
+
+                ServerStatus = "מתחבר לשרת...";
+                await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatusPage(this));
+                BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
+                Object o=null;
+                if (IsPlayer)
                 {
-                    if (this.imageFileResult != null)
-                    {
-                        ServerStatus = "Uploading photo";
-
-                        bool success = await proxy.UploadImage(new FileInfo()
-                        {
-                            Name = this.imageFileResult.FullPath
-                        }, $"{newPlayer.Id}.jpg");
-                    }
-                    ServerStatus = "Saving data...";
-                    //if someone registered to get the contact added event, fire the event
-                    if (this.ContactUpdatedEvent != null)
-                    {
-                        this.ContactUpdatedEvent(newPlayer, this.thePlayer);
-                    }
-
-                    //close the message and add contact windows!
-                    await App.Current.MainPage.Navigation.PopAsync();
-                    await App.Current.MainPage.Navigation.PopModalAsync();
-
-                    App a = (App)App.Current;
-                    PlayerPage ap = new PlayerPage();
-                    ap.Title = "Player Page";
-                    a.MainPage = ap;
-                    //await App.Current.MainPage.Navigation.PushAsync(ap);
+                    Player newPlayer = await proxy.PlayerSignUpAsync(this.p);
+                    o = newPlayer;
                 }
+                else
+                {// add couach
+
+                }
+                    if (o == null)
+                    {
+                        await App.Current.MainPage.DisplayAlert("שגיאה", "שמירת המשתמש נכשלה", "בסדר");
+                        await App.Current.MainPage.Navigation.PopModalAsync();
+                    }
+                    else
+                    {
+                        if (this.imageFileResult != null)
+                        {
+                            ServerStatus = "מעלה תמונה...";
+
+                            if(isPlayer)
+                        { bool success = await proxy.UploadImage(new FileInfo()
+                            {
+                                Name = this.imageFileResult.FullPath
+                            }, $"{((Player)o).Id}.jpg");
+                        }
+                            else
+                        {
+                            {
+                                bool success = await proxy.UploadImage(new FileInfo()
+                                {
+                                    Name = this.imageFileResult.FullPath
+                                }, $"{((Coach)o).Id}.jpg");
+                            }
+
+                        ServerStatus = "שומר נתונים...";
+                        //if someone registered to get the contact added event, fire the event
+                        if (this.ContactUpdatedEvent != null)
+                        {
+                            this.ContactUpdatedEvent(((Player)o), this.p);
+                        }
+
+                        //close the message and add contact windows!
+                        await App.Current.MainPage.Navigation.PopAsync();
+                        await App.Current.MainPage.Navigation.PopModalAsync();
+
+                        App a = (App)App.Current;
+                        //PlayerPage ap = new PlayerPage();
+                        //ap.Title = "Player Page";
+                        //a.MainPage = ap;
+                        //await App.Current.MainPage.Navigation.PushAsync(ap);
+                    }
+                }
+                else
+                    await App.Current.MainPage.DisplayAlert("שמירת נתונים", " יש בעיה עם הנתונים בדוק ונסה שוב", "אישור", FlowDirection.RightToLeft);
             }
-            else
-                await App.Current.MainPage.DisplayAlert("Save data", "There is a problen with the data, please try again", "OK");
         }
         #endregion
 
         #region OnPickImage
         //The following command handle the pick photo button
-        FileResult imageFileResult;
+       
         public event Action<ImageSource> SetImageSourceEvent;
         public ICommand PickImageCommand => new Command(OnPickImage);
         public async void OnPickImage()
