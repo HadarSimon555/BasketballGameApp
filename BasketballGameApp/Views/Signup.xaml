@@ -24,10 +24,10 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
-                        <Label Text="שם מלא" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
-                        <Label Text="{Binding NameError}" IsVisible="{Binding ShowNameError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
+                        <Label Text="שם מלא" Grid.Column="0" />
+                        <Label Text="{Binding NameError}" IsVisible="{Binding ShowNameError}" Grid.Column="1" />
                     </Grid>
-                    <Entry Placeholder="הכנס שם מלא" Text="{Binding Name}" Style="{StaticResource entryStyle}"/>
+                    <Entry Placeholder="הכנס שם מלא" Text="{Binding Name}" />
 
                     <!-- BirthDate -->
                     <Grid>
@@ -38,10 +38,10 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
-                        <Label Text="תאריך לידה" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
-                        <Label Text="{Binding BirthDateError}" IsVisible="{Binding ShowBirthDateError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
+                        <Label Text="תאריך לידה" Grid.Column="0"/>
+                        <Label Text="{Binding BirthDateError}" IsVisible="{Binding ShowBirthDateError}" Grid.Column="1" />
                     </Grid>
-                    <DatePicker Date="{Binding BirthDate}" Style="{StaticResource entry}"/>
+                    <DatePicker Date="{Binding BirthDate}"/>
 
                     <!-- Image -->
                     <Grid>
@@ -67,10 +67,10 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
-                        <Label Text="גובה" Grid.Column="0"  Style="{StaticResource labelNameStyle}"/>
-                        <Label Text="{Binding HeightError}" IsVisible="{Binding ShowHeightError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
+                        <Label Text="גובה" Grid.Column="0"/>
+                        <Label Text="{Binding HeightError}" IsVisible="{Binding ShowHeightError}" Grid.Column="1"/>
                     </Grid>
-                    <Entry Placeholder="הכנס גובה" Text="{Binding Height}" Style="{StaticResource entryStyle}"/>
+                    <Entry Placeholder="הכנס גובה" Text="{Binding Height}" />
 
                     <!-- Gender -->
                     <Grid>
@@ -81,10 +81,10 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
-                        <Label Text="מין" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
-                        <Label Text="{Binding GenderError}" IsVisible="{Binding ShowGenderError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
+                        <Label Text="מין" Grid.Column="0" />
+                        <Label Text="{Binding GenderError}" IsVisible="{Binding ShowGenderError}" Grid.Column="1"/>
                     </Grid>
-                    <Entry Placeholder="הכנס מין" Text="{Binding Gender}" Style="{StaticResource entryStyle}"/>
+                    <Entry Placeholder="הכנס מין" Text="{Binding Gender}"/>
 
                     <!-- City -->
                     <Grid>
@@ -95,10 +95,10 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
-                        <Label Text="עיר מגורים" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
-                        <Label Text="{Binding CityError}" IsVisible="{Binding ShowCityError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
+                        <Label Text="עיר מגורים" Grid.Column="0"/>
+                        <Label Text="{Binding CityError}" IsVisible="{Binding ShowCityError}" Grid.Column="1"/>
                     </Grid>
-                    <Entry Placeholder="הכנס עיר מגורים" Text="{Binding City}" Style="{StaticResource entryStyle}"/>
+                    <Entry Placeholder="הכנס עיר מגורים" Text="{Binding City}"/>
                 </StackLayout>
             </ScrollView>
             <Button Text="שמור נתונים" Command="{Binding SaveDataCommand}"></Button>

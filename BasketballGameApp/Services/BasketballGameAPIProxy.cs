@@ -136,7 +136,7 @@ namespace BasketballGameApp.Services
         #endregion
 
         #region PlayerSignUpAsync
-        public async Task<Player> PlayerSignUpAsync(Player Player)
+        public async Task<Player> PlayerSignUpAsync(Player player)
         {
             try
             {
@@ -146,7 +146,7 @@ namespace BasketballGameApp.Services
                     Encoder = JavaScriptEncoder.Create(UnicodeRanges.Hebrew, UnicodeRanges.BasicLatin),
                     PropertyNameCaseInsensitive = true
                 };
-                string jsonObject = JsonSerializer.Serialize<Player>(Player, options);
+                string jsonObject = JsonSerializer.Serialize<Player>(player, options);
                 StringContent content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
 
                 HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/PlayerSignUp", content);
@@ -154,6 +154,40 @@ namespace BasketballGameApp.Services
                 {
                     jsonObject = await response.Content.ReadAsStringAsync();
                     Player a = JsonSerializer.Deserialize<Player>(jsonObject, options);
+                    return a;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+        #endregion
+
+        #region CoachSignUpAsync
+        public async Task<Coach> CoachSignUpAsync(Coach coach)
+        {
+            try
+            {
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    ReferenceHandler = ReferenceHandler.Preserve,
+                    Encoder = JavaScriptEncoder.Create(UnicodeRanges.Hebrew, UnicodeRanges.BasicLatin),
+                    PropertyNameCaseInsensitive = true
+                };
+                string jsonObject = JsonSerializer.Serialize<Coach>(coach, options);
+                StringContent content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/CoachSignUp", content);
+                if (response.IsSuccessStatusCode)
+                {
+                    jsonObject = await response.Content.ReadAsStringAsync();
+                    Coach a = JsonSerializer.Deserialize<Coach>(jsonObject, options);
                     return a;
                 }
                 else
