@@ -1,10 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:BasketballGameApp.ViewModels"
              x:Class="BasketballGameApp.Views.Signup"
              NavigationPage.HasNavigationBar="True"
              FlowDirection="RightToLeft"
              Title="הרשמה">
+    <ContentPage.BindingContext>
+        <local:SignupViewModel></local:SignupViewModel>
+    </ContentPage.BindingContext>
     <ContentPage.ToolbarItems>
         <ToolbarItem Name="AddUser" Order="Primary" Text="הרשמה" Priority="0" Command="{Binding SignupCommand}" />
     </ContentPage.ToolbarItems>
@@ -69,8 +73,9 @@
                         </Grid.RowDefinitions>
                         <Label Text="גובה" Grid.Column="0"/>
                         <Label Text="{Binding HeightError}" IsVisible="{Binding ShowHeightError}" Grid.Column="1"/>
+                        <Entry Placeholder="הכנס גובה"  Text="{Binding Height}" />
                     </Grid>
-                    <Entry Placeholder="הכנס גובה" Text="{Binding Height}" />
+                    
 
                     <!-- Gender -->
                     <Grid>

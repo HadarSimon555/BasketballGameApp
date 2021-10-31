@@ -401,7 +401,7 @@ namespace BasketballGameApp.ViewModels
             App theApp = (App)App.Current;
             u = new User()
             {
-                Id = theApp.CurrentUser.Id,
+                Id =0,
                 Email = "",
                 Pass = "",
                 BirthDate = DateTime.Now,
@@ -409,6 +409,8 @@ namespace BasketballGameApp.ViewModels
                 Gender = "",
                 City = ""
             };
+         
+
 
             if (IsPlayer)
             {
