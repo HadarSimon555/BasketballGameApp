@@ -104,6 +104,34 @@
                         <Label Text="{Binding CityError}" IsVisible="{Binding ShowCityError}" Grid.Column="1"/>
                     </Grid>
                     <Entry Placeholder="הכנס עיר מגורים" Text="{Binding City}"/>
+
+                    <!-- דואר אלקטרוני-->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Label Text="דואר אלקטרוני" Grid.Column="0"/>
+                        <Label Text="{Binding EmailError}" IsVisible="{Binding ShowEmailError}" Grid.Column="1"/>
+                    </Grid>
+                    <Entry Placeholder="הכנס דואר אלקטרוני" Text="{Binding Email}"/>
+
+                    <!-- סיסמה-->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Label Text="סיסמה" Grid.Column="0"/>
+                        <Label Text="{Binding PasswordError}" IsVisible="{Binding ShowPasswordError}" Grid.Column="1"/>
+                    </Grid>
+                    <Entry Placeholder="הכנס סיסמה" Text="{Binding Password}"/>
                 </StackLayout>
             </ScrollView>
             <Button Text="שמור נתונים" Command="{Binding SaveDataCommand}"></Button>

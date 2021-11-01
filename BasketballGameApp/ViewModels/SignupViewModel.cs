@@ -394,6 +394,7 @@ namespace BasketballGameApp.ViewModels
         //For updates the user contact object should be sent to the constructor
         public SignupViewModel()
         {
+            
             IsPlayer = true;
 
             //create a new user contact if this is an add operation
@@ -449,12 +450,14 @@ namespace BasketballGameApp.ViewModels
             this.HeightError = ERROR_MESSAGES.BAD_HEIGHT;
             this.PasswordError = ERROR_MESSAGES.SHORT_PASS;
             this.EmailError = ERROR_MESSAGES.BAD_EMAIL;
+            this.GenderError = ERROR_MESSAGES.REQUIRED_FIELD;
+            this.CityError = ERROR_MESSAGES.REQUIRED_FIELD;
 
             this.ShowNameError = false;
             this.ShowBirthDateError = false;
             this.ShowHeightError = false;
             this.ShowGenderError = false;
-            this.showCityError = false;
+            this.ShowCityError = false;
             this.ShowEmailError = false;
             this.ShowPasswordError = false;
 
