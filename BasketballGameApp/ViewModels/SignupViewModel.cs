@@ -158,10 +158,12 @@ namespace BasketballGameApp.ViewModels
             if (this.Height < MIN_HEIGHT)
             {
                 this.ShowHeightError = true;
-                this.HeightError = ERROR_MESSAGES.BAD_HEIGHT;
+                //this.HeightError = ERROR_MESSAGES.BAD_HEIGHT;
             }
             else
-                this.HeightError = ERROR_MESSAGES.REQUIRED_FIELD;
+                this.ShowHeightError = false;
+            //else
+            //    this.HeightError = ERROR_MESSAGES.REQUIRED_FIELD;
         }
 
         private bool showHeightError;
@@ -309,8 +311,8 @@ namespace BasketballGameApp.ViewModels
                     this.EmailError = ERROR_MESSAGES.BAD_EMAIL;
                 }
             }
-            else
-                this.EmailError = ERROR_MESSAGES.REQUIRED_FIELD;
+            //else
+            //    this.EmailError = ERROR_MESSAGES.REQUIRED_FIELD;
         }
         #endregion
 
@@ -363,16 +365,18 @@ namespace BasketballGameApp.ViewModels
                     this.PasswordError = ERROR_MESSAGES.SHORT_PASS;
                 }
             }
-            else
-                this.PasswordError = ERROR_MESSAGES.REQUIRED_FIELD;
+            //else
+            //    this.PasswordError = ERROR_MESSAGES.REQUIRED_FIELD;
         }
         #endregion
 
-        FileResult imageFileResult;
+        //FileResult imageFileResult;
 
         Player p;
         Coach c;
         User u;
+
+        #region IsPlayer
         private bool isPlayer;
         public bool IsPlayer
         {
@@ -386,6 +390,7 @@ namespace BasketballGameApp.ViewModels
                 OnPropertyChanged("IsPlayer");
             }
         }
+        #endregion
 
         #region Constructor
         //This contact is a reference to the updated or new created contact
@@ -523,7 +528,7 @@ namespace BasketballGameApp.ViewModels
                 if (IsPlayer)
                 {
                     this.p.Height = this.Height;
-                    p.Name = this.Name;
+                    this.p.Name = this.Name;
                 }
                 else
                     this.c.Name = this.Name;
@@ -602,6 +607,7 @@ namespace BasketballGameApp.ViewModels
 
         #region OnPickImage
         //The following command handle the pick photo button
+        FileResult imageFileResult;
 
         public event Action<ImageSource> SetImageSourceEvent;
         public ICommand PickImageCommand => new Command(OnPickImage);
