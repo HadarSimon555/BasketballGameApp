@@ -401,7 +401,7 @@ namespace BasketballGameApp.ViewModels
             App theApp = (App)App.Current;
             u = new User()
             {
-                Id =0,
+                Id = 0,
                 Email = "",
                 Pass = "",
                 BirthDate = DateTime.Now,
@@ -409,7 +409,7 @@ namespace BasketballGameApp.ViewModels
                 Gender = "",
                 City = ""
             };
-         
+
 
 
             if (IsPlayer)
@@ -485,8 +485,10 @@ namespace BasketballGameApp.ViewModels
             ValidatePassword();
 
             //check if any validation failed
-            if (ShowNameError || ShowBirthDateError || ShowHeightError || ShowGenderError
+            if (ShowNameError || ShowBirthDateError || ShowGenderError
                 || ShowCityError || ShowEmailError || ShowPasswordError)
+                return false;
+            if (isPlayer && ShowHeightError)
                 return false;
             return true;
         }
@@ -507,7 +509,7 @@ namespace BasketballGameApp.ViewModels
 
         #region SaveData
         //This event is fired after the new contact is generated in the system so it can be added to the list of contacts
-        public event Action<Player, Player> ContactUpdatedEvent;
+        //public event Action<Player, Player> PlayerUpdatedEvent;
 
         //The command for saving the contact
         public Command SaveDataCommand { protected set; get; }
