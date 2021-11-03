@@ -6,6 +6,32 @@
              NavigationPage.HasNavigationBar="True"
              FlowDirection="RightToLeft"
              Title="הרשמה">
+    <ContentPage.Resources>
+        <Style TargetType="RadioButton">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CheckedStates">
+                        <VisualState x:Name="Checked">
+                            <VisualState.Setters>
+                                <Setter Property="TextColor"
+                                        Value="Green" />
+                                <Setter Property="Opacity"
+                                        Value="1" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Unchecked">
+                            <VisualState.Setters>
+                                <Setter Property="TextColor"
+                                        Value="Red" />
+                                <Setter Property="Opacity"
+                                        Value="0.5" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
     <ContentPage.BindingContext>
         <local:SignupViewModel></local:SignupViewModel>
     </ContentPage.BindingContext>
@@ -13,7 +39,8 @@
         <ToolbarItem Name="AddUser" Order="Primary" Text="הרשמה" Priority="0" Command="{Binding SaveDataCommand}" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout>
+
+        <StackLayout RadioButtonGroup.GroupName="Gender" RadioButtonGroup.SelectedValue="{Binding Gender}">
             <ScrollView>
                 <StackLayout Padding="0,20,0,0">
                     <Label Text="אני רוצה להיות שחקן"></Label>
@@ -76,10 +103,9 @@
                         <Entry Placeholder="הכנס גובה"  Text="{Binding Height}" />
                     </Grid>
                     
-
                     <!-- Gender -->
                     <Grid>
-                        <Grid.ColumnDefinitions>
+                        <Grid.ColumnDefinitions >
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
@@ -89,7 +115,8 @@
                         <Label Text="מין" Grid.Column="0" />
                         <Label Text="{Binding GenderError}" IsVisible="{Binding ShowGenderError}" Grid.Column="1"/>
                     </Grid>
-                    <Entry Placeholder="הכנס מין" Text="{Binding Gender}"/>
+                    <RadioButton Content="זכר" Value="זכר" GroupName="Gender"></RadioButton>
+                    <RadioButton Content="נקבה" Value="נקבה" GroupName="Gender"></RadioButton>
 
                     <!-- City -->
                     <Grid>
@@ -131,7 +158,7 @@
                         <Label Text="סיסמה" Grid.Column="0"/>
                         <Label Text="{Binding PasswordError}" IsVisible="{Binding ShowPasswordError}" Grid.Column="1"/>
                     </Grid>
-                    <Entry Placeholder="הכנס סיסמה" Text="{Binding Password}"/>
+                    <Entry Placeholder="הכנס סיסמה" Text="{Binding Password}" IsPassword="True"/>
                 </StackLayout>
             </ScrollView>
             <Button Text="שמור נתונים" Command="{Binding SaveDataCommand}"></Button>

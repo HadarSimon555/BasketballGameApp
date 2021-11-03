@@ -418,23 +418,23 @@ namespace BasketballGameApp.ViewModels
 
 
 
-            if (IsPlayer)
-            {
-                p = new Player()
-                {
-                    User = u,
-                    Height = 0,
-                    Name = ""
-                };
-            }
-            else
-            {
-                c = new Coach()
-                {
-                    User = u,
-                    Name = ""
-                };
-            }
+            //if (IsPlayer)
+            //{
+            //    p = new Player()
+            //    {
+            //        User = u,
+            //        Height = 0,
+            //        Name = ""
+            //    };
+            //}
+            //else
+            //{
+            //    c = new Coach()
+            //    {
+            //        User = u,
+            //        Name = ""
+            //    };
+            //}
 
             //Setup default image photo
             this.UserImgSrc = DEFAULT_PHOTO_SRC;
@@ -527,11 +527,22 @@ namespace BasketballGameApp.ViewModels
             {
                 if (IsPlayer)
                 {
-                    this.p.Height = this.Height;
-                    this.p.Name = this.Name;
+
+                    p = new Player()
+                    {
+                        User = u,
+                        Height = this.Height,
+                        Name = this.Name
+                    };
                 }
                 else
-                    this.c.Name = this.Name;
+                {
+                    c = new Coach()
+                    {
+                        User = u,
+                        Name = this.Name
+                    };
+                }
 
                 this.u.BirthDate = this.BirthDate;
                 this.u.Gender = this.Gender;
