@@ -370,11 +370,11 @@ namespace BasketballGameApp.ViewModels
         }
         #endregion
 
-        //FileResult imageFileResult;
-
+        #region Player,Coach and User
         Player p;
         Coach c;
         User u;
+        #endregion
 
         #region IsPlayer
         private bool isPlayer;
@@ -553,66 +553,85 @@ namespace BasketballGameApp.ViewModels
                 ServerStatus = "מתחבר לשרת...";
                 await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatusPage(this));
                 BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
-                Object o = null;
-                if (IsPlayer)
+
+                bool isEmailExist = await proxy.UserExistByEmailAsync(this.u.Email);
+                bool isPasswordExist = await proxy.UserExistByPasswordAsync(this.u.Pass);
+
+                if (!isEmailExist && !isPasswordExist)
                 {
-                    Player newPlayer = await proxy.PlayerSignUpAsync(this.p);
-                    o = newPlayer;
-                }
-                else
-                {
-                    Coach newCoach = await proxy.CoachSignUpAsync(this.c);
-                    o = newCoach;
-                }
-                if (o == null)
-                {
-                    await App.Current.MainPage.DisplayAlert("שגיאה", "שמירת המשתמש נכשלה", "בסדר");
-                    await App.Current.MainPage.Navigation.PopModalAsync();
-                }
-                else
-                {
-                    if (this.imageFileResult != null)
+                    Object o = null;
+                    if (IsPlayer)
                     {
-                        ServerStatus = "מעלה תמונה...";
-
-                        if (isPlayer)
-                        {
-                            bool success = await proxy.UploadImage(new FileInfo()
-                            {
-                                Name = this.imageFileResult.FullPath
-                            }, $"{((Player)o).Id}.jpg");
-                        }
-                        else
-
-                        {
-                            bool success = await proxy.UploadImage(new FileInfo()
-                            {
-                                Name = this.imageFileResult.FullPath
-                            }, $"{((Coach)o).Id}.jpg");
-                        }
-
-                        //ServerStatus = "שומר נתונים...";
-                        ////if someone registered to get the contact added event, fire the event
-                        //if (this.ContactUpdatedEvent != null)
-                        //{
-                        //    this.ContactUpdatedEvent(((Player)o), this.p);
-                        //}
-
-                        //close the message and add contact windows!
-                        await App.Current.MainPage.Navigation.PopAsync();
+                        Player newPlayer = await proxy.PlayerSignUpAsync(this.p);
+                        o = newPlayer;
+                    }
+                    else
+                    {
+                        Coach newCoach = await proxy.CoachSignUpAsync(this.c);
+                        o = newCoach;
+                    }
+                    if (o == null)
+                    {
+                        await App.Current.MainPage.DisplayAlert("שגיאה", "שמירת המשתמש נכשלה", "בסדר");
                         await App.Current.MainPage.Navigation.PopModalAsync();
+                    }
+                    else
+                    {
+                        if (this.imageFileResult != null)
+                        {
+                            ServerStatus = "מעלה תמונה...";
 
-                        App a = (App)App.Current;
+                            if (isPlayer)
+                            {
+                                bool success = await proxy.UploadImage(new FileInfo()
+                                {
+                                    Name = this.imageFileResult.FullPath
+                                }, $"{((Player)o).Id}.jpg");
+                            }
+                            else
+
+                            {
+                                bool success = await proxy.UploadImage(new FileInfo()
+                                {
+                                    Name = this.imageFileResult.FullPath
+                                }, $"{((Coach)o).Id}.jpg");
+                            }
+                        }
+                            //ServerStatus = "שומר נתונים...";
+                            ////if someone registered to get the contact added event, fire the event
+                            //if (this.ContactUpdatedEvent != null)
+                            //{
+                            //    this.ContactUpdatedEvent(((Player)o), this.p);
+                            //}
+
+                            //close the message and add contact windows!
+                            await App.Current.MainPage.Navigation.PopAsync();
+                            await App.Current.MainPage.Navigation.PopModalAsync();
+
+                            App a = (App)App.Current;
                         //PlayerPage ap = new PlayerPage();
                         //ap.Title = "Player Page";
                         //a.MainPage = ap;
                         //await App.Current.MainPage.Navigation.PushAsync(ap);
+                        await App.Current.MainPage.DisplayAlert("הרשמה", "ההרשמה בוצעה בהצלחה", "אישור", FlowDirection.RightToLeft);
                     }
+                }
+                else
+                {
+                    if (isEmailExist && isPasswordExist)
+                        await App.Current.MainPage.DisplayAlert("שגיאה", "האימייל והסיסמה שהקלדת כבר קיימים במערכת, בבקשה תבחר אימייל וסיסמה חדשים ונסה שוב", "אישור", FlowDirection.RightToLeft);
+
+                    else if (isEmailExist)
+                        await App.Current.MainPage.DisplayAlert("שגיאה", "האימייל שהקלדת כבר קיים במערכת, בבקשה תבחר אימייל חדש ונסה שוב", "אישור", FlowDirection.RightToLeft);
 
                     else
-                        await App.Current.MainPage.DisplayAlert("שמירת נתונים", " יש בעיה עם הנתונים בדוק ונסה שוב", "אישור", FlowDirection.RightToLeft);
+                        await App.Current.MainPage.DisplayAlert("שגיאה", "הסיסמה שהקלדת כבר קיימת במערכת, בבקשה תבחר סיסמה חדשה ונסה שוב", "אישור", FlowDirection.RightToLeft);
+
+                    await App.Current.MainPage.Navigation.PopModalAsync();
                 }
             }
+            else
+                await App.Current.MainPage.DisplayAlert("שמירת נתונים", " יש בעיה עם הנתונים בדוק ונסה שוב", "אישור", FlowDirection.RightToLeft);
         }
         #endregion
 
