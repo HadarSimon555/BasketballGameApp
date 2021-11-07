@@ -75,7 +75,7 @@
                     <DatePicker Date="{Binding BirthDate}"/>
 
                     <!-- Image -->
-                    <!--><Grid>
+                    <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
@@ -87,7 +87,7 @@
                         <Image x:Name="theImage" Source="{Binding ContactImgSrc}" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1"/>
                         <ImageButton Source="photogallery.png" HorizontalOptions="End" BackgroundColor="White" Grid.Column="0" Grid.Row="0" Command="{Binding PickImageCommand}"/>
                         <ImageButton Source="camera.png" HorizontalOptions="Start" Grid.Column="1" Grid.Row="0" BackgroundColor="White" Command="{Binding CameraImageCommand}"/>
-                    </Grid> -->
+                    </Grid>
 
                     <!-- Height -->
                     <Grid IsVisible="{Binding IsPlayer}">

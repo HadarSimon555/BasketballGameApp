@@ -399,7 +399,7 @@ namespace BasketballGameApp.ViewModels
         //For updates the user contact object should be sent to the constructor
         public SignupViewModel()
         {
-            
+
             IsPlayer = true;
 
             //create a new user contact if this is an add operation
@@ -597,18 +597,18 @@ namespace BasketballGameApp.ViewModels
                                 }, $"{((Coach)o).Id}.jpg");
                             }
                         }
-                            //ServerStatus = "שומר נתונים...";
-                            ////if someone registered to get the contact added event, fire the event
-                            //if (this.ContactUpdatedEvent != null)
-                            //{
-                            //    this.ContactUpdatedEvent(((Player)o), this.p);
-                            //}
+                        ServerStatus = "שומר נתונים...";
+                        ////if someone registered to get the contact added event, fire the event
+                        //if (this.ContactUpdatedEvent != null)
+                        //{
+                        //    this.ContactUpdatedEvent(((Player)o), this.p);
+                        //}
 
-                            //close the message and add contact windows!
-                            await App.Current.MainPage.Navigation.PopAsync();
-                            await App.Current.MainPage.Navigation.PopModalAsync();
+                        //close the message and add contact windows!
+                        await App.Current.MainPage.Navigation.PopAsync();
+                        await App.Current.MainPage.Navigation.PopModalAsync();
 
-                            App a = (App)App.Current;
+                        App a = (App)App.Current;
                         //PlayerPage ap = new PlayerPage();
                         //ap.Title = "Player Page";
                         //a.MainPage = ap;
