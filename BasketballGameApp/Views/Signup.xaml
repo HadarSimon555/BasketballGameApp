@@ -73,10 +73,10 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
-                                <Label Text="שם מלא" Grid.Column="0" Style="{StaticResource labelNameStyle}/>
-                                <Label Text="{Binding NameError}" IsVisible="{Binding ShowNameError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}/>
+                                <Label Text="שם מלא" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
+                                <Label Text="{Binding NameError}" IsVisible="{Binding ShowNameError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
                             </Grid>
-                            <Entry Placeholder="הכנס שם מלא" Text="{Binding Name}" />
+                            <Entry Placeholder="הכנס שם מלא" Text="{Binding Name}" Style="{StaticResource entry}" />
 
                             <!-- BirthDate -->
                             <Grid>
