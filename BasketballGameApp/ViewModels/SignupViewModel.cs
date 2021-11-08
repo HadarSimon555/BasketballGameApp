@@ -7,6 +7,7 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using BasketballGameApp.Services;
 using BasketballGameApp.Models;
+using BasketballGameApp.Views;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -610,10 +611,9 @@ namespace BasketballGameApp.ViewModels
                         await App.Current.MainPage.Navigation.PopModalAsync();
 
                         App a = (App)App.Current;
-                        //PlayerPage ap = new PlayerPage();
-                        //ap.Title = "Player Page";
-                        //a.MainPage = ap;
-                        //await App.Current.MainPage.Navigation.PushAsync(ap);
+                        a.CurrentUser = u;
+                        Page page = new GamesScore();
+                        App.Current.MainPage = new NavigationPage(page) { BarBackgroundColor = Color.FromHex("#f9b42d") };
                         await App.Current.MainPage.DisplayAlert("הרשמה", "ההרשמה בוצעה בהצלחה", "אישור", FlowDirection.RightToLeft);
                     }
                 }

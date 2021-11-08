@@ -72,7 +72,7 @@ namespace BasketballGameApp.ViewModels
                 App theApp = (App)App.Current;
                 theApp.CurrentUser = user;
                 Page page = new GamesScore();
-                App.Current.MainPage = new NavigationPage(page) { BarBackgroundColor = Color.FromHex("#81cfe0") };
+                App.Current.MainPage = new NavigationPage(page) { BarBackgroundColor = Color.FromHex("#f9b42d") };
                 await App.Current.MainPage.DisplayAlert("התחברות", "ההתחברות בוצעה בהצלחה", "אישור", FlowDirection.RightToLeft);
             }
         }
