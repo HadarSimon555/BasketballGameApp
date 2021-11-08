@@ -544,6 +544,7 @@ namespace BasketballGameApp.ViewModels
                     };
                 }
 
+                this.u.Image = this.UserImgSrc;
                 this.u.BirthDate = this.BirthDate;
                 this.u.Gender = this.Gender;
                 this.u.City = this.City;

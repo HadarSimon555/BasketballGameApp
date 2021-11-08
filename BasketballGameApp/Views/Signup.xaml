@@ -40,39 +40,12 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
 
-        <StackLayout RadioButtonGroup.GroupName="Gender" RadioButtonGroup.SelectedValue="{Binding Gender}">
+        <StackLayout Style="{StaticResource Stack}" RadioButtonGroup.GroupName="Gender" RadioButtonGroup.SelectedValue="{Binding Gender}">
             <ScrollView>
                 <StackLayout Padding="0,20,0,0">
+
                     <Label Text="אני רוצה להיות שחקן"></Label>
                     <Switch x:Name="PlayerOrCoach" IsToggled="{Binding IsPlayer}" />
-
-                    <!-- Name -->
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <Label Text="שם מלא" Grid.Column="0" />
-                        <Label Text="{Binding NameError}" IsVisible="{Binding ShowNameError}" Grid.Column="1" />
-                    </Grid>
-                    <Entry Placeholder="הכנס שם מלא" Text="{Binding Name}" />
-
-                    <!-- BirthDate -->
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <Label Text="תאריך לידה" Grid.Column="0"/>
-                        <Label Text="{Binding BirthDateError}" IsVisible="{Binding ShowBirthDateError}" Grid.Column="1" />
-                    </Grid>
-                    <DatePicker Date="{Binding BirthDate}"/>
 
                     <!-- Image -->
                     <Grid>
@@ -89,80 +62,111 @@
                         <ImageButton Source="camera.png" HorizontalOptions="Start" Grid.Column="1" Grid.Row="0" BackgroundColor="White" Command="{Binding CameraImageCommand}"/>
                     </Grid>
 
-                    <!-- Height -->
-                    <Grid IsVisible="{Binding IsPlayer}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <Label Text="גובה" Grid.Column="0"/>
-                        <Label Text="{Binding HeightError}" IsVisible="{Binding ShowHeightError}" Grid.Column="1"/>
-                        <Entry Placeholder="הכנס גובה"  Text="{Binding Height}" />
-                    </Grid>
-                    
-                    <!-- Gender -->
-                    <Grid>
-                        <Grid.ColumnDefinitions >
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <Label Text="מין" Grid.Column="0" />
-                        <Label Text="{Binding GenderError}" IsVisible="{Binding ShowGenderError}" Grid.Column="1"/>
-                    </Grid>
-                    <RadioButton Content="זכר" Value="זכר" GroupName="Gender"></RadioButton>
-                    <RadioButton Content="נקבה" Value="נקבה" GroupName="Gender"></RadioButton>
+                    <Frame Style="{StaticResource logInSignUp}">
+                        <StackLayout>
+                            <!-- Name -->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Label Text="שם מלא" Grid.Column="0" Style="{StaticResource labelNameStyle}/>
+                                <Label Text="{Binding NameError}" IsVisible="{Binding ShowNameError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}/>
+                            </Grid>
+                            <Entry Placeholder="הכנס שם מלא" Text="{Binding Name}" />
 
-                    <!-- City -->
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <Label Text="עיר מגורים" Grid.Column="0"/>
-                        <Label Text="{Binding CityError}" IsVisible="{Binding ShowCityError}" Grid.Column="1"/>
-                    </Grid>
-                    <Entry Placeholder="הכנס עיר מגורים" Text="{Binding City}"/>
+                            <!-- BirthDate -->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Label Text="תאריך לידה" Grid.Column="0"/>
+                                <Label Text="{Binding BirthDateError}" IsVisible="{Binding ShowBirthDateError}" Grid.Column="1" />
+                            </Grid>
+                            <DatePicker Date="{Binding BirthDate}"/>
 
-                    <!-- דואר אלקטרוני-->
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <Label Text="דואר אלקטרוני" Grid.Column="0"/>
-                        <Label Text="{Binding EmailError}" IsVisible="{Binding ShowEmailError}" Grid.Column="1"/>
-                    </Grid>
-                    <Entry Placeholder="הכנס דואר אלקטרוני" Text="{Binding Email}"/>
+                            <!-- Height -->
+                            <Grid IsVisible="{Binding IsPlayer}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Label Text="גובה" Grid.Column="0"/>
+                                <Label Text="{Binding HeightError}" IsVisible="{Binding ShowHeightError}" Grid.Column="1"/>
+                                <Entry Placeholder="הכנס גובה"  Text="{Binding Height}" />
+                            </Grid>
 
-                    <!-- סיסמה-->
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <Label Text="סיסמה" Grid.Column="0"/>
-                        <Label Text="{Binding PasswordError}" IsVisible="{Binding ShowPasswordError}" Grid.Column="1"/>
-                    </Grid>
-                    <Entry Placeholder="הכנס סיסמה" Text="{Binding Password}" IsPassword="True"/>
+                            <!-- Gender -->
+                            <Grid>
+                                <Grid.ColumnDefinitions >
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Label Text="מין" Grid.Column="0" />
+                                <Label Text="{Binding GenderError}" IsVisible="{Binding ShowGenderError}" Grid.Column="1"/>
+                            </Grid>
+                            <RadioButton Content="זכר" Value="זכר" GroupName="Gender"></RadioButton>
+                            <RadioButton Content="נקבה" Value="נקבה" GroupName="Gender"></RadioButton>
+
+                            <!-- City -->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Label Text="עיר מגורים" Grid.Column="0"/>
+                                <Label Text="{Binding CityError}" IsVisible="{Binding ShowCityError}" Grid.Column="1"/>
+                            </Grid>
+                            <Entry Placeholder="הכנס עיר מגורים" Text="{Binding City}"/>
+
+                            <!-- דואר אלקטרוני-->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Label Text="דואר אלקטרוני" Grid.Column="0"/>
+                                <Label Text="{Binding EmailError}" IsVisible="{Binding ShowEmailError}" Grid.Column="1"/>
+                            </Grid>
+                            <Entry Placeholder="הכנס דואר אלקטרוני" Text="{Binding Email}"/>
+
+                            <!-- סיסמה-->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Label Text="סיסמה" Grid.Column="0"/>
+                                <Label Text="{Binding PasswordError}" IsVisible="{Binding ShowPasswordError}" Grid.Column="1"/>
+                            </Grid>
+                            <Entry Placeholder="הכנס סיסמה" Text="{Binding Password}" IsPassword="True"/>
+                        </StackLayout>
+                    </Frame>
+                    <Button Text="שמור נתונים" Command="{Binding SaveDataCommand}"></Button>
                 </StackLayout>
             </ScrollView>
-            <Button Text="שמור נתונים" Command="{Binding SaveDataCommand}"></Button>
         </StackLayout>
-
     </ContentPage.Content>
 </ContentPage>

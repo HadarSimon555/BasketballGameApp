@@ -16,5 +16,9 @@ namespace BasketballGameApp.Views
         {
             InitializeComponent();
         }
+        public void OnSetImageSource(ImageSource imgSource)
+        {
+            theImage.Source = imgSource;
+        }
     }
 }

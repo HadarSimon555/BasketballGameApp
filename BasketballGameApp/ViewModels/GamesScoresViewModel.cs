@@ -6,5 +6,6 @@ namespace BasketballGameApp.ViewModels
 {
     class GamesScoresViewModel : BaseViewModel
     {
+
     }
 }
