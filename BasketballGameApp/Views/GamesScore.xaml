@@ -7,7 +7,7 @@
              FlowDirection="RightToLeft"
              Title="תוצאות של משחקים">
     <ContentPage.Content>
-        <CollectionView ItemsSource="{Binding Monkeys}">
+        <CollectionView ItemsSource="{Binding Games}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Grid Padding="10">
@@ -22,7 +22,10 @@
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
                         <Label Text="{Binding HomeTeamName}" Grid.Column="0" />
-                        <Label Text="{Binding ScoreHomeTeam}" Grid.Column="0" />
+                        <Label Text="{Binding ScoreHomeTeam}" Grid.Column="1" />
+                        <Label Text="-" Grid.Column="2" />
+                        <Label Text="{Binding ScoreAwayTeam}" Grid.Column="3" />
+                        <Label Text="{Binding AwayTeamName}" Grid.Column="4" />
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
