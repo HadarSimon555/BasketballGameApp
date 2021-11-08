@@ -8,6 +8,7 @@
                 <Setter Property="FontFamily" Value="Amatic"></Setter>
                 <Setter Property="FontSize" Value="32"></Setter>
                 <Setter Property="HorizontalOptions" Value="Center"></Setter>
+                <Setter Property="TextColor" Value="#f5ab35"></Setter>
             </Style>
 
             <Style x:Key="smallerTitle" TargetType="Label">
@@ -69,7 +70,13 @@
                 <Setter Property="BackgroundColor" Value="#f5ab35"/>
                 <Setter Property="CornerRadius" Value="10"></Setter>
             </Style>
-
+            <Style TargetType="NavigationPage" x:Key="NavigationPage">
+                <Setter Property="HorizontalOptions" Value="Right"/>
+                <Setter Property="FontSize" Value="Large"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="BackgroundColor" Value="#f5ab35"></Setter>
+                <Setter Property="TextColor" Value="White"></Setter>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

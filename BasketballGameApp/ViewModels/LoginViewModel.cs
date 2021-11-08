@@ -7,6 +7,7 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using BasketballGameApp.Services;
 using BasketballGameApp.Models;
+using BasketballGameApp.Views;
 using Xamarin.Essentials;
 using System.Linq;
 using BasketballGameApp.DTO;
@@ -63,13 +64,15 @@ namespace BasketballGameApp.ViewModels
             User user = await proxy.LoginAsync(new UserDTO() { Email = this.Email, Pass = this.Password }); ;
             if (user == null)
             {
-                await App.Current.MainPage.DisplayAlert("שגיאה", "התחברות נכשלה, בדוק שם משתמש וסיסמה ונסה שוב", "בסדר");
+                await App.Current.MainPage.DisplayAlert("שגיאה", "התחברות נכשלה, בדוק אימייל וסיסמה ונסה שוב", "בסדר");
             }
             else
             {
                 ServerStatus = "קורא נתונים...";
                 App theApp = (App)App.Current;
                 theApp.CurrentUser = user;
+                Page page = new GamesScore();
+                App.Current.MainPage = new NavigationPage(page) { BarBackgroundColor = Color.FromHex("#81cfe0") };
                 await App.Current.MainPage.DisplayAlert("התחברות", "ההתחברות בוצעה בהצלחה", "אישור", FlowDirection.RightToLeft);
             }
         }

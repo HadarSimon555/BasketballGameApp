@@ -3,46 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BasketballGameApp.Views.Login" 
              NavigationPage.HasNavigationBar="True"
-             FlowDirection="RightToLeft"
+             FlowDirection="RightToLeft" 
              Title="התחברות">
-    <ContentPage.Resources>
-        <Style TargetType="StackLayout" x:Key="LoginStack">
-            <Setter Property="Orientation" Value="Vertical"/>
-            <Setter Property="Padding" Value="30"/>
-            <Setter Property="Spacing" Value="40"/>
-            <Setter Property="FlowDirection" Value="RightToLeft"/>
-        </Style>
-        <Style TargetType="Label" x:Key="FormTitle">
-            <Setter Property="HorizontalOptions" Value="Center"/>
-            <Setter Property="FontSize" Value="Large"/>
-            <Setter Property="FontAttributes" Value="Bold"/>
-        </Style>
-        <Style TargetType="Entry" x:Key="LoginEntry">
-            <Setter Property="PlaceholderColor" Value="White"/>
-            <Setter Property="HeightRequest" Value="40"/>
-            <Setter Property="TextColor" Value="White"/>
-        </Style>
-        <Style TargetType="Button" x:Key="LoginButton">
-            <Setter Property="FontAttributes" Value="Bold"/>
-            <Setter Property="FontSize" Value="Large"/>
-            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
-            <Setter Property="TextColor" Value="White"/>
-            <Setter Property="BackgroundColor" Value="#f27935"/>
-        </Style>
-    </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout Style="{StaticResource LoginStack}">
-            <Frame BackgroundColor="#f27935" HasShadow="False">
+        <StackLayout Style="{StaticResource Stack}">
+            <Label Text="התחברות" Style="{StaticResource title}"></Label>
+            <Frame Style="{StaticResource logInSignUp}">
                 <StackLayout>
-                    <Entry x:Name="Email" Text="{Binding Email}" Placeholder="דואר אלקטרוני"   
+                    <Entry x:Name="Email" MaxLength="30" Text="{Binding Email}" Placeholder="דואר אלקטרוני"   
                            Keyboard="Email"  
-                           Style="{StaticResource LoginEntry}"/>
-                    <Entry x:Name="Password" Text="{Binding Password}" Placeholder="סיסמה"
-                           Style="{StaticResource LoginEntry}"/>
+                           Style="{StaticResource entry}"/>
+                    <Entry x:Name="Password" MaxLength="30" Text="{Binding Password}" Placeholder="סיסמה" IsPassword="True"
+                           Style="{StaticResource entry}"/>
                 </StackLayout>
             </Frame>
-            <Button Command="{Binding SubmitCommand}" Text="התחבר" Style="{StaticResource LoginButton}" />
-
+            <Button Command="{Binding SubmitCommand}" Text="התחבר" Style="{StaticResource Button}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

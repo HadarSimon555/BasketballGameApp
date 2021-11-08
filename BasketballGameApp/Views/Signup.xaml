@@ -34,18 +34,19 @@
     </ContentPage.Resources>
     <!-- <ContentPage.BindingContext>
         <local:SignupViewModel></local:SignupViewModel>
-    </ContentPage.BindingContext> -->
+    </ContentPage.BindingContext> 
     <ContentPage.ToolbarItems>
         <ToolbarItem Name="AddUser" Order="Primary" Text="הרשמה" Priority="0" Command="{Binding SaveDataCommand}" />
-    </ContentPage.ToolbarItems>
+    </ContentPage.ToolbarItems> -->
     <ContentPage.Content>
 
         <StackLayout Style="{StaticResource Stack}" RadioButtonGroup.GroupName="Gender" RadioButtonGroup.SelectedValue="{Binding Gender}">
+            <Label Text="הרשמה" Style="{StaticResource title}"></Label>
             <ScrollView>
                 <StackLayout Padding="0,20,0,0">
 
                     <Label Text="אני רוצה להיות שחקן"></Label>
-                    <Switch x:Name="PlayerOrCoach" IsToggled="{Binding IsPlayer}" />
+                    <Switch x:Name="PlayerOrCoach" IsToggled="{Binding IsPlayer}" OnColor="#f5ab35" ThumbColor="#f5ab35"/>
 
                     <!-- Image -->
                     <Grid>
@@ -76,7 +77,7 @@
                                 <Label Text="שם מלא" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
                                 <Label Text="{Binding NameError}" IsVisible="{Binding ShowNameError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
                             </Grid>
-                            <Entry Placeholder="הכנס שם מלא" Text="{Binding Name}" Style="{StaticResource entry}" />
+                            <Entry Placeholder="הכנס שם מלא" MaxLength="30" Text="{Binding Name}" Style="{StaticResource entry}" />
 
                             <!-- BirthDate -->
                             <Grid>
@@ -103,7 +104,7 @@
                                 </Grid.RowDefinitions>
                                 <Label Text="גובה" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
                                 <Label Text="{Binding HeightError}" IsVisible="{Binding ShowHeightError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
-                                <Entry Placeholder="הכנס גובה"  Text="{Binding Height}" Style="{StaticResource entry}"/>
+                                <Entry Placeholder="הכנס גובה" MaxLength="30" Text="{Binding Height}" Style="{StaticResource entry}"/>
                             </Grid>
 
                             <!-- Gender -->
@@ -133,7 +134,7 @@
                                 <Label Text="עיר מגורים" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
                                 <Label Text="{Binding CityError}" IsVisible="{Binding ShowCityError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
                             </Grid>
-                            <Entry Placeholder="הכנס עיר מגורים" Text="{Binding City}" Style="{StaticResource entry}"/>
+                            <Entry Placeholder="הכנס עיר מגורים" MaxLength="30" Text="{Binding City}" Style="{StaticResource entry}"/>
 
                             <!-- דואר אלקטרוני-->
                             <Grid>
@@ -147,7 +148,7 @@
                                 <Label Text="דואר אלקטרוני" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
                                 <Label Text="{Binding EmailError}" IsVisible="{Binding ShowEmailError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
                             </Grid>
-                            <Entry Placeholder="הכנס דואר אלקטרוני" Text="{Binding Email}" Style="{StaticResource entry}"/>
+                            <Entry Placeholder="הכנס דואר אלקטרוני" MaxLength="30" Text="{Binding Email}" Style="{StaticResource entry}"/>
 
                             <!-- סיסמה-->
                             <Grid>
@@ -161,7 +162,7 @@
                                 <Label Text="סיסמה" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
                                 <Label Text="{Binding PasswordError}" IsVisible="{Binding ShowPasswordError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
                             </Grid>
-                            <Entry Placeholder="הכנס סיסמה" Text="{Binding Password}" IsPassword="True" Style="{StaticResource entry}"/>
+                            <Entry Placeholder="הכנס סיסמה" MaxLength="30" Text="{Binding Password}" IsPassword="True" Style="{StaticResource entry}"/>
                         </StackLayout>
                     </Frame>
                     <Button Text="הירשם" Style="{StaticResource Button}" Command="{Binding SaveDataCommand}"></Button>
