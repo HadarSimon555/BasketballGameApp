@@ -16,6 +16,7 @@ namespace BasketballGameApp.ViewModels
 {
     class LoginViewModel : BaseViewModel
     {
+        #region Email
         private string email;
         public string Email
         {
@@ -26,6 +27,9 @@ namespace BasketballGameApp.ViewModels
                 OnPropertyChanged("Email");
             }
         }
+        #endregion
+
+        #region Password
         private string password;
         public string Password
         {
@@ -36,13 +40,16 @@ namespace BasketballGameApp.ViewModels
                 OnPropertyChanged("Password");
             }
         }
-        public ICommand SubmitCommand { protected set; get; }
+        #endregion
 
+        #region Constructor
         public LoginViewModel()
         {
             SubmitCommand = new Command(OnSubmit);
         }
+        #endregion
 
+        #region ServerStatus
         private string serverStatus;
         public string ServerStatus
         {
@@ -53,7 +60,10 @@ namespace BasketballGameApp.ViewModels
                 OnPropertyChanged("ServerStatus");
             }
         }
+        #endregion
 
+        #region OnSubmit
+        public ICommand SubmitCommand { protected set; get; }
         public async void OnSubmit()
         {
             ServerStatus = "מתחבר לשרת...";
@@ -71,10 +81,11 @@ namespace BasketballGameApp.ViewModels
                 ServerStatus = "קורא נתונים...";
                 App theApp = (App)App.Current;
                 theApp.CurrentUser = user;
-                Page page = new GamesScore();
+                Page page = new GamesScores();
                 App.Current.MainPage = new NavigationPage(page) { BarBackgroundColor = Color.FromHex("#f9b42d") };
                 await App.Current.MainPage.DisplayAlert("התחברות", "ההתחברות בוצעה בהצלחה", "אישור", FlowDirection.RightToLeft);
             }
         }
+        #endregion
     }
 }

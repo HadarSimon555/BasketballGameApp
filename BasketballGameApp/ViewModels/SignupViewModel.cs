@@ -400,7 +400,6 @@ namespace BasketballGameApp.ViewModels
         //For updates the user contact object should be sent to the constructor
         public SignupViewModel()
         {
-
             IsPlayer = true;
 
             //create a new user contact if this is an add operation
@@ -611,7 +610,7 @@ namespace BasketballGameApp.ViewModels
 
                         App a = (App)App.Current;
                         a.CurrentUser = u;
-                        Page page = new GamesScore();
+                        Page page = new GamesScores();
                         App.Current.MainPage = new NavigationPage(page) { BarBackgroundColor = Color.FromHex("#f9b42d") };
                         await App.Current.MainPage.DisplayAlert("הרשמה", "ההרשמה בוצעה בהצלחה", "אישור", FlowDirection.RightToLeft);
                     }
