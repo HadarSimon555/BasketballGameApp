@@ -414,7 +414,8 @@ namespace BasketballGameApp.ViewModels
                 BirthDate = DateTime.Now,
                 Image = "",
                 Gender = "",
-                City = ""
+                City = "",
+                Name =""
             };
 
 
@@ -528,12 +529,10 @@ namespace BasketballGameApp.ViewModels
             {
                 if (IsPlayer)
                 {
-
                     p = new Player()
                     {
                         User = u,
                         Height = this.Height,
-                        Name = this.Name
                     };
                 }
                 else
@@ -541,7 +540,6 @@ namespace BasketballGameApp.ViewModels
                     c = new Coach()
                     {
                         User = u,
-                        Name = this.Name
                     };
                 }
 
@@ -551,6 +549,7 @@ namespace BasketballGameApp.ViewModels
                 this.u.City = this.City;
                 this.u.Email = this.Email;
                 this.u.Pass = this.Password;
+                this.u.Name = this.Name;
 
                 ServerStatus = "מתחבר לשרת...";
                 await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatusPage(this));

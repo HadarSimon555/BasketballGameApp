@@ -18,6 +18,8 @@ namespace BasketballGameApp.Models
         public int GameStatusId { get; set; }
         public int ScoreAwayTeam { get; set; }
         public int ScoreHomeTeam { get; set; }
+        public DateTime Date { get; set; }
+        public TimeSpan Time { get; set; }
 
         public virtual Team AwayTeam { get; set; }
         public virtual GameStatus GameStatus { get; set; }
