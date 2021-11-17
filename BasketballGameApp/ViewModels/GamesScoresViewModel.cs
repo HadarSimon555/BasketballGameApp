@@ -17,7 +17,7 @@ namespace BasketballGameApp.ViewModels
     {
         #region IsLoggedin
         private bool isLoggedin;
-        public bool IsLoggedin
+        public bool IsLoggedIn
         {
             get => isLoggedin;
             set
@@ -34,11 +34,11 @@ namespace BasketballGameApp.ViewModels
             App theApp = (App)App.Current;
             if (theApp.CurrentUser == null)
             {
-                IsLoggedin = false;
+                IsLoggedIn = !false;
                 NavigateToPageCommand = new Command<string>(NavigateToPage);
             } 
             else
-                IsLoggedin = true;
+                IsLoggedIn = !true;
         }
         #endregion
 

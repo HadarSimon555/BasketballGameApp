@@ -4,6 +4,7 @@
              x:Class="BasketballGameApp.Views.ServerStatusPage">
     <ContentPage.Content>
         <StackLayout>
+            <Image Source="loading"></Image>
             <Label Text="{Binding ServerStatus}"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
