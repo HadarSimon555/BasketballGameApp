@@ -76,7 +76,7 @@ namespace BasketballGameApp.ViewModels
                     break;
                 default: break;
             }
-            App.Current.MainPage = new NavigationPage(p) { BarBackgroundColor = Color.FromHex("#f9b42d") };
+            App.Current.MainPage.Navigation.PushAsync(p);
         }
         #endregion
     }

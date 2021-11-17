@@ -14,31 +14,46 @@
     </ContentPage.ToolbarItems> -->
     <ContentPage.Content>
 
-        <StackLayout Style="{StaticResource Stack}" RadioButtonGroup.GroupName="Gender" RadioButtonGroup.SelectedValue="{Binding Gender}">
-            <Label Text="הרשמה" Style="{StaticResource title}"></Label>
+        <StackLayout Style="{StaticResource Stack}" RadioButtonGroup.GroupName="Gender" RadioButtonGroup.SelectedValue="{Binding Gender}" Padding="0">
+            <Grid Margin="0,0,0,0" Padding="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="150"/>
+                </Grid.RowDefinitions>
+                <Image Grid.Column="0" Aspect="AspectFill" Source="basketballPic" Opacity="0.6"></Image>
+                <Label Text="הרשמה" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Style="{StaticResource FormTitle}"></Label>
+            </Grid>
             <ScrollView>
                 <StackLayout Padding="0,20,0,0">
-
                     <Label Text="אני רוצה להיות שחקן"></Label>
                     <Switch x:Name="PlayerOrCoach" IsToggled="{Binding IsPlayer}" OnColor="#f5ab35" ThumbColor="#f5ab35"/>
-
-                    <!-- Image -->
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="30" />
-                            <RowDefinition Height="150" />
-                        </Grid.RowDefinitions>
-                        <Image x:Name="theImage" Source="{Binding UserImgSrc}" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1"/>
-                        <ImageButton Source="photogallery.png" HorizontalOptions="End" BackgroundColor="White" Grid.Column="0" Grid.Row="0" Command="{Binding PickImageCommand}"/>
-                        <ImageButton Source="camera.png" HorizontalOptions="Start" Grid.Column="1" Grid.Row="0" BackgroundColor="White" Command="{Binding CameraImageCommand}"/>
-                    </Grid>
-
                     <Frame Style="{StaticResource logInSignUp}">
                         <StackLayout>
+                            <!-- Image -->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="1.4*"/>
+                                    <ColumnDefinition Width="1.4*"/>
+                                    <ColumnDefinition Width="2*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="150" />
+                                </Grid.RowDefinitions>
+                                <ImageButton Source="photogallery.png" HorizontalOptions="Start" BackgroundColor="White" Grid.Column="2" Grid.Row="0" Command="{Binding PickImageCommand}"/>
+                                <ImageButton Source="camera.png" HorizontalOptions="End" Grid.Column="1" Grid.Row="0" BackgroundColor="White" Command="{Binding CameraImageCommand}"/>
+                                
+                                <Frame BorderColor="white"  CornerRadius="100" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" IsClippedToBounds="True" Padding="0" HeightRequest="100" WidthRequest="100">
+                                    <Image x:Name="theImage" Source="{Binding UserImgSrc}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0">
+
+                                    </Image>
+                                </Frame>
+                               
+                                
+                            </Grid>
                             <!-- Name -->
                             <Grid>
                                 <Grid.ColumnDefinitions>

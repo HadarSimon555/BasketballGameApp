@@ -54,8 +54,9 @@
 
             <Style TargetType="Label" x:Key="FormTitle">
                 <Setter Property="HorizontalOptions" Value="Center"/>
-                <Setter Property="FontSize" Value="Large"/>
                 <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="FontSize" Value="44"/>
+                <Setter Property="TextColor" Value="White"/>
             </Style>
             <Style TargetType="Entry" x:Key="LoginEntry">
                 <Setter Property="PlaceholderColor" Value="White"/>

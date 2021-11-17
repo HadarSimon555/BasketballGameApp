@@ -125,7 +125,7 @@ namespace BasketballGameApp.ViewModels
                 OnPropertyChanged("UserImgSrc");
             }
         }
-        private const string DEFAULT_PHOTO_SRC = "defaultphoto.jpg";
+        private const string DEFAULT_PHOTO_SRC = "defaultphoto.png";
         #endregion
 
         #region Height
@@ -611,7 +611,7 @@ namespace BasketballGameApp.ViewModels
                         App a = (App)App.Current;
                         a.CurrentUser = u;
                         Page page = new GamesScores();
-                        App.Current.MainPage = new NavigationPage(page) { BarBackgroundColor = Color.FromHex("#f9b42d") };
+                        await App.Current.MainPage.Navigation.PushAsync(page);
                         await App.Current.MainPage.DisplayAlert("הרשמה", "ההרשמה בוצעה בהצלחה", "אישור", FlowDirection.RightToLeft);
                     }
                 }
