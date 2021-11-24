@@ -7,9 +7,9 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using BasketballGameApp.Services;
 using BasketballGameApp.Models;
-using BasketballGameApp.Views;
-using Xamarin.Essentials;
+using System.Collections.ObjectModel;
 using System.Linq;
+using BasketballGameApp.Views;
 
 namespace BasketballGameApp.ViewModels
 {
@@ -36,9 +36,13 @@ namespace BasketballGameApp.ViewModels
             {
                 IsLoggedIn = !false;
                 NavigateToPageCommand = new Command<string>(NavigateToPage);
-            } 
+            }
             else
+            {
                 IsLoggedIn = !true;
+                this.SearchTerm = String.Empty;
+                InitContacts();
+            }
         }
         #endregion
 
@@ -79,5 +83,43 @@ namespace BasketballGameApp.ViewModels
             App.Current.MainPage.Navigation.PushAsync(p);
         }
         #endregion
+
+        private List<Game> listGames;
+        private ObservableCollection<Game> observableCollectionGames;
+        public ObservableCollection<Game> ObservableCollectionGames
+        {
+            get
+            {
+                return this.observableCollectionGames;
+            }
+            set
+            {
+                if (this.observableCollectionGames != value)
+                {
+
+                    this.observableCollectionGames = value;
+                    OnPropertyChanged("ObservableCollectionGames");
+                }
+            }
+        }
+
+        private string searchTerm;
+        public string SearchTerm
+        {
+            get
+            {
+                return this.searchTerm;
+            }
+            set
+            {
+                if (this.searchTerm != value)
+                {
+
+                    this.searchTerm = value;
+                    OnTextChanged(value);
+                    OnPropertyChanged("SearchTerm");
+                }
+            }
+        }
     }
 }
