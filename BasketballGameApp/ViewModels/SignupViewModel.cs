@@ -80,7 +80,7 @@ namespace BasketballGameApp.ViewModels
             }
         }
 
-        private DateTime birthDate;
+        private DateTime birthDate = DateTime.Now;
 
         public DateTime BirthDate
         {
@@ -555,9 +555,8 @@ namespace BasketballGameApp.ViewModels
                 BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
 
                 bool isEmailExist = await proxy.UserExistByEmailAsync(this.u.Email);
-                bool isPasswordExist = await proxy.UserExistByPasswordAsync(this.u.Pass);
 
-                if (!isEmailExist && !isPasswordExist)
+                if (!isEmailExist)
                 {
                     Object o = null;
                     if (IsPlayer)
@@ -617,15 +616,8 @@ namespace BasketballGameApp.ViewModels
                 }
                 else
                 {
-                    if (isEmailExist && isPasswordExist)
-                        await App.Current.MainPage.DisplayAlert("שגיאה", "האימייל והסיסמה שהקלדת כבר קיימים במערכת, בבקשה תבחר אימייל וסיסמה חדשים ונסה שוב", "אישור", FlowDirection.RightToLeft);
-
-                    else if (isEmailExist)
+                    if (isEmailExist)
                         await App.Current.MainPage.DisplayAlert("שגיאה", "האימייל שהקלדת כבר קיים במערכת, בבקשה תבחר אימייל חדש ונסה שוב", "אישור", FlowDirection.RightToLeft);
-
-                    else
-                        await App.Current.MainPage.DisplayAlert("שגיאה", "הסיסמה שהקלדת כבר קיימת במערכת, בבקשה תבחר סיסמה חדשה ונסה שוב", "אישור", FlowDirection.RightToLeft);
-
                     await App.Current.MainPage.Navigation.PopModalAsync();
                 }
             }
