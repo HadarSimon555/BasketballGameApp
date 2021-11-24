@@ -41,7 +41,7 @@ namespace BasketballGameApp.ViewModels
             {
                 IsLoggedIn = !true;
                 this.SearchTerm = String.Empty;
-                InitContacts();
+                //InitContacts();
             }
         }
         #endregion
@@ -116,7 +116,7 @@ namespace BasketballGameApp.ViewModels
                 {
 
                     this.searchTerm = value;
-                    OnTextChanged(value);
+                    //OnTextChanged(value);
                     OnPropertyChanged("SearchTerm");
                 }
             }

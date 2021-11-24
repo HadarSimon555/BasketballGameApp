@@ -645,6 +645,7 @@ namespace BasketballGameApp.ViewModels
 
                 var stream = await result.OpenReadAsync();
                 ImageSource imgSource = ImageSource.FromStream(() => stream);
+                this.UserImgSrc = result.FullPath;
                 if (SetImageSourceEvent != null)
                     SetImageSourceEvent(imgSource);
             }
