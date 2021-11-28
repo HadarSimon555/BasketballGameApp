@@ -31,6 +31,7 @@ namespace BasketballGameApp.ViewModels
         #region Constructor
         public GamesScoresViewModel()
         {
+            observableCollectionGames = new ObservableCollection<Game>();
             App theApp = (App)App.Current;
             if (theApp.CurrentUser == null)
             {
@@ -40,9 +41,9 @@ namespace BasketballGameApp.ViewModels
             else
             {
                 IsLoggedIn = !true;
-                this.SearchTerm = String.Empty;
-                //InitContacts();
             }
+            //add server status page
+            LoadGames();
         }
         #endregion
 
@@ -103,21 +104,19 @@ namespace BasketballGameApp.ViewModels
             }
         }
 
-        private string searchTerm;
-        public string SearchTerm
+        public async void LoadGames()
         {
-            get
+            BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
+            if (isLoggedin)
             {
-                return this.searchTerm;
-            }
-            set
-            {
-                if (this.searchTerm != value)
+                App cur = (App)Application.Current;
+                listGames = await proxy.GetGamesAsync();
+                if (listGames != null)
                 {
-
-                    this.searchTerm = value;
-                    //OnTextChanged(value);
-                    OnPropertyChanged("SearchTerm");
+                    foreach (Game item in listGames)
+                    {
+                        this.observableCollectionGames.Add(item);
+                    }
                 }
             }
         }

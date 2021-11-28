@@ -11,7 +11,7 @@
             <Button IsVisible="{Binding IsLoggedIn}" Text="הירשם" Style="{StaticResource Button}" Command="{Binding NavigateToPageCommand}" CommandParameter="Signup"> </Button>
             <Button IsVisible="{Binding IsLoggedIn}" Text="התחבר" Style="{StaticResource Button}" Command="{Binding NavigateToPageCommand}" CommandParameter="Login"></Button>
 
-            <CollectionView ItemsSource="{Binding Games}">
+            <CollectionView ItemsSource="{Binding ObservableCollectionGames}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Grid Padding="10">
@@ -25,15 +25,16 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
-                            <Label Text="{Binding HomeTeamName}" Grid.Column="0" />
+                            <Label Text="{Binding HomeTeam.Name}" Grid.Column="0" />
                             <Label Text="{Binding ScoreHomeTeam}" Grid.Column="1" />
                             <Label Text="-" Grid.Column="2" />
                             <Label Text="{Binding ScoreAwayTeam}" Grid.Column="3" />
-                            <Label Text="{Binding AwayTeamName}" Grid.Column="4" />
+                            <Label Text="{Binding AwayTeam.Name}" Grid.Column="4" />
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
