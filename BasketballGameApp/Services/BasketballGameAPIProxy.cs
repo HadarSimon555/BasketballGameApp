@@ -270,6 +270,7 @@ namespace BasketballGameApp.Services
         }
         #endregion
 
+        #region GetGamesAsync
         public async Task<List<Game>> GetGamesAsync(string myTeam=null)
         {
             try
@@ -295,6 +296,7 @@ namespace BasketballGameApp.Services
                 return null;
             }
         }
+        #endregion
     }
 }
 

@@ -7,7 +7,17 @@
              FlowDirection="RightToLeft"
              Title="תוצאות של משחקים">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Style="{StaticResource Stack}" Padding="0">
+            <Grid Margin="0,0,0,0" Padding="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="150"/>
+                </Grid.RowDefinitions>
+                <Image Grid.Column="0" Aspect="AspectFill" Source="basketballPic" Opacity="0.6"></Image>
+                <Label Text="תוצאות של משחקים" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Style="{StaticResource FormTitle}"></Label>
+            </Grid>
             <Button IsVisible="{Binding IsLoggedIn}" Text="הירשם" Style="{StaticResource Button}" Command="{Binding NavigateToPageCommand}" CommandParameter="Signup"> </Button>
             <Button IsVisible="{Binding IsLoggedIn}" Text="התחבר" Style="{StaticResource Button}" Command="{Binding NavigateToPageCommand}" CommandParameter="Login"></Button>
 

@@ -107,18 +107,18 @@ namespace BasketballGameApp.ViewModels
         public async void LoadGames()
         {
             BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
-            if (isLoggedin)
+            //if (isLoggedin)
+            //{
+            App cur = (App)Application.Current;
+            listGames = await proxy.GetGamesAsync();
+            if (listGames != null)
             {
-                App cur = (App)Application.Current;
-                listGames = await proxy.GetGamesAsync();
-                if (listGames != null)
+                foreach (Game item in listGames)
                 {
-                    foreach (Game item in listGames)
-                    {
-                        this.observableCollectionGames.Add(item);
-                    }
+                    this.observableCollectionGames.Add(item);
                 }
             }
+            //}
         }
     }
 }
