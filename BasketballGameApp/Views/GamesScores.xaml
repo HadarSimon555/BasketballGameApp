@@ -4,8 +4,13 @@
              xmlns:local="clr-namespace:BasketballGameApp.ViewModels"
              x:Class="BasketballGameApp.Views.GamesScores"
              NavigationPage.HasNavigationBar="True"
-             FlowDirection="RightToLeft"
-             Title="תוצאות של משחקים">
+             FlowDirection="RightToLeft">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IsEnabled="{Binding IsLoggedIn}" Text="הירשם" Priority="0" Order="Primary" Command="{Binding NavigateToPageCommand}" CommandParameter="Signup"></ToolbarItem>
+        <ToolbarItem IsEnabled="{Binding IsLoggedIn}" Text="התחבר" Priority="0" Order="Primary" Command="{Binding NavigateToPageCommand}" CommandParameter="Login"></ToolbarItem>
+        <ToolbarItem Text="דירוגי השחקנים" Priority="0" Order="Secondary"></ToolbarItem>
+        <ToolbarItem Text="דירוגי הקבוצות" Priority="0" Order="Secondary"></ToolbarItem>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout Style="{StaticResource Stack}" Padding="0">
             <Grid Margin="0,0,0,0" Padding="0">

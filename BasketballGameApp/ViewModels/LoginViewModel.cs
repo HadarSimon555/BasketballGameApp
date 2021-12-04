@@ -83,7 +83,7 @@ namespace BasketballGameApp.ViewModels
                 theApp.CurrentUser = user;
                 Page page = new GamesScores();
                 await App.Current.MainPage.Navigation.PushAsync(page);
-                await App.Current.MainPage.DisplayAlert("התחברות", "ההתחברות בוצעה בהצלחה", "אישור", FlowDirection.RightToLeft);
+                //await App.Current.MainPage.DisplayAlert("התחברות", "ההתחברות בוצעה בהצלחה", "אישור", FlowDirection.RightToLeft);
             }
         }
         #endregion
