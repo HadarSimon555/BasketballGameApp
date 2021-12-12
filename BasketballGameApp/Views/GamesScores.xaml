@@ -5,12 +5,19 @@
              x:Class="BasketballGameApp.Views.GamesScores"
              NavigationPage.HasNavigationBar="True"
              FlowDirection="RightToLeft">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem IsEnabled="{Binding IsLoggedIn}" Text="הירשם" Priority="0" Order="Primary" Command="{Binding NavigateToPageCommand}" CommandParameter="Signup"></ToolbarItem>
-        <ToolbarItem IsEnabled="{Binding IsLoggedIn}" Text="התחבר" Priority="0" Order="Primary" Command="{Binding NavigateToPageCommand}" CommandParameter="Login"></ToolbarItem>
+    
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal" >
+            <Button IsVisible="{Binding IsLoggedIn}" Text="הירשם" Style="{StaticResource Button}" Command="{Binding NavigateToPageCommand}" CommandParameter="Signup"></Button>
+            <Button IsVisible="{Binding IsLoggedIn}" Text="התחבר" Style="{StaticResource Button}" Command="{Binding NavigateToPageCommand}" CommandParameter="Login"></Button>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <!--<ContentPage.ToolbarItems>
+        <ToolbarItem Text="הירשם" Priority="0" Order="Primary" Command="{Binding NavigateToPageCommand}" CommandParameter="Signup"></ToolbarItem>
+        <ToolbarItem Text="התחבר" Priority="0" Order="Primary"  Command="{Binding NavigateToPageCommand}" CommandParameter="Login"></ToolbarItem> 
         <ToolbarItem Text="דירוגי השחקנים" Priority="0" Order="Secondary"></ToolbarItem>
         <ToolbarItem Text="דירוגי הקבוצות" Priority="0" Order="Secondary"></ToolbarItem>
-    </ContentPage.ToolbarItems>
+    </ContentPage.ToolbarItems>-->
     <ContentPage.Content>
         <StackLayout Style="{StaticResource Stack}" Padding="0">
             <Grid Margin="0,0,0,0" Padding="0">
@@ -23,9 +30,7 @@
                 <Image Grid.Column="0" Aspect="AspectFill" Source="basketballPic" Opacity="0.6"></Image>
                 <Label Text="תוצאות של משחקים" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Style="{StaticResource FormTitle}"></Label>
             </Grid>
-            <Button IsVisible="{Binding IsLoggedIn}" Text="הירשם" Style="{StaticResource Button}" Command="{Binding NavigateToPageCommand}" CommandParameter="Signup"> </Button>
-            <Button IsVisible="{Binding IsLoggedIn}" Text="התחבר" Style="{StaticResource Button}" Command="{Binding NavigateToPageCommand}" CommandParameter="Login"></Button>
-
+            
             <CollectionView ItemsSource="{Binding ObservableCollectionGames}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
