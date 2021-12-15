@@ -3,13 +3,50 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BasketballGameApp.Views.PlayerCard"
              NavigationPage.HasNavigationBar="True"
-             FlowDirection="RightToLeft" 
-             Title="כרטיס שחקן">
+             FlowDirection="RightToLeft">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Style="{StaticResource Stack}" Padding="0">
+            <Grid Margin="0,0,0,0" Padding="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="150"/>
+                </Grid.RowDefinitions>
+                <Image Grid.Column="0" Aspect="AspectFill" Source="basketballPic" Opacity="0.6"></Image>
+                <Label Text="כרטיס שחקן" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Style="{StaticResource FormTitle}"></Label>
+            </Grid>
+
+            <CollectionView ItemsSource="{Binding ObservableCollectionPlayers}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Style="{StaticResource logInSignUp}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Label Text="קבוצה" Grid.Column="0" Grid.Row="0" Style="{StaticResource labelNameStyle}"/>
+                                <Label Text="{Binding TeamId.Name}" Grid.Column="1" Grid.Row="0" Style="{StaticResource labelNameStyle}"/>
+                                <Label Text="עמדה" Grid.Column="0" Grid.Row="1" Style="{StaticResource labelNameStyle}"/>
+                                <Label Text="{Binding PositionId.Name}" Grid.Column="1" Grid.Row="1" Style="{StaticResource labelNameStyle}"/>
+                                <Label Text="גובה" Grid.Column="0" Grid.Row="2" Style="{StaticResource labelNameStyle}"/>
+                                <Label Text="{Binding PlayerId.Height}" Grid.Column="1" Grid.Row="2" Style="{StaticResource labelNameStyle}"/>
+                                <Label Text="תאריך לידה" Grid.Column="0" Grid.Row="3" Style="{StaticResource labelNameStyle}"/>
+                                <Label Text="{Binding PlayerId.UserId.BirthDate}" Grid.Column="1" Grid.Row="3" Style="{StaticResource labelNameStyle}"/>
+                                <Label Text="{Binding PlayerId.UserId.Image}" Grid.Column="1" Grid.Row="4" Style="{StaticResource labelNameStyle}"/>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
