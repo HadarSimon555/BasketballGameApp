@@ -17,7 +17,33 @@
                 <Label Text="כרטיס שחקן" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Style="{StaticResource FormTitle}"></Label>
             </Grid>
 
-            <CollectionView ItemsSource="{Binding ObservableCollectionPlayers}">
+            <Frame Style="{StaticResource logInSignUp}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Label Text="קבוצה" Grid.Column="0" Grid.Row="0" Style="{StaticResource labelNameStyle}"/>
+                    <Label Text="מכבי" Grid.Column="1" Grid.Row="0" HorizontalOptions="End" Style="{StaticResource labelNameStyle}"/>
+                    <Label Text="עמדה" Grid.Column="0" Grid.Row="1" Style="{StaticResource labelNameStyle}"/>
+                    <Label Text="11" Grid.Column="1" Grid.Row="1" Style="{StaticResource labelNameStyle}"/>
+                    <Label Text="גובה" Grid.Column="0" Grid.Row="2" Style="{StaticResource labelNameStyle}"/>
+                    <Label Text="1.9" Grid.Column="1" Grid.Row="2" Style="{StaticResource labelNameStyle}"/>
+                    <Label Text="תאריך לידה" Grid.Column="0" Grid.Row="3" Style="{StaticResource labelNameStyle}"/>
+                    <Label Text="11.11.11" Grid.Column="1" Grid.Row="3" Style="{StaticResource labelNameStyle}"/>
+                    <Image Grid.Row="4" HorizontalOptions="CenterAndExpand" Source="basketballPic"/>
+                </Grid>
+            </Frame>
+
+
+            <CollectionView ItemsSource="{Binding CurrentPlayer}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame Style="{StaticResource logInSignUp}">
