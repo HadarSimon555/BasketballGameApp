@@ -5,7 +5,9 @@
              x:Class="BasketballGameApp.Views.GamesScores"
              NavigationPage.HasNavigationBar="True"
              FlowDirection="RightToLeft">
-    
+    <ContentPage.BindingContext>
+        <local:GamesScoresViewModel></local:GamesScoresViewModel>
+    </ContentPage.BindingContext>
     <NavigationPage.TitleView>
         <StackLayout Orientation="Horizontal" >
             <Button IsVisible="{Binding IsLoggedIn}" Text="הירשם" Style="{StaticResource Button}" Command="{Binding NavigateToPageCommand}" CommandParameter="Signup"></Button>
@@ -45,11 +47,11 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
-                            <Label Text="{Binding HomeTeamId.Name}" Grid.Column="0" />
+                            <Label Text="{Binding HomeTeam.Name}" Grid.Column="0" />
                             <Label Text="{Binding ScoreHomeTeam}" Grid.Column="1" />
                             <Label Text="-" Grid.Column="2" />
                             <Label Text="{Binding ScoreAwayTeam}" Grid.Column="3" />
-                            <Label Text="{Binding AwayTeamId.Name}" Grid.Column="4" />
+                            <Label Text="{Binding AwayTeam.Name}" Grid.Column="4" />
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

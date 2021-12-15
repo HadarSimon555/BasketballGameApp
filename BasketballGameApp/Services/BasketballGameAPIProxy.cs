@@ -299,11 +299,12 @@ namespace BasketballGameApp.Services
         #endregion
 
         #region GetPlayerOnTeamForSeasonAsync
-        public async Task<PlayerOnTeamForSeason> GetPlayerOnTeamForSeasonAsync(User user)
+
+        public async Task<PlayerOnTeamForSeason> GetPlayerOnTeamForSeasonAsync(int userId)
         {
             try
             {
-                HttpResponseMessage response = await client.GetAsync($"{this.baseUri}/GetPlayerOnTeamForSeason?user={user}");
+                HttpResponseMessage response = await client.GetAsync($"{this.baseUri}/GetPlayerOnTeamForSeason?userId={userId}");
                 if (response.IsSuccessStatusCode)
                 {
                     JsonSerializerOptions options = new JsonSerializerOptions

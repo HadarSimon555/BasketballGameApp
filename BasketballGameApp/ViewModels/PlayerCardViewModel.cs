@@ -41,7 +41,7 @@ namespace BasketballGameApp.ViewModels
         {
             BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
             App cur = (App)Application.Current;
-            currentPlayer = await proxy.GetPlayerOnTeamForSeasonAsync(cur.CurrentUser);
+            currentPlayer = await proxy.GetPlayerOnTeamForSeasonAsync(cur.CurrentUser.Id);
         }
     }
 }
