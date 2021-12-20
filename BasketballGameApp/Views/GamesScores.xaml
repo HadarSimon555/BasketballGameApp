@@ -6,7 +6,7 @@
              NavigationPage.HasNavigationBar="True"
              FlowDirection="RightToLeft">
     <ContentPage.ToolbarItems>
-        <ToolbarItem IsEnabled="{Binding IsLoggedIn}" Text="הירשם" Priority="0" Order="Primary" Command="{Binding NavigateToPageCommand}" CommandParameter="Signup"></ToolbarItem>
+        <ToolbarItem IsEnabled="{Binding IsLoggedIn}" Text="הירשם" Priority="0"  Order="Primary" Command="{Binding NavigateToPageCommand}" CommandParameter="Signup"></ToolbarItem>
         <ToolbarItem IsEnabled="{Binding IsLoggedIn}" Text="התחבר" Priority="0" Order="Primary" Command="{Binding NavigateToPageCommand}" CommandParameter="Login"></ToolbarItem>
         <ToolbarItem Text="דירוגי השחקנים" Priority="0" Order="Secondary"></ToolbarItem>
         <ToolbarItem Text="דירוגי הקבוצות" Priority="0" Order="Secondary"></ToolbarItem>
@@ -23,8 +23,8 @@
                 <Image Grid.Column="0" Aspect="AspectFill" Source="basketballPic" Opacity="0.6"></Image>
                 <Label Text="תוצאות של משחקים" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Style="{StaticResource FormTitle}"></Label>
             </Grid>
-            <Button IsVisible="{Binding IsLoggedIn}" Text="הירשם" Style="{StaticResource Button}" Command="{Binding NavigateToPageCommand}" CommandParameter="Signup"> </Button>
-            <Button IsVisible="{Binding IsLoggedIn}" Text="התחבר" Style="{StaticResource Button}" Command="{Binding NavigateToPageCommand}" CommandParameter="Login"></Button>
+            <!--<Button IsVisible="{Binding IsLoggedIn}" Text="הירשם" Style="{StaticResource Button}" Command="{Binding NavigateToPageCommand}" CommandParameter="Signup"> </Button>
+            <Button IsVisible="{Binding IsLoggedIn}" Text="התחבר" Style="{StaticResource Button}" Command="{Binding NavigateToPageCommand}" CommandParameter="Login"></Button>-->
 
             <CollectionView ItemsSource="{Binding ObservableCollectionGames}">
                 <CollectionView.ItemTemplate>
