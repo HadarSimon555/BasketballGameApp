@@ -1,12 +1,68 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BasketballGameApp.Views.CreateTeam">
+             x:Class="BasketballGameApp.Views.CreateTeam"
+             NavigationPage.HasNavigationBar="True"
+             FlowDirection="RightToLeft" 
+             Title="יצירת קבוצה">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Style="{StaticResource Stack}" Padding="0">
+            <Grid Margin="0,0,0,0" Padding="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="150"/>
+                </Grid.RowDefinitions>
+                <Image Grid.Column="0" Aspect="AspectFill" Source="basketballPic" Opacity="0.6"></Image>
+                <Label Text="יצירת קבוצה" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Style="{StaticResource FormTitle}"></Label>
+            </Grid>
+
+            <ScrollView>
+                <StackLayout Padding="0,20,0,0">
+
+                    <Frame Style="{StaticResource logInSignUp}">
+                        <StackLayout>
+                            <!-- Image -->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="1.4*"/>
+                                    <ColumnDefinition Width="1.4*"/>
+                                    <ColumnDefinition Width="2*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="150" />
+                                </Grid.RowDefinitions>
+                                <ImageButton Source="photogallery.png" HorizontalOptions="Start" BackgroundColor="White" Grid.Column="2" Grid.Row="0" Command="{Binding PickImageCommand}"/>
+                                <ImageButton Source="camera.png" HorizontalOptions="End" Grid.Column="1" Grid.Row="0" BackgroundColor="White" Command="{Binding CameraImageCommand}"/>
+
+                                <Frame BorderColor="white"  CornerRadius="100" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" IsClippedToBounds="True" Padding="0" HeightRequest="100" WidthRequest="100">
+                                    <Image x:Name="theImage" Source="{Binding UserImgSrc}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0">
+
+                                    </Image>
+                                </Frame>
+                            </Grid>
+
+                            <!-- Name -->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Label Text="שם הקבוצה" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
+                                <Label Text="{Binding NameError}" IsVisible="{Binding ShowNameError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
+                            </Grid>
+                            <Entry Placeholder="הכנס את שם הקבוצה" MaxLength="30" Text="{Binding Name}" Style="{StaticResource entry}" />
+                        </StackLayout>
+                    </Frame>
+                    <Button Text="צור קבוצה" Style="{StaticResource Button}" Command="{Binding SaveDataCommand}"></Button>
+                </StackLayout>
+            </ScrollView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
