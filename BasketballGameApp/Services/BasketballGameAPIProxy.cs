@@ -297,6 +297,35 @@ namespace BasketballGameApp.Services
             }
         }
         #endregion
+
+        #region GetPlayerOnTeamForSeasonAsync
+
+        public async Task<PlayerOnTeamForSeason> GetPlayerOnTeamForSeasonAsync(int userId)
+        {
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync($"{this.baseUri}/GetPlayerOnTeamForSeason?userId={userId}");
+                if (response.IsSuccessStatusCode)
+                {
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        ReferenceHandler = ReferenceHandler.Preserve,
+                        PropertyNameCaseInsensitive = true
+                    };
+
+                    string res = await response.Content.ReadAsStringAsync();
+                    return JsonSerializer.Deserialize<PlayerOnTeamForSeason>(res, options);
+                }
+                else
+                    return null;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+        #endregion
     }
 }
 
