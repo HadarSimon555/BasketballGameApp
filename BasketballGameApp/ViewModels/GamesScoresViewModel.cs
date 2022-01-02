@@ -85,6 +85,7 @@ namespace BasketballGameApp.ViewModels
         }
         #endregion
 
+        private App TheApp = (App)Application.Current;
         private List<Game> listGames;
         private ObservableCollection<Game> observableCollectionGames;
         public ObservableCollection<Game> ObservableCollectionGames
@@ -109,7 +110,7 @@ namespace BasketballGameApp.ViewModels
             BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
             //if (isLoggedin)
             //{
-            App cur = (App)Application.Current;
+           
             listGames = await proxy.GetGamesAsync();
             if (listGames != null)
             {
@@ -118,6 +119,7 @@ namespace BasketballGameApp.ViewModels
                     this.observableCollectionGames.Add(item);
                 }
             }
+            TheApp.leagues = await proxy.GetLeaguesAsync();
             //}
         }
     }

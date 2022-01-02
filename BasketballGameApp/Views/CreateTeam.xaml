@@ -39,7 +39,7 @@
                                 <ImageButton Source="camera.png" HorizontalOptions="End" Grid.Column="1" Grid.Row="0" BackgroundColor="White" Command="{Binding CameraImageCommand}"/>
 
                                 <Frame BorderColor="white"  CornerRadius="100" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" IsClippedToBounds="True" Padding="0" HeightRequest="100" WidthRequest="100">
-                                    <Image x:Name="theImage" Source="{Binding UserImgSrc}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0">
+                                    <Image x:Name="theImage" Source="{Binding TeamImgSrc}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="0">
 
                                     </Image>
                                 </Frame>

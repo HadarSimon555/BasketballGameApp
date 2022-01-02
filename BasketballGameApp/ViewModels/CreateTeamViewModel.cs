@@ -86,19 +86,20 @@ namespace BasketballGameApp.ViewModels
             }
         }
         #endregion
-
+        private App theApp { get; set; }
+        private Team team { get; set; }
         #region Constructor
         public CreateTeamViewModel()
         {
-            App theApp = (App)App.Current;
-            Team team = new Team()
+            theApp = (App)App.Current;
+             team = new Team()
             {
-                Id = 0,
-                CoachId = 0,
-                LeagueId = 0,
-                Name = "",
-                Image = ""
+
+                Coach = new Coach() { User=theApp.CurrentUser},
+                Name = string.Empty,
+                Image =string.Empty
             };
+            
 
             //Setup default image photo
             this.TeamImgSrc = DEFAULT_PHOTO_SRC;
