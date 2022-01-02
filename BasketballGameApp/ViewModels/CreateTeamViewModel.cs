@@ -90,8 +90,67 @@ namespace BasketballGameApp.ViewModels
         #region Constructor
         public CreateTeamViewModel()
         {
-            
+            App theApp = (App)App.Current;
+            Team team = new Team()
+            {
+                Id = 0,
+                CoachId = 0,
+                LeagueId = 0,
+                Name = "",
+                Image = ""
+            };
+
+            //Setup default image photo
+            this.TeamImgSrc = DEFAULT_PHOTO_SRC;
+            //this.imageFileResult = null; //mark that no picture was chosen
+
+            this.NameError = ERROR_MESSAGES.REQUIRED_FIELD;
+            this.ShowNameError = false;
+
+            this.SaveDataCommand = new Command(() => SaveData());
         }
         #endregion
+
+        #region ValidateForm
+        //This function validate the entire form upon submit!
+        private bool ValidateForm()
+        {
+            //Validate all fields first
+            ValidateName();
+
+            //check if any validation failed
+            if (ShowNameError)
+                return false;
+            return true;
+        }
+        #endregion
+
+        #region ServerStatus
+        private string serverStatus;
+        public string ServerStatus
+        {
+            get { return serverStatus; }
+            set
+            {
+                serverStatus = value;
+                OnPropertyChanged("ServerStatus");
+            }
+        }
+        #endregion
+
+        #region SaveData
+        //This event is fired after the new contact is generated in the system so it can be added to the list of contacts
+        //public event Action<Player, Player> PlayerUpdatedEvent;
+
+        //The command for saving the contact
+        public Command SaveDataCommand { protected set; get; }
+        private async void SaveData()
+        {
+            if (ValidateForm())
+            {
+
+            }
+        }
     }
+    #endregion
 }
