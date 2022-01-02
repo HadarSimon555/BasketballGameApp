@@ -74,32 +74,40 @@ namespace BasketballGameApp.ViewModels
         private const string DEFAULT_PHOTO_SRC = "defaultphoto.png";
         #endregion
 
-        #region IsCoach
-        private bool isCoach;
-        public bool IsCoach
+        //#region IsCoach
+        //private bool isCoach;
+        //public bool IsCoach
+        //{
+        //    get => isCoach;
+        //    set
+        //    {
+        //        isCoach = value;
+        //        OnPropertyChanged("IsCoach");
+        //    }
+        //}
+        //#endregion
+
+        #region SelectedLeague
+        private League selectedLeague;
+        public League SelectedLeague
         {
-            get => isCoach;
+            get => selectedLeague;
             set
             {
-                isCoach = value;
-                OnPropertyChanged("IsCoach");
+                selectedLeague = value;
+                OnPropertyChanged("SelectedLeague");
             }
         }
         #endregion
+        public ObservableCollection<League> Leagues { get; set; }
+        
         private App theApp { get; set; }
         private Team team { get; set; }
         #region Constructor
         public CreateTeamViewModel()
         {
             theApp = (App)App.Current;
-             team = new Team()
-            {
-
-                Coach = new Coach() { User=theApp.CurrentUser},
-                Name = string.Empty,
-                Image =string.Empty
-            };
-            
+            this.Leagues = new ObservableCollection<League>(theApp.Leagues);
 
             //Setup default image photo
             this.TeamImgSrc = DEFAULT_PHOTO_SRC;
@@ -149,7 +157,18 @@ namespace BasketballGameApp.ViewModels
         {
             if (ValidateForm())
             {
+                team = new Team()
+                {
+                    League = this.SelectedLeague,
+                    Coach = new Coach() { User = theApp.CurrentUser },
+                    Name = this.Name,
+                    Image = this.TeamImgSrc
+                };
 
+                this.team.Image = this.TeamImgSrc;
+                this.team.Name = this.Name;
+                this.team.League = this.SelectedLeague;
+                this.team.Coach = this.
             }
         }
     }

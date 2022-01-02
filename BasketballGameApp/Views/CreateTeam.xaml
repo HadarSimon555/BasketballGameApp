@@ -58,6 +58,9 @@
                                 <Label Text="{Binding NameError}" IsVisible="{Binding ShowNameError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
                             </Grid>
                             <Entry Placeholder="הכנס את שם הקבוצה" MaxLength="30" Text="{Binding Name}" Style="{StaticResource entry}" />
+
+                            <!--Leagues -->
+                            <Picker ItemsSource="{Binding Leagues}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedLeague}" />
                         </StackLayout>
                     </Frame>
                     <Button Text="צור קבוצה" Style="{StaticResource Button}" Command="{Binding SaveDataCommand}"></Button>

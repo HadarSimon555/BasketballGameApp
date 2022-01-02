@@ -119,7 +119,7 @@ namespace BasketballGameApp.ViewModels
                     this.observableCollectionGames.Add(item);
                 }
             }
-            TheApp.leagues = await proxy.GetLeaguesAsync();
+            TheApp.Leagues = await proxy.GetLeaguesAsync();
             //}
         }
     }

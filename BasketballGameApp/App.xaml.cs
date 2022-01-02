@@ -20,7 +20,7 @@ namespace BasketballGameApp
         //The current logged in user
         public User CurrentUser { get; set; }
 
-        public List<League> leagues { get; set; }
+        public List<League> Leagues { get; set; }
 
         //The list of phone types
         //public List<PhoneType> PhoneTypes { get; set; }
