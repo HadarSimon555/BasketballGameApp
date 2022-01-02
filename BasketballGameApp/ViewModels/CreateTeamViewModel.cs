@@ -59,6 +59,19 @@ namespace BasketballGameApp.ViewModels
         }
         #endregion
 
+        #region Coach
+        private Coach coach;
+        public Coach Coach
+        {
+            get => coach;
+            set
+            {
+                coach = value;
+                OnPropertyChanged("Coach");
+            }
+        }
+        #endregion
+
         #region TeamImgSrc
         private string teamImgSrc;
 
@@ -74,7 +87,7 @@ namespace BasketballGameApp.ViewModels
         private const string DEFAULT_PHOTO_SRC = "defaultphoto.png";
         #endregion
 
-        //#region IsCoach
+        #region IsCoach
         //private bool isCoach;
         //public bool IsCoach
         //{
@@ -85,7 +98,7 @@ namespace BasketballGameApp.ViewModels
         //        OnPropertyChanged("IsCoach");
         //    }
         //}
-        //#endregion
+        #endregion
 
         #region SelectedLeague
         private League selectedLeague;
@@ -108,6 +121,11 @@ namespace BasketballGameApp.ViewModels
         {
             theApp = (App)App.Current;
             this.Leagues = new ObservableCollection<League>(theApp.Leagues);
+
+            //team = new Team()
+            //{
+            //    Coach=
+            //}
 
             //Setup default image photo
             this.TeamImgSrc = DEFAULT_PHOTO_SRC;
@@ -168,7 +186,7 @@ namespace BasketballGameApp.ViewModels
                 this.team.Image = this.TeamImgSrc;
                 this.team.Name = this.Name;
                 this.team.League = this.SelectedLeague;
-                this.team.Coach = this.
+                this.team.Coach = this.Coach;
             }
         }
     }
