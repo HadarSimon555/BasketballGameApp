@@ -609,6 +609,17 @@ namespace BasketballGameApp.ViewModels
 
                         App a = (App)App.Current;
                         a.CurrentUser = u;
+                        if(o is Player)
+                        {
+                            Player player = (Player)o;
+                            a.CurrentPlayer = player;
+                        }
+                        else
+                        {
+                            Coach coach = (Coach)o;
+                            a.CurrentCoach = coach;
+                        }
+
                         Page page = new GamesScores();
                         await App.Current.MainPage.Navigation.PushAsync(page);
                         await App.Current.MainPage.DisplayAlert("הרשמה", "ההרשמה בוצעה בהצלחה", "אישור", FlowDirection.RightToLeft);
