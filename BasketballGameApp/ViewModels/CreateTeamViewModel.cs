@@ -112,9 +112,11 @@ namespace BasketballGameApp.ViewModels
             }
         }
         #endregion
+
         public ObservableCollection<League> Leagues { get; set; }
         private App theApp { get; set; }
         private Team team { get; set; }
+
         #region Constructor
         public CreateTeamViewModel()
         {

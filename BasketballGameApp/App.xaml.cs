@@ -19,6 +19,8 @@ namespace BasketballGameApp
 
         //The current logged in user
         public User CurrentUser { get; set; }
+        public Player CurrentPlayer { get; set; }
+        public Coach CurrentCoach { get; set; }
 
         public List<League> Leagues { get; set; }
 
