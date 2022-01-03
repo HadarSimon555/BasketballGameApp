@@ -113,7 +113,6 @@ namespace BasketballGameApp.ViewModels
         }
         #endregion
         public ObservableCollection<League> Leagues { get; set; }
-        
         private App theApp { get; set; }
         private Team team { get; set; }
         #region Constructor
@@ -122,14 +121,17 @@ namespace BasketballGameApp.ViewModels
             theApp = (App)App.Current;
             this.Leagues = new ObservableCollection<League>(theApp.Leagues);
 
-            //team = new Team()
-            //{
-            //    Coach=
-            //}
+            team = new Team()
+            {
+                League = null,
+                Coach = null,
+                Name = string.Empty,
+                Image = string.Empty
+            };
 
             //Setup default image photo
             this.TeamImgSrc = DEFAULT_PHOTO_SRC;
-            //this.imageFileResult = null; //mark that no picture was chosen
+            this.imageFileResult = null; //mark that no picture was chosen
 
             this.NameError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.ShowNameError = false;
@@ -187,8 +189,94 @@ namespace BasketballGameApp.ViewModels
                 this.team.Name = this.Name;
                 this.team.League = this.SelectedLeague;
                 this.team.Coach = this.Coach;
+
+                ServerStatus = "מתחבר לשרת...";
+                await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatusPage(this));
+                BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
+
+                Team newTeam = await proxy.AddTeamAsync(this.team);
+
+                if (newTeam == null)
+                {
+                    await App.Current.MainPage.DisplayAlert("שגיאה", "שמירת המשתמש נכשלה", "בסדר");
+                    await App.Current.MainPage.Navigation.PopModalAsync();
+                }
+
+                else
+                {
+                    if (this.imageFileResult != null)
+                    {
+                        ServerStatus = "מעלה תמונה...";
+                        bool success = await proxy.UploadImage(new FileInfo()
+                        {
+                            Name = this.imageFileResult.FullPath
+                        }, $"{(newTeam).Id}.jpg");
+                    }
+
+                    ServerStatus = "שומר נתונים...";
+
+                    //close the message and add contact windows!
+                    await App.Current.MainPage.Navigation.PopAsync();
+                    await App.Current.MainPage.Navigation.PopModalAsync();
+
+                    theApp = (App)App.Current;
+                    //theApp.CurrentTeam = team;
+                    Page page = new GamesScores();
+                    await App.Current.MainPage.Navigation.PushAsync(page);
+                    await App.Current.MainPage.DisplayAlert("יצירת קבוצה", "יצירת הקבוצה בוצעה בהצלחה", "אישור", FlowDirection.RightToLeft);
+                }
+            }
+            else
+                await App.Current.MainPage.DisplayAlert("שמירת נתונים", " יש בעיה עם הנתונים בדוק ונסה שוב", "אישור", FlowDirection.RightToLeft);
+        }
+        #endregion
+
+        #region OnPickImage
+        //The following command handle the pick photo button
+        FileResult imageFileResult;
+
+        public event Action<ImageSource> SetImageSourceEvent;
+        public ICommand PickImageCommand => new Command(OnPickImage);
+        public async void OnPickImage()
+        {
+            FileResult result = await MediaPicker.PickPhotoAsync(new MediaPickerOptions()
+            {
+                Title = "Pick a photo"
+            });
+
+            if (result != null)
+            {
+                this.imageFileResult = result;
+
+                var stream = await result.OpenReadAsync();
+                ImageSource imgSource = ImageSource.FromStream(() => stream);
+                this.TeamImgSrc = result.FullPath;
+                if (SetImageSourceEvent != null)
+                    SetImageSourceEvent(imgSource);
             }
         }
+        #endregion
+
+        #region OnCameraImage
+        //The following command handle the take photo button
+        public ICommand CameraImageCommand => new Command(OnCameraImage);
+        public async void OnCameraImage()
+        {
+            var result = await MediaPicker.CapturePhotoAsync(new MediaPickerOptions()
+            {
+                Title = "Take a photo"
+            });
+
+            if (result != null)
+            {
+                this.imageFileResult = result;
+                var stream = await result.OpenReadAsync();
+                ImageSource imgSource = ImageSource.FromStream(() => stream);
+                this.TeamImgSrc = result.FullPath;
+                if (SetImageSourceEvent != null)
+                    SetImageSourceEvent(imgSource);
+            }
+        }
+        #endregion
     }
-    #endregion
 }
