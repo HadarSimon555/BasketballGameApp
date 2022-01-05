@@ -48,16 +48,15 @@ namespace BasketballGameApp.ViewModels
             App theApp = (App)App.Current;
             if (theApp.CurrentUser == null)
             {
-                IsLoggedIn = true;
+                IsLoggedIn = !false;
                 NavigateToPageCommand = new Command<string>(NavigateToPage);
             }
             else
             {
-                IsLoggedIn = false;
+                IsLoggedIn = !true;
 
                 if (theApp.CurrentCoach != null && TheApp.CurrentCoach.Teams.Count == 0)
                 {
-                    IsLoggedIn = true;
                     IsCoach = true;
                     NavigateToCreateTeamPageCommand = new Command(NavigateToCreateTeamPage);
                 }
