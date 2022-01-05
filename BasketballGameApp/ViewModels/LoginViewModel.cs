@@ -82,13 +82,13 @@ namespace BasketballGameApp.ViewModels
                 App theApp = (App)App.Current;
                 theApp.CurrentUser = user;
 
-                if (user.Coaches != null)
+                if (user.Coaches.Count > 0)
                 {
                     theApp.CurrentCoach = user.Coaches[0];
                     theApp.CurrentPlayer = null;
                 }
                     
-                if (user.Players != null)
+                if (user.Players.Count > 0)
                 {
                     theApp.CurrentPlayer = user.Players[0];
                     theApp.CurrentCoach = null;

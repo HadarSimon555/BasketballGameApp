@@ -28,6 +28,19 @@ namespace BasketballGameApp.ViewModels
         }
         #endregion
 
+        #region IsCoach
+        private bool isCoach;
+        public bool IsCoach
+        {
+            get => isCoach;
+            set
+            {
+                isCoach = value;
+                OnPropertyChanged("IsCoach");
+            }
+        }
+        #endregion
+
         #region Constructor
         public GamesScoresViewModel()
         {
@@ -35,12 +48,21 @@ namespace BasketballGameApp.ViewModels
             App theApp = (App)App.Current;
             if (theApp.CurrentUser == null)
             {
-                IsLoggedIn = !false;
+                IsLoggedIn = true;
                 NavigateToPageCommand = new Command<string>(NavigateToPage);
             }
             else
             {
-                IsLoggedIn = !true;
+                IsLoggedIn = false;
+
+                if (theApp.CurrentCoach != null && TheApp.CurrentCoach.Teams.Count == 0)
+                {
+                    IsLoggedIn = true;
+                    IsCoach = true;
+                    NavigateToCreateTeamPageCommand = new Command(NavigateToCreateTeamPage);
+                }
+                else
+                    IsCoach = false;
             }
             //add server status page
             LoadGames();
@@ -85,6 +107,16 @@ namespace BasketballGameApp.ViewModels
         }
         #endregion
 
+        #region NavigateToCreateTeamPage
+        public ICommand NavigateToCreateTeamPageCommand { protected set; get; }
+        public void NavigateToCreateTeamPage()
+        {
+            Page p = new CreateTeam();
+            p.BindingContext = new CreateTeamViewModel();
+            App.Current.MainPage.Navigation.PushAsync(p);
+        }
+        #endregion
+
         private App TheApp = (App)Application.Current;
         private List<Game> listGames;
         private ObservableCollection<Game> observableCollectionGames;
@@ -110,7 +142,7 @@ namespace BasketballGameApp.ViewModels
             BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
             //if (isLoggedin)
             //{
-           
+
             listGames = await proxy.GetGamesAsync();
             if (listGames != null)
             {
