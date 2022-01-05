@@ -81,6 +81,19 @@ namespace BasketballGameApp.ViewModels
                 ServerStatus = "קורא נתונים...";
                 App theApp = (App)App.Current;
                 theApp.CurrentUser = user;
+
+                if (user.Coaches != null)
+                {
+                    theApp.CurrentCoach = user.Coaches[0];
+                    theApp.CurrentPlayer = null;
+                }
+                    
+                if (user.Players != null)
+                {
+                    theApp.CurrentPlayer = user.Players[0];
+                    theApp.CurrentCoach = null;
+                }
+                    
                 await App.Current.MainPage.DisplayAlert("התחברות", "ההתחברות בוצעה בהצלחה", "אישור", FlowDirection.RightToLeft);
                 await App.Current.MainPage.Navigation.PopModalAsync();
                 await App.Current.MainPage.Navigation.PushAsync(new GamesScores());
