@@ -19,7 +19,6 @@ namespace BasketballGameApp.Models
         public string Name { get; set; }
         public string Image { get; set; }
 
-        public virtual Coach Coach { get; set; }
         public virtual League League { get; set; }
         public virtual List<Game> GameAwayTeams { get; set; }
         public virtual List<Game> GameHomeTeams { get; set; }
@@ -27,3 +26,4 @@ namespace BasketballGameApp.Models
         public virtual List<RequestToJoinTeam> RequestToJoinTeams { get; set; }
     }
 }
+
