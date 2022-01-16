@@ -126,7 +126,7 @@ namespace BasketballGameApp.ViewModels
             team = new Team()
             {
                 League = null,
-                Coach = null,
+                //Coach = null,
                 Name = string.Empty,
                 Image = string.Empty
             };
@@ -182,7 +182,7 @@ namespace BasketballGameApp.ViewModels
                 team = new Team()
                 {
                     League = this.SelectedLeague,
-                    Coach = new Coach() { User = theApp.CurrentUser },
+                    //Coach = new Coach() { User = theApp.CurrentUser },
                     Name = this.Name,
                     Image = this.TeamImgSrc
                 };
@@ -190,7 +190,7 @@ namespace BasketballGameApp.ViewModels
                 this.team.Image = this.TeamImgSrc;
                 this.team.Name = this.Name;
                 this.team.League = this.SelectedLeague;
-                this.team.Coach = this.Coach;
+                //this.team.Coach = this.Coach;
 
                 ServerStatus = "מתחבר לשרת...";
                 await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatusPage(this));
