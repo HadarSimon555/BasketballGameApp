@@ -21,7 +21,6 @@ namespace BasketballGameApp.Models
         public string Image { get; set; }
 
         public virtual Coach Coach { get; set; }
-        public virtual League League { get; set; }
         public virtual List<Coach> Coaches { get; set; }
         public virtual List<Game> GameAwayTeams { get; set; }
         public virtual List<Game> GameHomeTeams { get; set; }

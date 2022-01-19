@@ -113,7 +113,7 @@ namespace BasketballGameApp.ViewModels
         }
         #endregion
 
-        public ObservableCollection<League> Leagues { get; set; }
+        //public ObservableCollection<League> Leagues { get; set; }
         private App theApp { get; set; }
         private Team team { get; set; }
 
@@ -121,12 +121,11 @@ namespace BasketballGameApp.ViewModels
         public CreateTeamViewModel()
         {
             theApp = (App)App.Current;
-            this.Leagues = new ObservableCollection<League>(theApp.Leagues);
+            //this.Leagues = new ObservableCollection<League>(theApp.Leagues);
 
             team = new Team()
             {
-                League = null,
-                //Coach = null,
+                //League = null,
                 Name = string.Empty,
                 Image = string.Empty
             };
@@ -181,7 +180,7 @@ namespace BasketballGameApp.ViewModels
             {
                 team = new Team()
                 {
-                    League = this.SelectedLeague,
+                    //League = this.SelectedLeague,
                     //Coach = new Coach() { User = theApp.CurrentUser },
                     Name = this.Name,
                     Image = this.TeamImgSrc
@@ -189,7 +188,7 @@ namespace BasketballGameApp.ViewModels
 
                 this.team.Image = this.TeamImgSrc;
                 this.team.Name = this.Name;
-                this.team.League = this.SelectedLeague;
+                //this.team.League = this.SelectedLeague;
                 //this.team.Coach = this.Coach;
 
                 ServerStatus = "מתחבר לשרת...";
