@@ -7,6 +7,7 @@ namespace BasketballGameApp.Models
     {
         public Team()
         {
+            Coaches = new List<Coach>();
             GameAwayTeams = new List<Game>();
             GameHomeTeams = new List<Game>();
             PlayerOnTeamForSeasons = new List<PlayerOnTeamForSeason>();
@@ -19,11 +20,14 @@ namespace BasketballGameApp.Models
         public string Name { get; set; }
         public string Image { get; set; }
 
+        public virtual Coach Coach { get; set; }
         public virtual League League { get; set; }
+        public virtual List<Coach> Coaches { get; set; }
         public virtual List<Game> GameAwayTeams { get; set; }
         public virtual List<Game> GameHomeTeams { get; set; }
         public virtual List<PlayerOnTeamForSeason> PlayerOnTeamForSeasons { get; set; }
         public virtual List<RequestToJoinTeam> RequestToJoinTeams { get; set; }
     }
 }
+
 

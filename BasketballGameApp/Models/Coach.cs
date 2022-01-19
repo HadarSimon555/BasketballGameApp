@@ -8,14 +8,18 @@ namespace BasketballGameApp.Models
         public Coach()
         {
             RequestGames = new List<RequestGame>();
+            Teams = new List<Team>();
         }
 
         public int Id { get; set; }
         public int UserId { get; set; }
         public int TeamId { get; set; }
 
+        public virtual Team Team { get; set; }
         public virtual User User { get; set; }
         public virtual List<RequestGame> RequestGames { get; set; }
+        public virtual List<Team> Teams { get; set; }
     }
 }
+
 
