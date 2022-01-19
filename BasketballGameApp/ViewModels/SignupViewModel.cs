@@ -621,8 +621,10 @@ namespace BasketballGameApp.ViewModels
                         }
 
                         Page page = new GamesScores();
-                        await App.Current.MainPage.Navigation.PushAsync(page);
+                        NavigationPage p = new NavigationPage(page);
+                        NavigationPage.SetHasNavigationBar(p, false);
                         await App.Current.MainPage.DisplayAlert("הרשמה", "ההרשמה בוצעה בהצלחה", "אישור", FlowDirection.RightToLeft);
+                        await App.Current.MainPage.Navigation.PushAsync(p);
                     }
                 }
                 else

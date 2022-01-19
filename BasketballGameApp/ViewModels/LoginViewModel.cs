@@ -96,7 +96,9 @@ namespace BasketballGameApp.ViewModels
                     
                 await App.Current.MainPage.DisplayAlert("התחברות", "ההתחברות בוצעה בהצלחה", "אישור", FlowDirection.RightToLeft);
                 await App.Current.MainPage.Navigation.PopModalAsync();
-                await App.Current.MainPage.Navigation.PushAsync(new GamesScores());
+                NavigationPage p = new NavigationPage(new GamesScores());
+                NavigationPage.SetHasNavigationBar(p, false);
+                await App.Current.MainPage.Navigation.PushAsync(p);
             }
         }
         #endregion

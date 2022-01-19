@@ -44,21 +44,23 @@ namespace BasketballGameApp.ViewModels
         #region Constructor
         public GamesScoresViewModel()
         {
+            NavigateToPageCommand = new Command<string>(NavigateToPage);
+            NavigateToCreateTeamPageCommand = new Command(NavigateToCreateTeamPage);
             observableCollectionGames = new ObservableCollection<Game>();
             App theApp = (App)App.Current;
             if (theApp.CurrentUser == null)
             {
                 IsLoggedIn = !false;
-                NavigateToPageCommand = new Command<string>(NavigateToPage);
+                
             }
             else
             {
                 IsLoggedIn = !true;
 
-                if (theApp.CurrentCoach != null && TheApp.CurrentCoach.Teams.Count == 0)
+                if (theApp.CurrentCoach != null && TheApp.CurrentCoach.Team == null)
                 {
                     IsCoach = true;
-                    NavigateToCreateTeamPageCommand = new Command(NavigateToCreateTeamPage);
+                   
                 }
                 else
                     IsCoach = false;

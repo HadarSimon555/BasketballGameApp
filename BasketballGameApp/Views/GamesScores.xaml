@@ -3,13 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:BasketballGameApp.ViewModels"
              x:Class="BasketballGameApp.Views.GamesScores"
-             NavigationPage.HasNavigationBar="True"
+             
+             NavigationPage.HasBackButton="False"
              FlowDirection="RightToLeft">
     <ContentPage.BindingContext>
         <local:GamesScoresViewModel></local:GamesScoresViewModel>
     </ContentPage.BindingContext>
     <NavigationPage.TitleView>
-        <StackLayout Orientation="Horizontal" >
+        <StackLayout Orientation="Horizontal"  >
             <Button IsVisible="{Binding IsLoggedIn}" Text="הירשם" Style="{StaticResource Button}" Command="{Binding NavigateToPageCommand}" CommandParameter="Signup"></Button>
             <Button IsVisible="{Binding IsLoggedIn}" Text="התחבר" Style="{StaticResource Button}" Command="{Binding NavigateToPageCommand}" CommandParameter="Login"></Button>
             <Button IsVisible="{Binding IsCoach}" Text="צור קבוצה" Style="{StaticResource Button}" Command="{Binding NavigateToCreateTeamPageCommand}"></Button>

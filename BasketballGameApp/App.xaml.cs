@@ -32,7 +32,7 @@ namespace BasketballGameApp
             InitializeComponent();
             CurrentUser = null;
             //PhoneTypes = new List<PhoneType>();
-            MainPage = new NavigationPage(new GamesScores()) { BarBackgroundColor = Color.FromHex("#f9b42d") };
+            MainPage = new NavigationPage(new GamesScores());
         }
 
         protected override void OnStart()
