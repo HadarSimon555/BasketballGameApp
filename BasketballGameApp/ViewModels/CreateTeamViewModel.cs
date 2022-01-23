@@ -126,6 +126,7 @@ namespace BasketballGameApp.ViewModels
             team = new Team()
             {
                 //League = null,
+                CoachId = 0,
                 Name = string.Empty,
                 Image = string.Empty
             };
@@ -182,6 +183,7 @@ namespace BasketballGameApp.ViewModels
                 {
                     //League = this.SelectedLeague,
                     //Coach = new Coach() { User = theApp.CurrentUser },
+                    CoachId = theApp.CurrentCoach.Id,
                     Name = this.Name,
                     Image = this.TeamImgSrc
                 };
