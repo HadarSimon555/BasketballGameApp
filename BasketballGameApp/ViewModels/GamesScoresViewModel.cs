@@ -51,7 +51,6 @@ namespace BasketballGameApp.ViewModels
             if (theApp.CurrentUser == null)
             {
                 IsLoggedIn = !false;
-                
             }
             else
             {
@@ -60,7 +59,6 @@ namespace BasketballGameApp.ViewModels
                 if (theApp.CurrentCoach != null && TheApp.CurrentCoach.Team == null)
                 {
                     IsCoach = true;
-                   
                 }
                 else
                     IsCoach = false;
