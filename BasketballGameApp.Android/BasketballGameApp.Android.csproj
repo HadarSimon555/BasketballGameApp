@@ -84,16 +84,10 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\camera.png" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\BasketballGameApp\BasketballGameApp.csproj">
       <Project>{DCEAFFDD-F282-48A0-B41D-8C7387107CB0}</Project>
       <Name>BasketballGameApp</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\photogallery.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\basketballPic.jpg" />
@@ -105,6 +99,12 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\loading.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\camera.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\photogallery.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
