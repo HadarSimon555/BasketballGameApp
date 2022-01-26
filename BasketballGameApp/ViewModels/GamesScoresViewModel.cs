@@ -41,11 +41,46 @@ namespace BasketballGameApp.ViewModels
         }
         #endregion
 
+        #region IsPlayer
+        private bool isPlayer;
+        public bool IsPlayer
+        {
+            get => isPlayer;
+            set
+            {
+                isCoach = value;
+                OnPropertyChanged("IsPlayer");
+            }
+        }
+        #endregion
+
+        #region ObservableCollectionGames
+        private App TheApp = (App)Application.Current;
+        private List<Game> listGames;
+        private ObservableCollection<Game> observableCollectionGames;
+        public ObservableCollection<Game> ObservableCollectionGames
+        {
+            get
+            {
+                return this.observableCollectionGames;
+            }
+            set
+            {
+                if (this.observableCollectionGames != value)
+                {
+                    this.observableCollectionGames = value;
+                    OnPropertyChanged("ObservableCollectionGames");
+                }
+            }
+        }
+        #endregion
+
         #region Constructor
         public GamesScoresViewModel()
         {
             NavigateToPageCommand = new Command<string>(NavigateToPage);
             NavigateToCreateTeamPageCommand = new Command(NavigateToCreateTeamPage);
+            NavigateToJoinToGroupCommand = new Command(NavigateToJoinToGroupPage);
             observableCollectionGames = new ObservableCollection<Game>();
             App theApp = (App)App.Current;
             if (theApp.CurrentUser == null)
@@ -59,9 +94,18 @@ namespace BasketballGameApp.ViewModels
                 if (theApp.CurrentCoach != null && TheApp.CurrentCoach.Team == null)
                 {
                     IsCoach = true;
+                    IsPlayer = false;
+                }
+                else if(TheApp.CurrentPlayer != null && TheApp.CurrentPlayer.)
+                {
+                    IsPlayer = true;
+                    IsCoach = false;
                 }
                 else
+                {
                     IsCoach = false;
+                    IsPlayer = false;
+                }    
             }
             //add server status page
             LoadGames();
@@ -116,26 +160,17 @@ namespace BasketballGameApp.ViewModels
         }
         #endregion
 
-        private App TheApp = (App)Application.Current;
-        private List<Game> listGames;
-        private ObservableCollection<Game> observableCollectionGames;
-        public ObservableCollection<Game> ObservableCollectionGames
+        #region NavigateToJoinToGroupPage
+        public ICommand NavigateToJoinToGroupCommand { protected set; get; }
+        public void NavigateToJoinToGroupPage()
         {
-            get
-            {
-                return this.observableCollectionGames;
-            }
-            set
-            {
-                if (this.observableCollectionGames != value)
-                {
-
-                    this.observableCollectionGames = value;
-                    OnPropertyChanged("ObservableCollectionGames");
-                }
-            }
+            Page p = new JoinToGroup();
+            p.BindingContext = new JoinToGroupViewModel();
+            App.Current.MainPage.Navigation.PushAsync(p);
         }
+        #endregion
 
+        #region LoadGames
         public async void LoadGames()
         {
             BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
@@ -153,5 +188,6 @@ namespace BasketballGameApp.ViewModels
             TheApp.Leagues = await proxy.GetLeaguesAsync();
             //}
         }
+        #endregion
     }
 }
