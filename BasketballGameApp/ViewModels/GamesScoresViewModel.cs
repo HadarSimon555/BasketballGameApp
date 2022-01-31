@@ -96,7 +96,7 @@ namespace BasketballGameApp.ViewModels
                     IsCoach = true;
                     IsPlayer = false;
                 }
-                else if(TheApp.CurrentPlayer != null && TheApp.CurrentPlayer.)
+                else if(TheApp.CurrentPlayer != null && TheApp.CurrentPlayer.Team == null)
                 {
                     IsPlayer = true;
                     IsCoach = false;

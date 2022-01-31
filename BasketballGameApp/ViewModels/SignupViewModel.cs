@@ -531,14 +531,14 @@ namespace BasketballGameApp.ViewModels
                     p = new Player()
                     {
                         User = u,
-                        Height = this.Height,
+                        Height = this.Height
                     };
                 }
                 else
                 {
                     c = new Coach()
                     {
-                        User = u,
+                        User = u
                     };
                 }
 
