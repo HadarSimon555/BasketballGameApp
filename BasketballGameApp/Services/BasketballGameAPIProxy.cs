@@ -362,31 +362,31 @@ namespace BasketballGameApp.Services
         #endregion
 
         #region GetLeaguesAsync
-        public async Task<List<League>> GetLeaguesAsync()
-        {
-            try
-            {
-                HttpResponseMessage response = await client.GetAsync($"{this.baseUri}/GetLeagues");
-                if (response.IsSuccessStatusCode)
-                {
-                    JsonSerializerOptions options = new JsonSerializerOptions
-                    {
-                        ReferenceHandler = ReferenceHandler.Preserve,
-                        PropertyNameCaseInsensitive = true
-                    };
+        //public async Task<List<League>> GetLeaguesAsync()
+        //{
+        //    try
+        //    {
+        //        HttpResponseMessage response = await client.GetAsync($"{this.baseUri}/GetLeagues");
+        //        if (response.IsSuccessStatusCode)
+        //        {
+        //            JsonSerializerOptions options = new JsonSerializerOptions
+        //            {
+        //                ReferenceHandler = ReferenceHandler.Preserve,
+        //                PropertyNameCaseInsensitive = true
+        //            };
 
-                    string res = await response.Content.ReadAsStringAsync();
-                    return JsonSerializer.Deserialize<List<League>>(res, options);
-                }
-                else
-                    return null;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                return null;
-            }
-        }
+        //            string res = await response.Content.ReadAsStringAsync();
+        //            return JsonSerializer.Deserialize<List<League>>(res, options);
+        //        }
+        //        else
+        //            return null;
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Console.WriteLine(e.Message);
+        //        return null;
+        //    }
+        //}
         #endregion
 
         #region GetOpenTeamsAsync

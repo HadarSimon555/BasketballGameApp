@@ -417,8 +417,6 @@ namespace BasketballGameApp.ViewModels
                 Name =""
             };
 
-
-
             //if (IsPlayer)
             //{
             //    p = new Player()
