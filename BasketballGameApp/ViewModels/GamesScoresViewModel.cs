@@ -178,6 +178,7 @@ namespace BasketballGameApp.ViewModels
             //{
 
             listGames = await proxy.GetGamesAsync();
+
             if (listGames != null)
             {
                 foreach (Game item in listGames)

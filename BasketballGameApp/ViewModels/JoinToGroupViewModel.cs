@@ -78,7 +78,7 @@ namespace BasketballGameApp.ViewModels
         #region Constructor
         public JoinToGroupViewModel()
         {
-
+            //observableCollectionOpenTeams = new ObservableCollection<Team>();
         }
         #endregion
     }

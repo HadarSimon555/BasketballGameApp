@@ -36,8 +36,8 @@
                 <Image Grid.Column="0" Aspect="AspectFill" Source="basketballPic" Opacity="0.6"></Image>
                 <Label Text="תוצאות של משחקים" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Style="{StaticResource FormTitle}"></Label>
             </Grid>
-            
-            <CollectionView ItemsSource="{Binding ObservableCollectionGames}">
+
+            <CollectionView EmptyView="אין כרגע משחקים באתר!" ItemsSource="{Binding ObservableCollectionGames}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Grid Padding="10">
