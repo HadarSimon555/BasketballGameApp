@@ -1,12 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:BasketballGameApp.ViewModels"
              x:Class="BasketballGameApp.Views.JoinToGroup"
              NavigationPage.HasNavigationBar="True"
              FlowDirection="RightToLeft" 
              Title="הצטרפות לקבוצה">
+
+    <ContentPage.BindingContext>
+        <local:JoinToGroupViewModel></local:JoinToGroupViewModel>
+    </ContentPage.BindingContext>
+
     <ContentPage.Content>
         <StackLayout Style="{StaticResource Stack}" Padding="0">
+
             <Grid Margin="0,0,0,0" Padding="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -18,15 +25,22 @@
                 <Label Text="הצטרפות לקבוצה" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Style="{StaticResource FormTitle}"></Label>
             </Grid>
 
-            <ScrollView>
-                <StackLayout Padding="0,20,0,0">
-                    <Frame Style="{StaticResource logInSignUp}">
-                        <StackLayout>
-                            
-                        </StackLayout>
-                    </Frame>
-                </StackLayout>
-            </ScrollView>
+            <CollectionView  x:Name="CvTeams" SelectionMode="Single" SelectedItem="{Binding SelectedTeam}" SelectionChangedCommand="{Binding SelectionChangeCommand}" SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference CvTeams}}" EmptyView="אין כרגע קבוצות פנויות!" ItemsSource="{Binding ObservableCollectionOpenTeams}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Label Text="{Binding Name}" Grid.Column="0" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

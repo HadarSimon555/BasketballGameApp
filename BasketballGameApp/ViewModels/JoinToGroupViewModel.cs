@@ -56,7 +56,7 @@ namespace BasketballGameApp.ViewModels
                 if (this.observableCollectionOpenTeams != value)
                 {
                     this.observableCollectionOpenTeams = value;
-                    OnPropertyChanged("ObservableCollectionGames");
+                    OnPropertyChanged("ObservableCollectionOpenTeams");
                 }
             }
         }
@@ -75,10 +75,50 @@ namespace BasketballGameApp.ViewModels
         }
         #endregion
 
+        #region SelectedTeam
+        private string selectedTeam;
+        public string SelectedTeam
+        {
+            get => selectedTeam;
+            set
+            {
+                selectedTeam = value;
+                OnPropertyChanged("SelectedTeam");
+            }
+        }
+        #endregion
+
         #region Constructor
         public JoinToGroupViewModel()
         {
-            //observableCollectionOpenTeams = new ObservableCollection<Team>();
+            observableCollectionOpenTeams = new ObservableCollection<Team>();
+            SelectionChangeCommand = new Command(SelectionChangedCommand);
+            LoadOpenTeams();
+        }
+        #endregion
+
+        #region SelectionChangedCommand
+        public ICommand SelectionChangeCommand { protected set; get; }
+        public void SelectionChangedCommand()
+        {
+
+        }
+        #endregion
+
+        #region LoadOpenGroups
+        public async void LoadOpenTeams()
+        {
+            BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
+
+            listOpenTeams = await proxy.GetOpenTeamsAsync();
+
+            if (listOpenTeams != null)
+            {
+                foreach (Team item in listOpenTeams)
+                {
+                    this.observableCollectionOpenTeams.Add(item);
+                }
+            }
         }
         #endregion
     }

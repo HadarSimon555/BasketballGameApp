@@ -3,12 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:BasketballGameApp.ViewModels"
              x:Class="BasketballGameApp.Views.GamesScores"
-             
              NavigationPage.HasBackButton="False"
              FlowDirection="RightToLeft">
     <ContentPage.BindingContext>
         <local:GamesScoresViewModel></local:GamesScoresViewModel>
     </ContentPage.BindingContext>
+    
     <NavigationPage.TitleView>
         <StackLayout Orientation="Horizontal"  >
             <Button IsVisible="{Binding IsLoggedIn}" Text="הירשם" Style="{StaticResource Button}" Command="{Binding NavigateToPageCommand}" CommandParameter="Signup"></Button>
@@ -17,6 +17,7 @@
             <Button IsVisible="{Binding IsPlayer}" Text="הצטרף קבוצה" Style="{StaticResource Button}" Command="{Binding NavigateToJoinToGroupCommand}"></Button>
         </StackLayout>
     </NavigationPage.TitleView>
+    
     <!--<ContentPage.ToolbarItems>
         <ToolbarItem Text="הירשם" Priority="0" Order="Primary" Command="{Binding NavigateToPageCommand}" CommandParameter="Signup"></ToolbarItem>
         <ToolbarItem Text="התחבר" Priority="0" Order="Primary"  Command="{Binding NavigateToPageCommand}" CommandParameter="Login"></ToolbarItem> 
