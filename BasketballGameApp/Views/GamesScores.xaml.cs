@@ -14,7 +14,6 @@ namespace BasketballGameApp.Views
     {
         public GamesScores()
         {
-            
             InitializeComponent();
         }
     }

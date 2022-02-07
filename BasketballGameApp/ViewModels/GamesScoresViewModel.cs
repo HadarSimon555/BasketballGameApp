@@ -48,7 +48,7 @@ namespace BasketballGameApp.ViewModels
             get => isPlayer;
             set
             {
-                isCoach = value;
+                isPlayer = value;
                 OnPropertyChanged("IsPlayer");
             }
         }
