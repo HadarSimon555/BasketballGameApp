@@ -92,16 +92,43 @@ namespace BasketballGameApp.ViewModels
         public JoinToGroupViewModel()
         {
             observableCollectionOpenTeams = new ObservableCollection<Team>();
-            SelectionChangeCommand = new Command(SelectionChangedCommand);
+            SelectionChangeCommand = new Command<Team>(SelectionChangedCommand);
             LoadOpenTeams();
         }
         #endregion
 
         #region SelectionChangedCommand
         public ICommand SelectionChangeCommand { protected set; get; }
-        public void SelectionChangedCommand()
+        public async void SelectionChangedCommand(Team selectedTeam)
         {
+            App theApp = (App)App.Current;
+            RequestToJoinTeam request = new RequestToJoinTeam()
+            {
+                Team = selectedTeam,
+                Player = theApp.CurrentPlayer
+            };
 
+            ServerStatus = "מתחבר לשרת...";
+            await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatusPage(this));
+
+            BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
+            bool addRequest = await proxy.AddRequestToJoinTeamAsync(request);
+
+            if (!addRequest)
+            {
+                await App.Current.MainPage.DisplayAlert("שגיאה", "הגשת הבקשה להצטרפות לקבוצה נכשלה!", "בסדר");
+            }
+            else
+            {
+                ServerStatus = "קורא נתונים...";
+                //App theApp = (App)App.Current;
+
+                await App.Current.MainPage.DisplayAlert("התחברות", "הגשת הבקשה להצטרפות לקבוצה נשלחה למאמן הקבוצה!", "אישור", FlowDirection.RightToLeft);
+                await App.Current.MainPage.Navigation.PopModalAsync();
+                NavigationPage p = new NavigationPage(new GamesScores());
+                NavigationPage.SetHasNavigationBar(p, false);
+                await App.Current.MainPage.Navigation.PushAsync(p);
+            }
         }
         #endregion
 
