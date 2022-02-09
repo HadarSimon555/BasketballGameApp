@@ -15,6 +15,7 @@
             <Button IsVisible="{Binding IsLoggedIn}" Text="התחבר" Style="{StaticResource Button}" Command="{Binding NavigateToPageCommand}" CommandParameter="Login"></Button>
             <Button IsVisible="{Binding IsCoach}" Text="צור קבוצה" Style="{StaticResource Button}" Command="{Binding NavigateToCreateTeamPageCommand}"></Button>
             <Button IsVisible="{Binding IsPlayer}" Text="הצטרף קבוצה" Style="{StaticResource Button}" Command="{Binding NavigateToJoinToGroupCommand}"></Button>
+            <Button IsVisible="{Binding HaveTeam}" Text="אישור בקשות הצטרפות לקבוצה" Style="{StaticResource Button}" Command="{Binding NavigateToApproveRequestsToJoinTeamCommand}"></Button>
         </StackLayout>
     </NavigationPage.TitleView>
     

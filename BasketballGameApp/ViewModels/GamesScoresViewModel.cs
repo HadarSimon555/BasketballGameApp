@@ -54,6 +54,19 @@ namespace BasketballGameApp.ViewModels
         }
         #endregion
 
+        #region HaveTeam
+        private bool haveTeam;
+        public bool HaveTeam
+        {
+            get => haveTeam;
+            set
+            {
+                haveTeam = value;
+                OnPropertyChanged("HaveTeam");
+            }
+        }
+        #endregion
+
         #region ObservableCollectionGames
         private App TheApp = (App)Application.Current;
         private List<Game> listGames;
@@ -95,16 +108,25 @@ namespace BasketballGameApp.ViewModels
                 {
                     IsCoach = true;
                     IsPlayer = false;
+                    HaveTeam = false;
                 }
-                else if(TheApp.CurrentPlayer != null && TheApp.CurrentPlayer.Team == null)
+                else if(TheApp.CurrentPlayer != null && TheApp.CurrentPlayer.Team == null)//להוסיף בדיקה אם כבר הגיש בקשה להצטרפות לקבוצה
                 {
                     IsPlayer = true;
                     IsCoach = false;
+                    HaveTeam = false;
+                }
+                else if(theApp.CurrentCoach != null && TheApp.CurrentCoach.Team != null)//לבדוק האם הקבוצה כבר מלאה
+                {
+                    IsCoach = !true;
+                    IsPlayer = false;
+                    HaveTeam = true;
                 }
                 else
                 {
                     IsCoach = false;
                     IsPlayer = false;
+                    HaveTeam = false;
                 }    
             }
             //add server status page
@@ -125,7 +147,7 @@ namespace BasketballGameApp.ViewModels
         }
         #endregion
 
-        #region OnSubmit
+        #region NavigateToPage
         public ICommand NavigateToPageCommand { protected set; get; }
         public void NavigateToPage(string obj)
         {
@@ -166,6 +188,16 @@ namespace BasketballGameApp.ViewModels
         {
             Page p = new JoinToGroup();
             p.BindingContext = new JoinToGroupViewModel();
+            App.Current.MainPage.Navigation.PushAsync(p);
+        }
+        #endregion
+
+        #region NavigateToApproveRequestsToJoinTeamPage
+        public ICommand NavigateToApproveRequestsToJoinTeamCommand { protected set; get; }
+        public void NavigateToApproveRequestsToJoinTeamPage()
+        {
+            Page p = new ApproveRequestsToJoinTeam();
+            p.BindingContext = new ApproveRequestsToJoinTeamViewModels();
             App.Current.MainPage.Navigation.PushAsync(p);
         }
         #endregion

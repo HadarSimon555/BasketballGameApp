@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BasketballGameApp.Views.ApproveRequestsToJoinTeam"
+             NavigationPage.HasNavigationBar="True"
+             FlowDirection="RightToLeft" 
+             Title="אישור בקשות הצטרפות לקבוצה">
+    <ContentPage.Content>
+        <StackLayout Style="{StaticResource Stack}" Padding="0">
+            <Grid Margin="0,0,0,0" Padding="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="150"/>
+                </Grid.RowDefinitions>
+                <Image Grid.Column="0" Aspect="AspectFill" Source="basketballPic" Opacity="0.6"></Image>
+                <Label Text="אישור בקשות הצטרפות לקבוצה" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Style="{StaticResource FormTitle}"></Label>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
