@@ -435,7 +435,7 @@ namespace BasketballGameApp.Services
                 if (response.IsSuccessStatusCode)
                 {
                     jsonObject = await response.Content.ReadAsStringAsync();
-                    Team t = JsonSerializer.Deserialize<Team>(jsonObject, options);
+                    bool r = JsonSerializer.Deserialize<bool>(jsonObject, options);
                     return true;
                 }
                 else
