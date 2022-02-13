@@ -16,29 +16,29 @@ namespace BasketballGameApp.ViewModels
     class JoinToGroupViewModel : BaseViewModel
     {
         #region IsLoggedin
-        private bool isLoggedin;
-        public bool IsLoggedIn
-        {
-            get => isLoggedin;
-            set
-            {
-                isLoggedin = value;
-                OnPropertyChanged("IsLoggedin");
-            }
-        }
+        //private bool isLoggedin;
+        //public bool IsLoggedIn
+        //{
+        //    get => isLoggedin;
+        //    set
+        //    {
+        //        isLoggedin = value;
+        //        OnPropertyChanged("IsLoggedin");
+        //    }
+        //}
         #endregion
 
         #region IsPlayer
-        private bool isPlayer;
-        public bool IsPlayer
-        {
-            get => isPlayer;
-            set
-            {
-                isPlayer = value;
-                OnPropertyChanged("IsPlayer");
-            }
-        }
+        //private bool isPlayer;
+        //public bool IsPlayer
+        //{
+        //    get => isPlayer;
+        //    set
+        //    {
+        //        isPlayer = value;
+        //        OnPropertyChanged("IsPlayer");
+        //    }
+        //}
         #endregion
 
         #region ObservableCollectionOpenTeams
