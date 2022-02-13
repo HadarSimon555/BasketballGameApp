@@ -183,11 +183,12 @@ namespace BasketballGameApp.ViewModels
                 {
                     //League = this.SelectedLeague,
                     //Coach = new Coach() { User = theApp.CurrentUser },
-                    CoachId = theApp.CurrentCoach.Id,
+                    Coach = theApp.CurrentCoach,
                     Name = this.Name,
                     Image = this.TeamImgSrc
                 };
 
+                theApp.CurrentCoach.Team = team;
                 this.team.Image = this.TeamImgSrc;
                 this.team.Name = this.Name;
                 //this.team.League = this.SelectedLeague;
@@ -201,7 +202,8 @@ namespace BasketballGameApp.ViewModels
 
                 if (newTeam == null)
                 {
-                    await App.Current.MainPage.DisplayAlert("שגיאה", "שמירת המשתמש נכשלה", "בסדר");
+                    theApp.CurrentCoach.Team = null;
+                    await App.Current.MainPage.DisplayAlert("שגיאה", "הוספת הקבוצה נכשלה", "בסדר");
                     await App.Current.MainPage.Navigation.PopModalAsync();
                 }
 

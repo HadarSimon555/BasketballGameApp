@@ -94,6 +94,7 @@ namespace BasketballGameApp.ViewModels
             NavigateToPageCommand = new Command<string>(NavigateToPage);
             NavigateToCreateTeamPageCommand = new Command(NavigateToCreateTeamPage);
             NavigateToJoinToGroupCommand = new Command(NavigateToJoinToGroupPage);
+            NavigateToApproveRequestsToJoinTeamCommand = new Command(NavigateToApproveRequestsToJoinTeamPage);
             observableCollectionGames = new ObservableCollection<Game>();
             App theApp = (App)App.Current;
             if (theApp.CurrentUser == null)
