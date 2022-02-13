@@ -57,7 +57,7 @@ namespace BasketballGameApp.ViewModels
         }
         #endregion
 
-        #region LoadOpenGroups
+        #region LoadRequestsToJoinTeam
         public async void LoadRequestsToJoinTeam()
         {
             BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
