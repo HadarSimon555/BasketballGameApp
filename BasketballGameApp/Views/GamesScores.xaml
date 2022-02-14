@@ -3,12 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:BasketballGameApp.ViewModels"
              x:Class="BasketballGameApp.Views.GamesScores"
+             xmlns:models="clr-namespace:BasketballGameApp.Models"
              NavigationPage.HasBackButton="False"
-             FlowDirection="RightToLeft">
-    <ContentPage.BindingContext>
-        <local:GamesScoresViewModel></local:GamesScoresViewModel>
-    </ContentPage.BindingContext>
-    
+             FlowDirection="RightToLeft"
+             x:DataType="local:GamesScoresViewModel">
+
     <NavigationPage.TitleView>
         <StackLayout Orientation="Horizontal"  >
             <Button IsVisible="{Binding IsLoggedIn}" Text="הירשם" Style="{StaticResource Button}" Command="{Binding NavigateToPageCommand}" CommandParameter="Signup"></Button>
@@ -41,7 +40,7 @@
 
             <CollectionView EmptyView="אין כרגע משחקים באתר!" ItemsSource="{Binding ObservableCollectionGames}">
                 <CollectionView.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate x:DataType="models:Game">
                         <Grid Padding="10">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>

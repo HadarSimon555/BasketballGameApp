@@ -131,7 +131,7 @@ namespace BasketballGameApp.ViewModels
                 }    
             }
             //add server status page
-            LoadGames();
+            //LoadGames();
         }
         #endregion
 
@@ -204,7 +204,7 @@ namespace BasketballGameApp.ViewModels
         #endregion
 
         #region LoadGames
-        public async void LoadGames()
+        public async Task LoadGames()
         {
             BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
             //if (isLoggedin)
