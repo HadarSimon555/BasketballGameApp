@@ -53,12 +53,12 @@ namespace BasketballGameApp.ViewModels
         {
             observableCollectionRequestsToJoinTeam = new ObservableCollection<RequestToJoinTeam>();
             //SelectionChangeCommand = new Command<Team>(SelectionChangedCommand);
-            LoadRequestsToJoinTeam();
+            //LoadRequestsToJoinTeam();
         }
         #endregion
 
         #region LoadRequestsToJoinTeam
-        public async void LoadRequestsToJoinTeam()
+        public async Task LoadRequestsToJoinTeam()
         {
             BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
             App theApp = (App)App.Current;

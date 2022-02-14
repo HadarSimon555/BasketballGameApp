@@ -93,7 +93,7 @@ namespace BasketballGameApp.ViewModels
         {
             observableCollectionOpenTeams = new ObservableCollection<Team>();
             SelectionChangeCommand = new Command<Team>(SelectionChangedCommand);
-            LoadOpenTeams();
+           // LoadOpenTeams();
         }
         #endregion
 
@@ -133,7 +133,7 @@ namespace BasketballGameApp.ViewModels
         #endregion
 
         #region LoadOpenGroups
-        public async void LoadOpenTeams()
+        public async Task LoadOpenTeams()
         {
             BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
 
@@ -143,7 +143,7 @@ namespace BasketballGameApp.ViewModels
             {
                 foreach (Team item in listOpenTeams)
                 {
-                    this.observableCollectionOpenTeams.Add(item);
+                    this.ObservableCollectionOpenTeams.Add(item);
                 }
             }
         }

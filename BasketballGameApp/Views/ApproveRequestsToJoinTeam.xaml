@@ -3,14 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:BasketballGameApp.ViewModels"
              x:Class="BasketballGameApp.Views.ApproveRequestsToJoinTeam"
+             xmlns:models="clr-namespace:BasketballGameApp.Models"
              NavigationPage.HasNavigationBar="True"
              FlowDirection="RightToLeft" 
-             Title="אישור בקשות הצטרפות לקבוצה">
-
-    <ContentPage.BindingContext>
-        <local:ApproveRequestsToJoinTeamViewModels></local:ApproveRequestsToJoinTeamViewModels>
-    </ContentPage.BindingContext>
-
+             Title="אישור בקשות הצטרפות לקבוצה"
+             x:DataType="local:JoinToGroupViewModel">
 
     <ContentPage.Content>
         <StackLayout Style="{StaticResource Stack}" Padding="0">
@@ -27,7 +24,7 @@
 
             <CollectionView x:Name="collectionView" EmptyView="אין כרגע בקשות להצטרף לקבוצה!" ItemsSource="{Binding ObservableCollectionRequestsToJoinTeam}">
                 <CollectionView.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate  x:DataType="models:RequestToJoinTeam">
                         <SwipeView>
                             <SwipeView.LeftItems>
                                 <SwipeItems>

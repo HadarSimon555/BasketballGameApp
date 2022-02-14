@@ -3,13 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:BasketballGameApp.ViewModels"
              x:Class="BasketballGameApp.Views.JoinToGroup"
+             xmlns:models="clr-namespace:BasketballGameApp.Models"
              NavigationPage.HasNavigationBar="True"
              FlowDirection="RightToLeft" 
-             Title="הצטרפות לקבוצה">
-
-    <ContentPage.BindingContext>
-        <local:JoinToGroupViewModel></local:JoinToGroupViewModel>
-    </ContentPage.BindingContext>
+             Title="הצטרפות לקבוצה" 
+             x:DataType="local:JoinToGroupViewModel">
 
     <ContentPage.Content>
         <StackLayout Style="{StaticResource Stack}" Padding="0">
@@ -27,7 +25,7 @@
 
             <CollectionView  x:Name="CvTeams" SelectionMode="Single" SelectedItem="{Binding SelectedTeam}" SelectionChangedCommand="{Binding SelectionChangeCommand}" SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference CvTeams}}" EmptyView="אין כרגע קבוצות פנויות!" ItemsSource="{Binding ObservableCollectionOpenTeams}">
                 <CollectionView.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate x:DataType="models:Team">
                         <Grid Padding="10">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
