@@ -18,6 +18,7 @@ namespace BasketballGameApp.Views
         {
             InitializeComponent();
         }
+
         protected override async void OnAppearing()
         {
             if (this.BindingContext != null)
