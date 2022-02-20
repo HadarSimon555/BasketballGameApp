@@ -57,16 +57,6 @@ namespace BasketballGameApp.ViewModels
             ApproveCommand = new Command<RequestToJoinTeam>(ApproveRequest);
             DeleteCommand= new Command<RequestToJoinTeam>(DeleteRequest);
         }
-
-        private async void DeleteRequest(RequestToJoinTeam obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        private async void ApproveRequest(RequestToJoinTeam obj)
-        {
-            throw new NotImplementedException();
-        }
         #endregion
 
         #region LoadRequestsToJoinTeam
@@ -87,8 +77,42 @@ namespace BasketballGameApp.ViewModels
                 ObservableCollectionRequestsToJoinTeam = new ObservableCollection<RequestToJoinTeam>(listRequestsToJoinTeam);
             }
         }
+        #endregion
+
+        #region ApproveRequest
         public ICommand ApproveCommand { get; protected set; }
+        private async void ApproveRequest(RequestToJoinTeam request)
+        {
+            Player player = request.Player;
+            ServerStatus = "מתחבר לשרת...";
+            await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatusPage(this));
+
+            BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
+            Player updatePlayer = await proxy.UpdatePlayerAsync(player);
+
+            if (updatePlayer == null)
+            {
+                await App.Current.MainPage.DisplayAlert("שגיאה", "הוספת השחקן לקבוצה נכשלה!", "בסדר");
+            }
+            else
+            {
+                ServerStatus = "קורא נתונים...";
+                await App.Current.MainPage.DisplayAlert("התחברות", "הוספת השחקן לקבוצה בוצעה בהצלחה!", "אישור", FlowDirection.RightToLeft);
+                await App.Current.MainPage.Navigation.PopModalAsync();
+                NavigationPage p = new NavigationPage(new GamesScores());
+                NavigationPage.SetHasNavigationBar(p, false);
+                await App.Current.MainPage.Navigation.PushAsync(p);
+            }
+
+        }
+        #endregion
+
+        #region DeleteRequest
         public ICommand DeleteCommand { get; protected set; }
+        private async void DeleteRequest(RequestToJoinTeam obj)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
     }
 }

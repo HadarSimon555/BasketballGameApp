@@ -451,7 +451,7 @@ namespace BasketballGameApp.Services
         }
         #endregion
 
-        #region GetRequestsToJoinTeam
+        #region GetRequestsToJoinTeamAsync
         public async Task<List<RequestToJoinTeam>> GetRequestsToJoinTeamAsync(Coach coach)
         {
             try
@@ -470,6 +470,34 @@ namespace BasketballGameApp.Services
                 }
                 else
                     return null;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+        #endregion
+
+        #region UpdatePlayerAsync
+        public async Task<Player> UpdatePlayerAsync(Player player)
+        {
+            try
+            {
+                string json = JsonSerializer.Serialize(player);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/UpdatePlayer", content);
+                if (response.IsSuccessStatusCode)
+                {
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        ReferenceHandler = ReferenceHandler.Preserve,
+                        PropertyNameCaseInsensitive = true
+                    };
+                    string res = await response.Content.ReadAsStringAsync();
+                    return JsonSerializer.Deserialize<Player>(res, options);
+                }
+                return null;
             }
             catch (Exception e)
             {
