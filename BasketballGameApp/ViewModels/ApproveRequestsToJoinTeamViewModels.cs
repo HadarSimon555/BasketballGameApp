@@ -51,9 +51,21 @@ namespace BasketballGameApp.ViewModels
         #region Constructor
         public ApproveRequestsToJoinTeamViewModels()
         {
-            observableCollectionRequestsToJoinTeam = new ObservableCollection<RequestToJoinTeam>();
+            ObservableCollectionRequestsToJoinTeam = new ObservableCollection<RequestToJoinTeam>();
             //SelectionChangeCommand = new Command<Team>(SelectionChangedCommand);
             //LoadRequestsToJoinTeam();
+            ApproveCommand = new Command<RequestToJoinTeam>(ApproveRequest);
+            DeleteCommand= new Command<RequestToJoinTeam>(DeleteRequest);
+        }
+
+        private async void DeleteRequest(RequestToJoinTeam obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        private async void ApproveRequest(RequestToJoinTeam obj)
+        {
+            throw new NotImplementedException();
         }
         #endregion
 
@@ -67,12 +79,16 @@ namespace BasketballGameApp.ViewModels
 
             if (listRequestsToJoinTeam != null)
             {
-                foreach (RequestToJoinTeam item in listRequestsToJoinTeam)
-                {
-                    this.observableCollectionRequestsToJoinTeam.Add(item);
-                }
+                //foreach (RequestToJoinTeam item in listRequestsToJoinTeam)
+                //{
+                //    this.ObservableCollectionRequestsToJoinTeam.Add(item);
+                //    OnPropertyChanged("ObservableCollectionRequestsToJoinTeam");
+                //}
+                ObservableCollectionRequestsToJoinTeam = new ObservableCollection<RequestToJoinTeam>(listRequestsToJoinTeam);
             }
         }
+        public ICommand ApproveCommand { get; protected set; }
+        public ICommand DeleteCommand { get; protected set; }
         #endregion
     }
 }
