@@ -480,29 +480,30 @@ namespace BasketballGameApp.Services
         #endregion
 
         #region UpdatePlayerAsync
-        public async Task<Player> UpdatePlayerAsync(Player player)
+        public async Task<bool> UpdatePlayerAsync(Player player)
         {
             try
             {
-                string json = JsonSerializer.Serialize(player);
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    ReferenceHandler = ReferenceHandler.Preserve,
+                    PropertyNameCaseInsensitive = true
+                };
+                string json = JsonSerializer.Serialize(player,options);
                 StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
                 HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/UpdatePlayer", content);
                 if (response.IsSuccessStatusCode)
                 {
-                    JsonSerializerOptions options = new JsonSerializerOptions
-                    {
-                        ReferenceHandler = ReferenceHandler.Preserve,
-                        PropertyNameCaseInsensitive = true
-                    };
+                    
                     string res = await response.Content.ReadAsStringAsync();
-                    return JsonSerializer.Deserialize<Player>(res, options);
+                    return JsonSerializer.Deserialize<bool>(res, options);
                 }
-                return null;
+                return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                return null;
+                return false;
             }
         }
         #endregion

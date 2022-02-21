@@ -12,6 +12,6 @@ namespace BasketballGameApp.Models
 
         public virtual Coach Coach { get; set; }
         public virtual Game Game { get; set; }
-        public virtual RequestStatus RequestStatus { get; set; }
+        public virtual RequestGameStatus RequestStatus { get; set; }
     }
 }

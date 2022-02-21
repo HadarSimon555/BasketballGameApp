@@ -83,20 +83,24 @@ namespace BasketballGameApp.ViewModels
         public ICommand ApproveCommand { get; protected set; }
         private async void ApproveRequest(RequestToJoinTeam request)
         {
+            App theApp = (App)App.Current;
             Player player = request.Player;
+            player.Team = request.Team;
             ServerStatus = "מתחבר לשרת...";
             await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatusPage(this));
 
             BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
-            Player updatePlayer = await proxy.UpdatePlayerAsync(player);
+            bool updatePlayer = await proxy.UpdatePlayerAsync(player);
 
-            if (updatePlayer == null)
+            if (!updatePlayer)
             {
                 await App.Current.MainPage.DisplayAlert("שגיאה", "הוספת השחקן לקבוצה נכשלה!", "בסדר");
             }
             else
             {
                 ServerStatus = "קורא נתונים...";
+                
+                theApp.CurrentPlayer = player;
                 await App.Current.MainPage.DisplayAlert("התחברות", "הוספת השחקן לקבוצה בוצעה בהצלחה!", "אישור", FlowDirection.RightToLeft);
                 await App.Current.MainPage.Navigation.PopModalAsync();
                 NavigationPage p = new NavigationPage(new GamesScores());
