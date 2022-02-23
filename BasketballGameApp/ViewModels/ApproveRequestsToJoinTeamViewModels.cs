@@ -86,7 +86,7 @@ namespace BasketballGameApp.ViewModels
             App theApp = (App)App.Current;
             Player player = request.Player;
             player.Team = request.Team;
-            player.
+            
             ServerStatus = "מתחבר לשרת...";
             await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatusPage(this));
 
@@ -114,9 +114,14 @@ namespace BasketballGameApp.ViewModels
 
         #region DeleteRequest
         public ICommand DeleteCommand { get; protected set; }
-        private async void DeleteRequest(RequestToJoinTeam obj)
+        private async void DeleteRequest(RequestToJoinTeam request)
         {
-            throw new NotImplementedException();
+            App theApp = (App)App.Current;
+            Player player = request.Player;
+            player.Team = null;
+
+            ServerStatus = "מתחבר לשרת...";
+            await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatusPage(this));
         }
         #endregion
     }

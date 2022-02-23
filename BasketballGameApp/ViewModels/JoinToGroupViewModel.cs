@@ -105,7 +105,8 @@ namespace BasketballGameApp.ViewModels
             RequestToJoinTeam request = new RequestToJoinTeam()
             {
                 Team = selectedTeam,
-                Player = theApp.CurrentPlayer
+                Player = theApp.CurrentPlayer,
+                RequestToJoinTeamStatusId = 3
             };
 
             ServerStatus = "מתחבר לשרת...";
