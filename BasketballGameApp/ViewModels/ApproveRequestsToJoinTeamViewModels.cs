@@ -86,6 +86,7 @@ namespace BasketballGameApp.ViewModels
             App theApp = (App)App.Current;
             Player player = request.Player;
             player.Team = request.Team;
+            player.
             ServerStatus = "מתחבר לשרת...";
             await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatusPage(this));
 
