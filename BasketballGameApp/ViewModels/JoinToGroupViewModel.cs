@@ -106,7 +106,7 @@ namespace BasketballGameApp.ViewModels
             {
                 Team = selectedTeam,
                 Player = theApp.CurrentPlayer,
-                RequestToJoinTeamStatusId = 3
+                
             };
 
             ServerStatus = "מתחבר לשרת...";
@@ -118,6 +118,7 @@ namespace BasketballGameApp.ViewModels
             if (!addRequest)
             {
                 await App.Current.MainPage.DisplayAlert("שגיאה", "הגשת הבקשה להצטרפות לקבוצה נכשלה!", "בסדר");
+                await App.Current.MainPage.Navigation.PopModalAsync();
             }
             else
             {
@@ -137,7 +138,7 @@ namespace BasketballGameApp.ViewModels
         public async Task LoadOpenTeams()
         {
             BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
-
+            this.ObservableCollectionOpenTeams.Clear();
             listOpenTeams = await proxy.GetOpenTeamsAsync();
 
             if (listOpenTeams != null)
