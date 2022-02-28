@@ -91,9 +91,9 @@ namespace BasketballGameApp.ViewModels
             await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatusPage(this));
 
             BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
-            bool updatePlayer = await proxy.UpdatePlayerAsync(player);
+            bool approved = await proxy.ApproveRequestToJoinTeamAsync(player);
 
-            if (!updatePlayer)
+            if (!approved)
             {
                 await App.Current.MainPage.DisplayAlert("שגיאה", "הוספת השחקן לקבוצה נכשלה!", "בסדר");
             }
@@ -101,7 +101,6 @@ namespace BasketballGameApp.ViewModels
             {
                 ServerStatus = "קורא נתונים...";
                 
-                theApp.CurrentPlayer = player;
                 await App.Current.MainPage.DisplayAlert("התחברות", "הוספת השחקן לקבוצה בוצעה בהצלחה!", "אישור", FlowDirection.RightToLeft);
                 await App.Current.MainPage.Navigation.PopModalAsync();
                 NavigationPage p = new NavigationPage(new GamesScores());
@@ -122,6 +121,24 @@ namespace BasketballGameApp.ViewModels
 
             ServerStatus = "מתחבר לשרת...";
             await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatusPage(this));
+
+            BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
+            bool deleted = await proxy.DeleteRequestToJoinTeamAsync(player);
+
+            if (!deleted)
+            {
+                await App.Current.MainPage.DisplayAlert("שגיאה", "דחיית בקשת השחקן להצטרפות לקבוצה נכשלה!", "בסדר");
+            }
+            else
+            {
+                ServerStatus = "קורא נתונים...";
+
+                await App.Current.MainPage.DisplayAlert("התחברות", "דחיית בקשת השחקן להצטרפות לקבוצה בוצעה בהצלחה!", "אישור", FlowDirection.RightToLeft);
+                await App.Current.MainPage.Navigation.PopModalAsync();
+                NavigationPage p = new NavigationPage(new GamesScores());
+                NavigationPage.SetHasNavigationBar(p, false);
+                await App.Current.MainPage.Navigation.PushAsync(p);
+            }
         }
         #endregion
     }
