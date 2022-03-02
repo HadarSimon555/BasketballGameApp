@@ -1,7 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BasketballGameApp.Views.RequestToSetGame">
+             xmlns:local="clr-namespace:BasketballGameApp.ViewModels"
+             x:Class="BasketballGameApp.Views.RequestToSetGame"
+             xmlns:models="clr-namespace:BasketballGameApp.Models"
+             NavigationPage.HasNavigationBar="True"
+             FlowDirection="RightToLeft" 
+             Title="קביעת משחקים"
+             x:DataType="local:RequestToSetGameViewModel">
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Welcome to Xamarin.Forms!"

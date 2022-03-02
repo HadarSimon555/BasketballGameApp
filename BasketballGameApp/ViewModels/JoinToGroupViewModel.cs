@@ -106,7 +106,7 @@ namespace BasketballGameApp.ViewModels
         }
         #endregion
 
-        #region LoadOpenGroups
+        #region LoadOpenTeams
         public async Task LoadOpenTeams()
         {
             BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();

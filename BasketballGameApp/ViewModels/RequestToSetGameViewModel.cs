@@ -79,5 +79,22 @@ namespace BasketballGameApp.ViewModels
             App.Current.MainPage.Navigation.PushAsync(p);
         }
         #endregion
+
+        #region LoadTeams
+        public async Task LoadTeams()
+        {
+            BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
+            this.ObservableCollectionTeams.Clear();
+            listTeams = await proxy.GetTeamsAsync();
+
+            if (listTeams != null)
+            {
+                foreach (Team item in listTeams)
+                {
+                    this.ObservableCollectionTeams.Add(item);
+                }
+            }
+        }
+        #endregion
     }
 }
