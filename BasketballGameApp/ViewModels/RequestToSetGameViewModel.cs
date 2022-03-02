@@ -66,15 +66,17 @@ namespace BasketballGameApp.ViewModels
         public RequestToSetGameViewModel()
         {
             observableCollectionTeams = new ObservableCollection<Team>();
-            //NavigateToSendRequestToGameCommand = new Command(NavigateToSendRequestToGamePage(null));
+            NavigateToSendRequestToGamePageCommand = new Command(NavigateToSendRequestToSetGamePage);
         }
         #endregion
 
-        #region SelectionChangedCommand
-        public ICommand NavigateToSendRequestToGameCommand { protected set; get; }
-        public async void NavigateToSendRequestToSetGamePage(Team selectedTeam)
+        #region NavigateToSendRequestToGamePage
+        public ICommand NavigateToSendRequestToGamePageCommand { protected set; get; }
+        public void NavigateToSendRequestToSetGamePage()
         {
-             gdks
+            Page p = new SendRequestToSetGame();
+            p.BindingContext = new SendRequestToSetGameViewModel();
+            App.Current.MainPage.Navigation.PushAsync(p);
         }
         #endregion
     }
