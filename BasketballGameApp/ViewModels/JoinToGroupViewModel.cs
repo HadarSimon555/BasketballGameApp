@@ -106,7 +106,6 @@ namespace BasketballGameApp.ViewModels
             {
                 Team = selectedTeam,
                 Player = theApp.CurrentPlayer,
-                
             };
 
             ServerStatus = "מתחבר לשרת...";
@@ -123,8 +122,7 @@ namespace BasketballGameApp.ViewModels
             else
             {
                 ServerStatus = "קורא נתונים...";
-                //App theApp = (App)App.Current;
-
+                theApp.CurrentPlayer.RequestToJoinTeams.Add(request);
                 await App.Current.MainPage.DisplayAlert("התחברות", "הגשת הבקשה להצטרפות לקבוצה נשלחה למאמן הקבוצה!", "אישור", FlowDirection.RightToLeft);
                 await App.Current.MainPage.Navigation.PopModalAsync();
                 NavigationPage p = new NavigationPage(new GamesScores());

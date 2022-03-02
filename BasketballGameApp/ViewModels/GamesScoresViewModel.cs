@@ -111,7 +111,7 @@ namespace BasketballGameApp.ViewModels
                     IsPlayer = false;
                     HaveTeam = false;
                 }
-                else if(TheApp.CurrentPlayer != null && TheApp.CurrentPlayer.Team == null)//להוסיף בדיקה אם כבר הגיש בקשה להצטרפות לקבוצה
+                else if(TheApp.CurrentPlayer != null && TheApp.CurrentPlayer.RequestToJoinTeams.Count == 0)//להוסיף בדיקה אם כבר הגיש בקשה להצטרפות לקבוצה
                 {
                     IsPlayer = true;
                     IsCoach = false;
