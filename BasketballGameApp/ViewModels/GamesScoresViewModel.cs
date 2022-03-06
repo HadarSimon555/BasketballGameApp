@@ -67,6 +67,19 @@ namespace BasketballGameApp.ViewModels
         }
         #endregion
 
+        #region HaveMinPlayers
+        private bool haveMinPlayers;
+        public bool HaveMinPlayers
+        {
+            get => haveMinPlayers;
+            set
+            {
+                haveMinPlayers = value;
+                OnPropertyChanged("HaveMinPlayers");
+            }
+        }
+        #endregion
+
         #region ObservableCollectionGames
         private App TheApp = (App)Application.Current;
         private List<Game> listGames;
@@ -95,6 +108,7 @@ namespace BasketballGameApp.ViewModels
             NavigateToCreateTeamPageCommand = new Command(NavigateToCreateTeamPage);
             NavigateToJoinToGroupCommand = new Command(NavigateToJoinToGroupPage);
             NavigateToApproveRequestsToJoinTeamCommand = new Command(NavigateToApproveRequestsToJoinTeamPage);
+            NavigateToRequestToSetGameCommand = new Command(NavigateToRequestToSetGamePage);
             observableCollectionGames = new ObservableCollection<Game>();
             App theApp = (App)App.Current;
             if (theApp.CurrentUser == null)
@@ -110,24 +124,31 @@ namespace BasketballGameApp.ViewModels
                     IsCoach = true;
                     IsPlayer = false;
                     HaveTeam = false;
+                    HaveMinPlayers = false;
                 }
                 else if(TheApp.CurrentPlayer != null && TheApp.CurrentPlayer.RequestToJoinTeams.Count == 0)//להוסיף בדיקה אם כבר הגיש בקשה להצטרפות לקבוצה
                 {
                     IsPlayer = true;
                     IsCoach = false;
                     HaveTeam = false;
+                    HaveMinPlayers = false;
                 }
                 else if(theApp.CurrentCoach != null && TheApp.CurrentCoach.Team != null)//לבדוק האם הקבוצה כבר מלאה
                 {
                     IsCoach = !true;
                     IsPlayer = false;
                     HaveTeam = true;
+                    if (TheApp.CurrentCoach.Team.Players.Count() >= 3)
+                        haveMinPlayers = true;
+                    else
+                        HaveMinPlayers = false;
                 }
                 else
                 {
                     IsCoach = false;
                     IsPlayer = false;
                     HaveTeam = false;
+                    HaveMinPlayers = false;
                 }    
             }
             //add server status page
@@ -199,6 +220,16 @@ namespace BasketballGameApp.ViewModels
         {
             Page p = new ApproveRequestsToJoinTeam();
             p.BindingContext = new ApproveRequestsToJoinTeamViewModels();
+            App.Current.MainPage.Navigation.PushAsync(p);
+        }
+        #endregion
+
+        #region NavigateToApproveRequestToSetGame
+        public ICommand NavigateToRequestToSetGameCommand { protected set; get; }
+        public void NavigateToRequestToSetGamePage()
+        {
+            Page p = new RequestToSetGame();
+            p.BindingContext = new RequestToSetGameViewModel();
             App.Current.MainPage.Navigation.PushAsync(p);
         }
         #endregion

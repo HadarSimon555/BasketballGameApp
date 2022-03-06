@@ -15,6 +15,7 @@
             <Button IsVisible="{Binding IsCoach}" Text="צור קבוצה" Style="{StaticResource Button}" Command="{Binding NavigateToCreateTeamPageCommand}"></Button>
             <Button IsVisible="{Binding IsPlayer}" Text="הצטרף קבוצה" Style="{StaticResource Button}" Command="{Binding NavigateToJoinToGroupCommand}"></Button>
             <Button IsVisible="{Binding HaveTeam}" Text="אישור בקשות הצטרפות לקבוצה" Style="{StaticResource Button}" Command="{Binding NavigateToApproveRequestsToJoinTeamCommand}"></Button>
+            <Button IsVisible="{Binding HaveMinPlayers}" Text="בחירת קבוצה לקביעת משחק" Style="{StaticResource Button}" Command="{Binding NavigateToRequestToSetGameCommand}"></Button>
         </StackLayout>
     </NavigationPage.TitleView>
     
