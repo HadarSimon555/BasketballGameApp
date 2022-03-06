@@ -110,20 +110,6 @@
                             <RadioButton Content="זכר" Value="זכר" GroupName="Gender" Style="{StaticResource RadioButton}"></RadioButton>
                             <RadioButton Content="נקבה" Value="נקבה" GroupName="Gender" Style="{StaticResource RadioButton}"></RadioButton>
 
-                            <!-- City -->
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
-                                </Grid.RowDefinitions>
-                                <Label Text="עיר מגורים" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
-                                <Label Text="{Binding CityError}" IsVisible="{Binding ShowCityError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
-                            </Grid>
-                            <Entry Placeholder="הכנס עיר מגורים" MaxLength="30" Text="{Binding City}" Style="{StaticResource entry}"/>
-
                             <!-- דואר אלקטרוני-->
                             <Grid>
                                 <Grid.ColumnDefinitions>

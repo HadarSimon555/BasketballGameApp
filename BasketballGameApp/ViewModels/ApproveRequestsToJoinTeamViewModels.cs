@@ -92,6 +92,7 @@ namespace BasketballGameApp.ViewModels
 
             BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
             bool approved = await proxy.ApproveRequestToJoinTeamAsync(player);
+            
 
             if (!approved)
             {
@@ -99,6 +100,7 @@ namespace BasketballGameApp.ViewModels
             }
             else
             {
+                theApp.CurrentCoach.Team.Players.Add(player);
                 ServerStatus = "קורא נתונים...";
                 
                 await App.Current.MainPage.DisplayAlert("התחברות", "הוספת השחקן לקבוצה בוצעה בהצלחה!", "אישור", FlowDirection.RightToLeft);

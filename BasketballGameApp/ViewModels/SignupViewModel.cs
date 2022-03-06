@@ -221,48 +221,6 @@ namespace BasketballGameApp.ViewModels
         }
         #endregion
 
-        #region City
-        private string city;
-        public string City
-        {
-            get => city;
-            set
-            {
-                city = value;
-                ValidateCity();
-                OnPropertyChanged("City");
-            }
-        }
-
-        private string cityError;
-
-        public string CityError
-        {
-            get => cityError;
-            set
-            {
-                cityError = value;
-                OnPropertyChanged("CityError");
-            }
-        }
-
-        private void ValidateCity()
-        {
-            this.ShowCityError = string.IsNullOrEmpty(City);
-        }
-
-        private bool showCityError;
-        public bool ShowCityError
-        {
-            get => showCityError;
-            set
-            {
-                showCityError = value;
-                OnPropertyChanged("ShowCityError");
-            }
-        }
-        #endregion
-
         #region Email
         private bool showEmailError;
 
@@ -413,7 +371,6 @@ namespace BasketballGameApp.ViewModels
                 BirthDate = DateTime.Now,
                 Image = "",
                 Gender = "",
-                City = "",
                 Name =""
             };
 
@@ -455,13 +412,11 @@ namespace BasketballGameApp.ViewModels
             this.PasswordError = ERROR_MESSAGES.SHORT_PASS;
             this.EmailError = ERROR_MESSAGES.BAD_EMAIL;
             this.GenderError = ERROR_MESSAGES.REQUIRED_FIELD;
-            this.CityError = ERROR_MESSAGES.REQUIRED_FIELD;
 
             this.ShowNameError = false;
             this.ShowBirthDateError = false;
             this.ShowHeightError = false;
             this.ShowGenderError = false;
-            this.ShowCityError = false;
             this.ShowEmailError = false;
             this.ShowPasswordError = false;
 
@@ -487,13 +442,11 @@ namespace BasketballGameApp.ViewModels
             if (isPlayer)
                 ValidateHeight();
             ValidateGender();
-            ValidateCity();
             ValidateEmail();
             ValidatePassword();
 
             //check if any validation failed
-            if (ShowNameError || ShowBirthDateError || ShowGenderError
-                || ShowCityError || ShowEmailError || ShowPasswordError)
+            if (ShowNameError || ShowBirthDateError || ShowGenderError || ShowEmailError || ShowPasswordError)
                 return false;
             if (isPlayer && ShowHeightError)
                 return false;
@@ -543,7 +496,6 @@ namespace BasketballGameApp.ViewModels
                 this.u.Image = this.UserImgSrc;
                 this.u.BirthDate = this.BirthDate;
                 this.u.Gender = this.Gender;
-                this.u.City = this.City;
                 this.u.Email = this.Email;
                 this.u.Pass = this.Password;
                 this.u.Name = this.Name;
