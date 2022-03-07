@@ -92,7 +92,7 @@ namespace BasketballGameApp.ViewModels
             {
                 foreach (Team item in listTeams)
                 {
-                    if (item.Coach != theApp.CurrentCoach)
+                    if (item.Coach.Id != theApp.CurrentCoach.Id)
                         this.ObservableCollectionTeams.Add(item);
                 }
             }
