@@ -14,7 +14,7 @@
             <Button IsVisible="{Binding IsLoggedIn}" Text="הירשם" Style="{StaticResource Button}" Command="{Binding NavigateToPageCommand}" CommandParameter="Signup"></Button>
             <Button IsVisible="{Binding IsLoggedIn}" Text="התחבר" Style="{StaticResource Button}" Command="{Binding NavigateToPageCommand}" CommandParameter="Login"></Button>
             <Button IsVisible="{Binding IsCoach}" Text="צור קבוצה" Style="{StaticResource Button}" Command="{Binding NavigateToCreateTeamPageCommand}"></Button>
-            <Button IsVisible="{Binding IsPlayer}" Text="הצטרף קבוצה" Style="{StaticResource Button}" Command="{Binding NavigateToJoinToGroupCommand}"></Button>
+            <Button IsVisible="{Binding IsPlayer}" Text="הצטרף לקבוצה" Style="{StaticResource Button}" Command="{Binding NavigateToJoinToGroupCommand}"></Button>
             <Button IsVisible="{Binding HaveTeam}" Text="אישור בקשות הצטרפות לקבוצה" Style="{StaticResource Button}" Command="{Binding NavigateToApproveRequestsToJoinTeamCommand}"></Button>
             <Button IsVisible="{Binding HaveMinPlayers}" Text="בחירת קבוצה לקביעת משחק" Style="{StaticResource Button}" Command="{Binding NavigateToRequestToSetGameCommand}"></Button>
         </StackLayout>
