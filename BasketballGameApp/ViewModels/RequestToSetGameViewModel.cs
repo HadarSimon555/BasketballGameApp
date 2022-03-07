@@ -86,12 +86,14 @@ namespace BasketballGameApp.ViewModels
             BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
             this.ObservableCollectionTeams.Clear();
             listTeams = await proxy.GetTeamsAsync();
+            App theApp = (App)App.Current;
 
             if (listTeams != null)
             {
                 foreach (Team item in listTeams)
                 {
-                    this.ObservableCollectionTeams.Add(item);
+                    if (item.Coach != theApp.CurrentCoach)
+                        this.ObservableCollectionTeams.Add(item);
                 }
             }
         }
