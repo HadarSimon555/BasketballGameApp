@@ -17,6 +17,10 @@ namespace BasketballGameApp.ViewModels
 {
     class SendRequestToSetGameViewModel : BaseViewModel
     {
+        public DateTime MinDate { get => DateTime.Now; }
+
+        public DateTime MaxDate { get => DateTime.Now.AddMonths(6); }
+
         #region Date
         private DateTime date = DateTime.Now;
         public DateTime Date
@@ -79,7 +83,7 @@ namespace BasketballGameApp.ViewModels
         public SendRequestToSetGameViewModel(Team team)
         {
             theApp = (App)App.Current;
-            selectedTeam = team;
+            SelectedTeam = team;
             requestGame = new RequestGame
             {
                 RequestStatusId = 0,
@@ -126,7 +130,7 @@ namespace BasketballGameApp.ViewModels
             await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatusPage(this));
             BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
 
-            bool HasGame = await proxy.HasGameAsync(selectedTeam, date);
+            bool HasGame = await proxy.HasGameAsync(SelectedTeam.Id, date);
 
             if (!HasGame)
             {
@@ -146,6 +150,11 @@ namespace BasketballGameApp.ViewModels
                     NavigationPage.SetHasNavigationBar(p, false);
                     await App.Current.MainPage.Navigation.PushAsync(p);
                 }
+            }
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("שגיאה", "לאחת מהקבוצות כבר יש משחק בתאריך זה, בחר תאריך חדש לקביעת משחק!", "אישור", FlowDirection.RightToLeft);
+                await App.Current.MainPage.Navigation.PopModalAsync();
             }
         }
         #endregion

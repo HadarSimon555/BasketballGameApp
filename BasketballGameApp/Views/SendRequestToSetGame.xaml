@@ -8,25 +8,44 @@
              FlowDirection="RightToLeft" 
              Title="בחירת קבוצה לקביעת משחק"
              x:DataType="local:SendRequestToSetGameViewModel">
-    
+
     <ContentPage.Content>
-        
-        <Grid Margin="0,0,0,0" Padding="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="150"/>
-            </Grid.RowDefinitions>
-            <Image Grid.Column="0" Aspect="AspectFill" Source="basketballPic" Opacity="0.6"></Image>
-            <Label Text="בחירת קבוצה לקביעת משחק" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Style="{StaticResource FormTitle}"></Label>
-        </Grid>
+        <StackLayout Style="{StaticResource Stack}" Padding="0">
+            <Grid Margin="0,0,0,0" Padding="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="150"/>
+                </Grid.RowDefinitions>
+                <Image Grid.Column="0" Aspect="AspectFill" Source="basketballPic" Opacity="0.6"></Image>
+                <Label Text="בחירת קבוצה לקביעת משחק" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Style="{StaticResource FormTitle}"></Label>
+            </Grid>
 
-        <ScrollView>
-            <StackLayout Padding="0,20,0,0">
-                
-            </StackLayout>
-        </ScrollView>
+            <ScrollView>
+                <StackLayout Padding="0,20,0,0">
+                    <Frame Style="{StaticResource logInSignUp}">
+                        <StackLayout>
+                            <!-- Date -->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Label Text="תאריך" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
+                                <Label Text="{Binding DateError}" IsVisible="{Binding ShowDateError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
+                            </Grid>
+                            <DatePicker MinimumDate="{Binding MinDate}" MaximumDate="{Binding MaxDate}"  Date="{Binding Date}" Style="{StaticResource entry}"/>
 
+                        </StackLayout>
+                    </Frame>
+                    <Button Text="שלח בקשה" Style="{StaticResource Button}" Command="{Binding SaveDataCommand}"></Button>
+                </StackLayout>
+            </ScrollView>
+            
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

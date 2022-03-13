@@ -595,11 +595,11 @@ namespace BasketballGameApp.Services
         #endregion
 
         #region HasGameAsync
-        public async Task<bool> HasGameAsync(Team team, DateTime date)
+        public async Task<bool> HasGameAsync(int teamId, DateTime date)
         {
             try
             {
-                HttpResponseMessage response = await client.GetAsync($"{this.baseUri}/HasGame?team={team}date={date}");
+                HttpResponseMessage response = await client.GetAsync($"{this.baseUri}/HasGame?teamId={teamId}&&date={date}");
                 if (response.IsSuccessStatusCode)
                 {
                     return true;
