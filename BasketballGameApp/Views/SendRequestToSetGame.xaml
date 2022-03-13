@@ -21,6 +21,12 @@
             <Image Grid.Column="0" Aspect="AspectFill" Source="basketballPic" Opacity="0.6"></Image>
             <Label Text="בחירת קבוצה לקביעת משחק" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Style="{StaticResource FormTitle}"></Label>
         </Grid>
-        
+
+        <ScrollView>
+            <StackLayout Padding="0,20,0,0">
+                
+            </StackLayout>
+        </ScrollView>
+
     </ContentPage.Content>
 </ContentPage>

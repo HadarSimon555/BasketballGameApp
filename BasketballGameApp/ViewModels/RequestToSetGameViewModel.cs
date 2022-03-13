@@ -50,8 +50,8 @@ namespace BasketballGameApp.ViewModels
         #endregion
 
         #region SelectedTeam
-        private string selectedTeam;
-        public string SelectedTeam
+        private Team selectedTeam;
+        public Team SelectedTeam
         {
             get => selectedTeam;
             set
@@ -75,7 +75,7 @@ namespace BasketballGameApp.ViewModels
         public void NavigateToSendRequestToSetGamePage()
         {
             Page p = new SendRequestToSetGame();
-            p.BindingContext = new SendRequestToSetGameViewModel();
+            p.BindingContext = new SendRequestToSetGameViewModel(selectedTeam);
             App.Current.MainPage.Navigation.PushAsync(p);
         }
         #endregion

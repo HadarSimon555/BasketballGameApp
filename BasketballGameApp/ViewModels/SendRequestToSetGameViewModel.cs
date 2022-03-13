@@ -59,14 +59,27 @@ namespace BasketballGameApp.ViewModels
         }
         #endregion
 
+        #region SelectedTeam
+        private Team selectedTeam;
+        public Team SelectedTeam
+        {
+            get => selectedTeam;
+            set
+            {
+                selectedTeam = value;
+                OnPropertyChanged("SelectedTeam");
+            }
+        }
+        #endregion
+
         private App theApp { get; set; }
         private RequestGame requestGame { get; set; }
 
         #region Constructor
-        public SendRequestToSetGameViewModel()
+        public SendRequestToSetGameViewModel(Team team)
         {
             theApp = (App)App.Current;
-
+            selectedTeam = team;
             requestGame = new RequestGame
             {
                 RequestStatusId = 0,
@@ -105,8 +118,35 @@ namespace BasketballGameApp.ViewModels
             requestGame = new RequestGame
             {
                 Coach = theApp.CurrentCoach,
-
+                Time = this.Time.Time,
+                Date = this.Date
             };
+
+            ServerStatus = "מתחבר לשרת...";
+            await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatusPage(this));
+            BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
+
+            bool HasGame = await proxy.HasGameAsync(selectedTeam, date);
+
+            if (!HasGame)
+            {
+                bool addRequest = await proxy.AddRequestToGameAsync(requestGame);
+                if (!addRequest)
+                {
+                    await App.Current.MainPage.DisplayAlert("שגיאה", "הגשת הבקשה ללקביעת משחק נכשלה!", "בסדר");
+                    await App.Current.MainPage.Navigation.PopModalAsync();
+                }
+                else
+                {
+                    ServerStatus = "קורא נתונים...";
+                    theApp.CurrentCoach.RequestGames.Add(requestGame);
+                    await App.Current.MainPage.DisplayAlert("התחברות", "הגשת הבקשה לקביעת משחק נשלחה למאמן הקבוצה המתחרה!", "אישור", FlowDirection.RightToLeft);
+                    await App.Current.MainPage.Navigation.PopModalAsync();
+                    NavigationPage p = new NavigationPage(new GamesScores());
+                    NavigationPage.SetHasNavigationBar(p, false);
+                    await App.Current.MainPage.Navigation.PushAsync(p);
+                }
+            }
         }
         #endregion
     }
