@@ -35,11 +35,9 @@ namespace BasketballGameApp.ViewModels
         #endregion
 
         #region Time
-        private TimePicker time = new TimePicker
-        {
-            Time = new TimeSpan(0, 0, 0)
-        };
-        public TimePicker Time
+        private TimeSpan time = new TimeSpan(0, 0, 0);
+        
+        public TimeSpan Time
         {
             get => time;
             set
@@ -122,7 +120,7 @@ namespace BasketballGameApp.ViewModels
             requestGame = new RequestGame
             {
                 Coach = theApp.CurrentCoach,
-                Time = this.Time.Time,
+                Time = this.Time,
                 Date = this.Date
             };
 
@@ -137,7 +135,7 @@ namespace BasketballGameApp.ViewModels
                 bool addRequest = await proxy.AddRequestToGameAsync(requestGame);
                 if (!addRequest)
                 {
-                    await App.Current.MainPage.DisplayAlert("שגיאה", "הגשת הבקשה ללקביעת משחק נכשלה!", "בסדר");
+                    await App.Current.MainPage.DisplayAlert("שגיאה", "הגשת הבקשה לקביעת משחק נכשלה!", "בסדר");
                     await App.Current.MainPage.Navigation.PopModalAsync();
                 }
                 else

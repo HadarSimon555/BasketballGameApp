@@ -36,10 +36,34 @@
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
                                 <Label Text="תאריך" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
-                                <Label Text="{Binding DateError}" IsVisible="{Binding ShowDateError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
                             </Grid>
-                            <DatePicker MinimumDate="{Binding MinDate}" MaximumDate="{Binding MaxDate}"  Date="{Binding Date}" Style="{StaticResource entry}"/>
-
+                            <DatePicker MinimumDate="{Binding MinDate}" MaximumDate="{Binding MaxDate}" Date="{Binding Date}" Style="{StaticResource entry}"/>
+                            
+                            <!-- Time -->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Label Text="שעה" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
+                            </Grid>
+                            <TimePicker Time="{Binding Time}"></TimePicker>
+                            
+                            <!-- Position -->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Label Text="מיקום" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
+                            </Grid>
+                            <Entry Placeholder="הכנס מיקום" MaxLength="30" Text="{Binding Position}" Style="{StaticResource entry}" />
                         </StackLayout>
                     </Frame>
                     <Button Text="שלח בקשה" Style="{StaticResource Button}" Command="{Binding SaveDataCommand}"></Button>
