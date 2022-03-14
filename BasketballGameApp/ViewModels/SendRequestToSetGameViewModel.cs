@@ -86,7 +86,7 @@ namespace BasketballGameApp.ViewModels
             SelectedTeam = team;
             requestGame = new RequestGame
             {
-                RequestStatusId = 0,
+                RequestGameStatusId = 0,
                 CoachId = 0,
                 GameId = 0,
                 Date = DateTime.Now,
