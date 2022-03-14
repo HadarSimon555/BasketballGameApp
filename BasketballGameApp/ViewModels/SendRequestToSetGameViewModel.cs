@@ -121,7 +121,8 @@ namespace BasketballGameApp.ViewModels
             {
                 Coach = theApp.CurrentCoach,
                 Time = this.Time,
-                Date = this.Date
+                Date = this.Date,
+                Position = this.Position
             };
 
             ServerStatus = "מתחבר לשרת...";
