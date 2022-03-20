@@ -74,6 +74,14 @@
                 <Setter Property="BackgroundColor" Value="#f5ab35"/>
                 <Setter Property="CornerRadius" Value="10"></Setter>
             </Style>
+            <Style TargetType="ImageButton" x:Key="ImgButton">
+                <Setter Property="Aspect" Value="AspectFill"/>
+                <Setter Property="Scale" Value="0.5"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="BackgroundColor" Value="#f5ab35"/>
+                <Setter Property="CornerRadius" Value="10"></Setter>
+            </Style>
             <Style TargetType="RadioButton" x:Key="RadioButton">
                 <Setter Property="VisualStateManager.VisualStateGroups">
                     <VisualStateGroupList>
