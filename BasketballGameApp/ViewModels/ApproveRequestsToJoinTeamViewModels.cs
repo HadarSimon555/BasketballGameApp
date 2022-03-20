@@ -52,8 +52,6 @@ namespace BasketballGameApp.ViewModels
         public ApproveRequestsToJoinTeamViewModels()
         {
             ObservableCollectionRequestsToJoinTeam = new ObservableCollection<RequestToJoinTeam>();
-            //SelectionChangeCommand = new Command<Team>(SelectionChangedCommand);
-            //LoadRequestsToJoinTeam();
             ApproveCommand = new Command<RequestToJoinTeam>(ApproveRequest);
             DeleteCommand= new Command<RequestToJoinTeam>(DeleteRequest);
         }
