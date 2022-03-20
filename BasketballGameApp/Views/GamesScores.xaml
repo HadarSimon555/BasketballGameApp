@@ -11,11 +11,17 @@
 
     <NavigationPage.TitleView>
         <StackLayout Orientation="Horizontal">
-            <Button  IsVisible="{Binding IsLoggedIn}" VerticalOptions="Start"  Style="{StaticResource Button}" Command="{Binding NavigateToPageCommand}" CommandParameter="Login">
+            <Button  IsVisible="{Binding IsLoggedIn}" VerticalOptions="Start" Style="{StaticResource Button}" Command="{Binding NavigateToPageCommand}" CommandParameter="Login">
                 <Button.ImageSource>
                     <FileImageSource  File="login"/>
                 </Button.ImageSource>
             </Button>
+            <Button  IsVisible="{Binding IsLoggedIn}" VerticalOptions="Start" Style="{StaticResource Button}" Command="{Binding NavigateToPageCommand}" CommandParameter="Signup">
+                <Button.ImageSource>
+                    <FileImageSource File="signup"/>//להוסיף תמונה
+                </Button.ImageSource>
+            </Button>
+            
             <Button IsVisible="{Binding IsLoggedIn}" Text="הירשם" Style="{StaticResource Button}" Command="{Binding NavigateToPageCommand}" CommandParameter="Signup"></Button>
             <Button IsVisible="{Binding IsCoach}" Text="צור קבוצה" Style="{StaticResource Button}" Command="{Binding NavigateToCreateTeamPageCommand}"></Button>
             <Button IsVisible="{Binding IsPlayer}" Text="הצטרף לקבוצה" Style="{StaticResource Button}" Command="{Binding NavigateToJoinToGroupCommand}"></Button>
