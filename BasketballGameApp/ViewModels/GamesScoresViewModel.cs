@@ -109,6 +109,7 @@ namespace BasketballGameApp.ViewModels
             NavigateToJoinToGroupCommand = new Command(NavigateToJoinToGroupPage);
             NavigateToApproveRequestsToJoinTeamCommand = new Command(NavigateToApproveRequestsToJoinTeamPage);
             NavigateToRequestToSetGameCommand = new Command(NavigateToRequestToSetGamePage);
+            NavigateToApproveRequestsToSetGameCommand = new Command(NavigateToApproveRequestsToSetGamePage);
             observableCollectionGames = new ObservableCollection<Game>();
             App theApp = (App)App.Current;
             if (theApp.CurrentUser == null)
@@ -230,6 +231,16 @@ namespace BasketballGameApp.ViewModels
         {
             Page p = new RequestToSetGame();
             p.BindingContext = new RequestToSetGameViewModel();
+            App.Current.MainPage.Navigation.PushAsync(p);
+        }
+        #endregion
+
+        #region NavigateToApproveRequestsToSetGamePage
+        public ICommand NavigateToApproveRequestsToSetGameCommand { protected set; get; }
+        public void NavigateToApproveRequestsToSetGamePage()
+        {
+            Page p = new ApproveRequestsToSetGame();
+            p.BindingContext = new ApproveRequestsToSetGameViewModel();
             App.Current.MainPage.Navigation.PushAsync(p);
         }
         #endregion
