@@ -101,7 +101,7 @@ namespace BasketballGameApp.ViewModels
                 theApp.CurrentCoach.Team.Players.Add(player);
                 ServerStatus = "קורא נתונים...";
                 
-                await App.Current.MainPage.DisplayAlert("התחברות", "הוספת השחקן לקבוצה בוצעה בהצלחה!", "אישור", FlowDirection.RightToLeft);
+                await App.Current.MainPage.DisplayAlert("אישור בקשת הצטרפות לקבוצה", "הוספת השחקן לקבוצה בוצעה בהצלחה!", "אישור", FlowDirection.RightToLeft);
                 await App.Current.MainPage.Navigation.PopModalAsync();
                 NavigationPage p = new NavigationPage(new GamesScores());
                 NavigationPage.SetHasNavigationBar(p, false);

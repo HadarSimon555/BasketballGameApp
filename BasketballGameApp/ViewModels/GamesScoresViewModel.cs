@@ -224,7 +224,7 @@ namespace BasketballGameApp.ViewModels
         }
         #endregion
 
-        #region NavigateToApproveRequestToSetGame
+        #region NavigateToRequestToSetGame
         public ICommand NavigateToRequestToSetGameCommand { protected set; get; }
         public void NavigateToRequestToSetGamePage()
         {

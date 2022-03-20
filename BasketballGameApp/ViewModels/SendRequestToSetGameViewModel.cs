@@ -143,7 +143,7 @@ namespace BasketballGameApp.ViewModels
                 {
                     ServerStatus = "קורא נתונים...";
                     theApp.CurrentCoach.RequestGames.Add(requestGame);
-                    await App.Current.MainPage.DisplayAlert("התחברות", "הגשת הבקשה לקביעת משחק נשלחה למאמן הקבוצה המתחרה!", "אישור", FlowDirection.RightToLeft);
+                    await App.Current.MainPage.DisplayAlert("שליחת בקשה למשחק", "הגשת הבקשה לקביעת משחק נשלחה למאמן הקבוצה המתחרה!", "אישור", FlowDirection.RightToLeft);
                     await App.Current.MainPage.Navigation.PopModalAsync();
                     NavigationPage p = new NavigationPage(new GamesScores());
                     NavigationPage.SetHasNavigationBar(p, false);

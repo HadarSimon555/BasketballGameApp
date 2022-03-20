@@ -97,7 +97,7 @@ namespace BasketballGameApp.ViewModels
             {
                 ServerStatus = "קורא נתונים...";
                 theApp.CurrentPlayer.RequestToJoinTeams.Add(request);
-                await App.Current.MainPage.DisplayAlert("התחברות", "הגשת הבקשה להצטרפות לקבוצה נשלחה למאמן הקבוצה!", "אישור", FlowDirection.RightToLeft);
+                await App.Current.MainPage.DisplayAlert("הגשת בקשה להצארפות לקבוצה", "הגשת הבקשה להצטרפות לקבוצה נשלחה למאמן הקבוצה!", "אישור", FlowDirection.RightToLeft);
                 await App.Current.MainPage.Navigation.PopModalAsync();
                 NavigationPage p = new NavigationPage(new GamesScores());
                 NavigationPage.SetHasNavigationBar(p, false);
