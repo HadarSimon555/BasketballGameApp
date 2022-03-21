@@ -67,11 +67,6 @@ namespace BasketballGameApp.ViewModels
 
             if (listRequestsToJoinTeam != null)
             {
-                //foreach (RequestToJoinTeam item in listRequestsToJoinTeam)
-                //{
-                //    this.ObservableCollectionRequestsToJoinTeam.Add(item);
-                //    OnPropertyChanged("ObservableCollectionRequestsToJoinTeam");
-                //}
                 ObservableCollectionRequestsToJoinTeam = new ObservableCollection<RequestToJoinTeam>(listRequestsToJoinTeam);
             }
         }

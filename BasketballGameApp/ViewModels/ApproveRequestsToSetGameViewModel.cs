@@ -63,15 +63,10 @@ namespace BasketballGameApp.ViewModels
             BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
             App theApp = (App)App.Current;
 
-            listRequestsGame = await proxy.GetRequestsGameAsync(theApp.CurrentCoach);
+            listRequestsGame = await proxy.GetRequestsGameAsync(theApp.CurrentCoach.Team);
 
             if (listRequestsGame != null)
             {
-                //foreach (RequestToJoinTeam item in listRequestsToJoinTeam)
-                //{
-                //    this.ObservableCollectionRequestsToJoinTeam.Add(item);
-                //    OnPropertyChanged("ObservableCollectionRequestsToJoinTeam");
-                //}
                 ObservableCollectionRequestsGame = new ObservableCollection<RequestGame>(listRequestsGame);
             }
         }

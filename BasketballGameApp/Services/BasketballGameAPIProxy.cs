@@ -650,11 +650,11 @@ namespace BasketballGameApp.Services
         #endregion
 
         #region GetRequestsGameAsync
-        public async Task<List<RequestGame>> GetRequestsGameAsync(Coach coach)
+        public async Task<List<RequestGame>> GetRequestsGameAsync(Team team)
         {
             try
             {
-                HttpResponseMessage response = await client.GetAsync($"{this.baseUri}/GetRequestsGame?coachId={coach.Id}");
+                HttpResponseMessage response = await client.GetAsync($"{this.baseUri}/GetRequestsGame?teamId={team.Id}");
                 if (response.IsSuccessStatusCode)
                 {
                     JsonSerializerOptions options = new JsonSerializerOptions
