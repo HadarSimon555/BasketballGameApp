@@ -13,21 +13,39 @@
         <StackLayout Orientation="Horizontal">
             <Button  IsVisible="{Binding IsLoggedIn}" VerticalOptions="Start" Style="{StaticResource Button}" Command="{Binding NavigateToPageCommand}" CommandParameter="Login">
                 <Button.ImageSource>
-                    <FileImageSource  File="login"/>
+                    <FileImageSource File="login"/>
                 </Button.ImageSource>
             </Button>
             <Button  IsVisible="{Binding IsLoggedIn}" VerticalOptions="Start" Style="{StaticResource Button}" Command="{Binding NavigateToPageCommand}" CommandParameter="Signup">
                 <Button.ImageSource>
-                    <FileImageSource File="signup"/>//להוסיף תמונה
+                    <FileImageSource File="signup"/>
                 </Button.ImageSource>
             </Button>
-            
-            <Button IsVisible="{Binding IsLoggedIn}" Text="הירשם" Style="{StaticResource Button}" Command="{Binding NavigateToPageCommand}" CommandParameter="Signup"></Button>
-            <Button IsVisible="{Binding IsCoach}" Text="צור קבוצה" Style="{StaticResource Button}" Command="{Binding NavigateToCreateTeamPageCommand}"></Button>
-            <Button IsVisible="{Binding IsPlayer}" Text="הצטרף לקבוצה" Style="{StaticResource Button}" Command="{Binding NavigateToJoinToGroupCommand}"></Button>
-            <Button IsVisible="{Binding HaveTeam}" Text="אישור בקשות הצטרפות לקבוצה" Style="{StaticResource Button}" Command="{Binding NavigateToApproveRequestsToJoinTeamCommand}"></Button>
-            <Button IsVisible="{Binding HaveMinPlayers}" Text="בחירת קבוצה לקביעת משחק" Style="{StaticResource Button}" Command="{Binding NavigateToRequestToSetGameCommand}"></Button>
-            <Button IsVisible="{Binding HaveTeam}" Text="אישור בקשות לקביעת משחק" Style="{StaticResource Button}" Command="{Binding NavigateToApproveRequestsToSetGameCommand}"></Button>
+            <Button  IsVisible="{Binding IsCoach}" VerticalOptions="Start" Style="{StaticResource Button}" Command="{Binding NavigateToCreateTeamPageCommand}">
+                <Button.ImageSource>
+                    <FileImageSource File="createTeam"/>
+                </Button.ImageSource>
+            </Button>
+            <Button  IsVisible="{Binding IsPlayer}" VerticalOptions="Start" Style="{StaticResource Button}" Command="{Binding NavigateToJoinToGroupCommand}">
+                <Button.ImageSource>
+                    <FileImageSource File="joinToGroup"/>
+                </Button.ImageSource>
+            </Button>
+            <Button  IsVisible="{Binding HaveTeam}" VerticalOptions="Start" Style="{StaticResource Button}" Command="{Binding NavigateToApproveRequestsToJoinTeamCommand}">
+                <Button.ImageSource>
+                    <FileImageSource File="approveRequestsToJoinGroup"/>
+                </Button.ImageSource>
+            </Button>
+            <Button  IsVisible="{Binding HaveMinPlayers}" VerticalOptions="Start" Style="{StaticResource Button}" Command="{Binding NavigateToRequestToSetGameCommand}">
+                <Button.ImageSource>
+                    <FileImageSource File="requestToSetGame"/>
+                </Button.ImageSource>
+            </Button>
+            <Button  IsVisible="{Binding HaveMinPlayers}" VerticalOptions="Start" Style="{StaticResource Button}" Command="{Binding NavigateToApproveRequestsToSetGameCommand}">
+                <Button.ImageSource>
+                    <FileImageSource File="approveRequestToSetGame"/>
+                </Button.ImageSource>
+            </Button>
 
         </StackLayout>
     </NavigationPage.TitleView>
