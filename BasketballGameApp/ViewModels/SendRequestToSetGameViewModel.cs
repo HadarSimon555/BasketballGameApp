@@ -36,7 +36,7 @@ namespace BasketballGameApp.ViewModels
 
         #region Time
         private TimeSpan time = new TimeSpan(0, 0, 0);
-        
+
         public TimeSpan Time
         {
             get => time;
@@ -85,7 +85,8 @@ namespace BasketballGameApp.ViewModels
             requestGame = new RequestGame
             {
                 RequestGameStatusId = 0,
-                CoachId = 0,
+                CoachHomeTeamId = 0,
+                AwayTeamId = 0,
                 GameId = 0,
                 Date = DateTime.Now,
                 Time = new TimeSpan(0, 0, 0),
@@ -119,7 +120,8 @@ namespace BasketballGameApp.ViewModels
         {
             requestGame = new RequestGame
             {
-                Coach = theApp.CurrentCoach,
+                CoachHomeTeam = theApp.CurrentCoach,
+                AwayTeam = SelectedTeam,
                 Time = this.Time,
                 Date = this.Date,
                 Position = this.Position

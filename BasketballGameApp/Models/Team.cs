@@ -11,6 +11,7 @@ namespace BasketballGameApp.Models
             GameAwayTeams = new List<Game>();
             GameHomeTeams = new List<Game>();
             Players = new List<Player>();
+            RequestGames = new List<RequestGame>();
             RequestToJoinTeams = new List<RequestToJoinTeam>();
         }
 
@@ -24,6 +25,7 @@ namespace BasketballGameApp.Models
         public virtual List<Game> GameAwayTeams { get; set; }
         public virtual List<Game> GameHomeTeams { get; set; }
         public virtual List<Player> Players { get; set; }
+        public virtual List<RequestGame> RequestGames { get; set; }
         public virtual List<RequestToJoinTeam> RequestToJoinTeams { get; set; }
     }
 }

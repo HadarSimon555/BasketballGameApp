@@ -7,13 +7,15 @@ namespace BasketballGameApp.Models
     {
         public int Id { get; set; }
         public int RequestGameStatusId { get; set; }
-        public int CoachId { get; set; }
+        public int CoachHomeTeamId { get; set; }
         public int GameId { get; set; }
         public DateTime Date { get; set; }
         public TimeSpan Time { get; set; }
         public string Position { get; set; }
+        public int AwayTeamId { get; set; }
 
-        public virtual Coach Coach { get; set; }
+        public virtual Team AwayTeam { get; set; }
+        public virtual Coach CoachHomeTeam { get; set; }
         public virtual Game Game { get; set; }
         public virtual RequestGameStatus RequestGameStatus { get; set; }
     }
