@@ -85,7 +85,6 @@ namespace BasketballGameApp.ViewModels
 
             BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
             bool approved = await proxy.ApproveRequestToJoinTeamAsync(player);
-            
 
             if (!approved)
             {

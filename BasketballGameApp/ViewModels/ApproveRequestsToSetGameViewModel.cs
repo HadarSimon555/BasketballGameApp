@@ -76,7 +76,29 @@ namespace BasketballGameApp.ViewModels
         public ICommand ApproveCommand { get; protected set; }
         private async void ApproveRequest(RequestGame request)
         {
+            App theApp = (App)App.Current;
+            Coach coach = request.CoachHomeTeam;
 
+            ServerStatus = "מתחבר לשרת...";
+            await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatusPage(this));
+
+            BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
+            bool approved = await proxy.ApproveRequestToGameAsync(coach);
+
+            if (!approved)
+            {
+                await App.Current.MainPage.DisplayAlert("שגיאה", "אישור קביעת המשחק נכשלה!", "בסדר");
+            }
+            else
+            {
+                ServerStatus = "קורא נתונים...";
+
+                await App.Current.MainPage.DisplayAlert("אישור בקשת קביעת המשחק", "קביעת המשחק בוצעה בהצלחה!", "אישור", FlowDirection.RightToLeft);
+                await App.Current.MainPage.Navigation.PopModalAsync();
+                NavigationPage p = new NavigationPage(new GamesScores());
+                NavigationPage.SetHasNavigationBar(p, false);
+                await App.Current.MainPage.Navigation.PushAsync(p);
+            }
         }
         #endregion
 

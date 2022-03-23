@@ -630,6 +630,7 @@ namespace BasketballGameApp.Services
                 StringContent content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
 
                 HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/AddRequestToGame", content);
+
                 if (response.IsSuccessStatusCode)
                 {
                     jsonObject = await response.Content.ReadAsStringAsync();
@@ -673,6 +674,35 @@ namespace BasketballGameApp.Services
             {
                 Console.WriteLine(e.Message);
                 return null;
+            }
+        }
+        #endregion
+
+        #region ApproveRequestToGameAsync
+        public async Task<bool> ApproveRequestToGameAsync(Coach coach)
+        {
+            try
+            {
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    ReferenceHandler = ReferenceHandler.Preserve,
+                    PropertyNameCaseInsensitive = true
+                };
+
+                string json = JsonSerializer.Serialize(coach, options);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/ApproveRequestToGame", content);
+                if (response.IsSuccessStatusCode)
+                {
+                    string res = await response.Content.ReadAsStringAsync();
+                    return JsonSerializer.Deserialize<bool>(res, options);
+                }
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
             }
         }
         #endregion

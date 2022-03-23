@@ -6,7 +6,7 @@
              xmlns:models="clr-namespace:BasketballGameApp.Models"
              NavigationPage.HasNavigationBar="True"
              FlowDirection="RightToLeft" 
-             Title="שליחת בקשה למאמן הקבוצה"
+             Title="שליחת בקשה לקביעת משחק"
              x:DataType="local:RequestToSetGameViewModel">
     
     <ContentPage.Content>
@@ -20,7 +20,7 @@
                     <RowDefinition Height="150"/>
                 </Grid.RowDefinitions>
                 <Image Grid.Column="0" Aspect="AspectFill" Source="basketballPic" Opacity="0.6"></Image>
-                <Label Text="שליחת בקשה למאמן הקבוצה" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Style="{StaticResource FormTitle}"></Label>
+                <Label Text="שליחת בקשה לקביעת משחק" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Style="{StaticResource FormTitle}"></Label>
             </Grid>
 
             <CollectionView  x:Name="CvTeams" SelectionMode="Single" SelectedItem="{Binding SelectedTeam}" SelectionChangedCommand="{Binding NavigateToSendRequestToGamePageCommand}" SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference CvTeams}}" EmptyView="אין כרגע קבוצות שניתן לקבוע איתן משחקים!" ItemsSource="{Binding ObservableCollectionTeams}">
