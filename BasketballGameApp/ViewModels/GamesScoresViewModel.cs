@@ -139,7 +139,7 @@ namespace BasketballGameApp.ViewModels
                     IsCoach = !true;
                     IsPlayer = false;
                     HaveTeam = true;
-                    if (TheApp.CurrentCoach.Team.Players.Count() >= 2)
+                    if (TheApp.CurrentCoach.Team.Players.Count() >= 0)//לשנות
                         HaveMinPlayers = true;
                     else
                         HaveMinPlayers = false;
