@@ -47,7 +47,7 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
-                                <Label Text="{Binding CoachHomeTeam.Team}" Grid.Column="0" />
+                                <Label Text="{Binding CoachHomeTeam.Team.Name}" Grid.Column="0" />
                             </Grid>
                         </SwipeView>
                     </DataTemplate>
