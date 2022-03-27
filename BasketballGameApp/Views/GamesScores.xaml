@@ -11,6 +11,11 @@
 
     <NavigationPage.TitleView>
         <StackLayout Orientation="Horizontal">
+            <Button  IsVisible="{Binding IsLoggedOut}" VerticalOptions="Start" Style="{StaticResource Button}" Command="{Binding NavigateToLogOutPageCommand}">
+                <Button.ImageSource>
+                    <FileImageSource File="logout"/>
+                </Button.ImageSource>
+            </Button>
             <Button  IsVisible="{Binding IsLoggedIn}" VerticalOptions="Start" Style="{StaticResource Button}" Command="{Binding NavigateToPageCommand}" CommandParameter="Login">
                 <Button.ImageSource>
                     <FileImageSource File="login"/>

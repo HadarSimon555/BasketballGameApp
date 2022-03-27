@@ -15,6 +15,19 @@ namespace BasketballGameApp.ViewModels
 {
     class GamesScoresViewModel : BaseViewModel
     {
+        #region IsLoggedOut
+        private bool isLoggedOut;
+        public bool IsLoggedOut
+        {
+            get => isLoggedOut;
+            set
+            {
+                isLoggedOut = value;
+                OnPropertyChanged("IsLoggedOut");
+            }
+        }
+        #endregion
+
         #region IsLoggedin
         private bool isLoggedin;
         public bool IsLoggedIn
@@ -105,6 +118,7 @@ namespace BasketballGameApp.ViewModels
         public GamesScoresViewModel()
         {
             NavigateToPageCommand = new Command<string>(NavigateToPage);
+            NavigateToLogOutPageCommand = new Command(NavigateToLogOutPage);
             NavigateToCreateTeamPageCommand = new Command(NavigateToCreateTeamPage);
             NavigateToJoinToGroupCommand = new Command(NavigateToJoinToGroupPage);
             NavigateToApproveRequestsToJoinTeamCommand = new Command(NavigateToApproveRequestsToJoinTeamPage);
@@ -114,10 +128,12 @@ namespace BasketballGameApp.ViewModels
             App theApp = (App)App.Current;
             if (theApp.CurrentUser == null)
             {
+                IsLoggedOut = !true;
                 IsLoggedIn = !false;
             }
             else
             {
+                IsLoggedOut = !false;
                 IsLoggedIn = !true;
 
                 if (theApp.CurrentCoach != null && TheApp.CurrentCoach.Team == null)
@@ -191,6 +207,16 @@ namespace BasketballGameApp.ViewModels
                     break;
                 default: break;
             }
+            App.Current.MainPage.Navigation.PushAsync(p);
+        }
+        #endregion
+
+        #region NavigateToLogOutPage
+        public ICommand NavigateToLogOutPageCommand { protected set; get; }
+        public void NavigateToLogOutPage()
+        {
+            Page p = new LogOut();
+            p.BindingContext = new LogOutViewModel();
             App.Current.MainPage.Navigation.PushAsync(p);
         }
         #endregion

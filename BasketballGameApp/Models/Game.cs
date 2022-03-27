@@ -5,7 +5,7 @@ namespace BasketballGameApp.Models
 {
     public partial class Game
     {
-        public Game()
+        public Game()   
         {
             GameStats = new List<GameStat>();
             RequestGames = new List<RequestGame>();
