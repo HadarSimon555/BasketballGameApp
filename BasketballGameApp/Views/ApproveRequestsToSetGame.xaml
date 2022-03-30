@@ -22,7 +22,7 @@
             </Grid>
             <Picker SelectedIndex="{Binding RequestType}"   >
                 <Picker.Items>
-                    <x:String > "בקשות לאישור" </x:String>
+                    <x:String >"בקשות לאישור"</x:String>
                     <x:String>"בקשות ששלחתי"</x:String>
                 </Picker.Items>
             </Picker>
