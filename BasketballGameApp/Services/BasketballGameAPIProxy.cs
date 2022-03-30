@@ -679,7 +679,7 @@ namespace BasketballGameApp.Services
         #endregion
 
         #region ApproveRequestToGameAsync
-        public async Task<bool> ApproveRequestToGameAsync(Coach coach)
+        public async Task<bool> ApproveRequestToGameAsync(RequestGame request)
         {
             try
             {
@@ -689,7 +689,7 @@ namespace BasketballGameApp.Services
                     PropertyNameCaseInsensitive = true
                 };
 
-                string json = JsonSerializer.Serialize(coach, options);
+                string json = JsonSerializer.Serialize(request, options);
                 StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
                 HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/ApproveRequestToGame", content);
                 if (response.IsSuccessStatusCode)

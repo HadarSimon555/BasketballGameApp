@@ -77,13 +77,13 @@ namespace BasketballGameApp.ViewModels
         private async void ApproveRequest(RequestGame request)
         {
             App theApp = (App)App.Current;
-            Coach coach = request.CoachHomeTeam;
+            //Coach coach = request.AwayTeam.Coach;
 
             ServerStatus = "מתחבר לשרת...";
             await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatusPage(this));
 
             BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
-            bool approved = await proxy.ApproveRequestToGameAsync(coach);
+            bool approved = await proxy.ApproveRequestToGameAsync(request);
 
             if (!approved)
             {
