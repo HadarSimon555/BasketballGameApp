@@ -15,6 +15,19 @@ namespace BasketballGameApp.ViewModels
 {
     class ApproveRequestsToSetGameViewModel : BaseViewModel
     {
+        #region CanToApproveRequests
+        private bool canToApproveRequests;
+        public bool CanToApproveRequests
+        {
+            get => canToApproveRequests;
+            set
+            {
+                canToApproveRequests = value;
+                OnPropertyChanged("CanToApproveRequests");
+            }
+        }
+        #endregion
+
         #region ObservableCollectionRequestsGame
         private List<RequestGame> listRequestsGame;
         private ObservableCollection<RequestGame> observableCollectionRequestsGame;
@@ -35,6 +48,7 @@ namespace BasketballGameApp.ViewModels
         }
         #endregion
 
+        #region RequestType
         private int requestType;
         public int RequestType
         {
@@ -60,8 +74,7 @@ namespace BasketballGameApp.ViewModels
                 }
             }
         }
-
-
+        #endregion
 
         #region ServerStatus
         private string serverStatus;
@@ -134,6 +147,7 @@ namespace BasketballGameApp.ViewModels
         public ICommand DeleteCommand { get; protected set; }
         private async void DeleteRequest(RequestGame request)
         {
+
           
         }
         #endregion

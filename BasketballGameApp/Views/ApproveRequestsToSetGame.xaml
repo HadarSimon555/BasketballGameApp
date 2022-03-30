@@ -29,7 +29,7 @@
             <CollectionView x:Name="collectionView" EmptyView="אין כרגע בקשות לקביעת משחק!" ItemsSource="{Binding ObservableCollectionRequestsGame}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:RequestGame">
-                        <SwipeView >
+                        <SwipeView IsVisible="{Binding CanToApproveRequests}" >
                             <SwipeView.LeftItems>
                                 <SwipeItems>
                                     <SwipeItem Text="אישור"
