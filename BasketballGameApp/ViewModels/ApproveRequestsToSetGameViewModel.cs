@@ -35,6 +35,34 @@ namespace BasketballGameApp.ViewModels
         }
         #endregion
 
+        private int requestType;
+        public int RequestType
+        {
+            get
+            {
+                return this.requestType;
+            }
+            set
+            {
+                if(this.requestType != value)
+                {
+                    this.requestType = value;
+                    OnPropertyChanged("RequestType");
+
+                    if (listRequestsGame != null)
+                    {
+                        if (requestType == 0)
+                        { ObservableCollectionRequestsGame = new ObservableCollection<RequestGame>(listRequestsGame.Where(r => r.AwayTeamId == ((App)App.Current).CurrentCoach.TeamId).ToList()); }
+                        else
+                        { ObservableCollectionRequestsGame = new ObservableCollection<RequestGame>(listRequestsGame.Where(r => r.CoachHomeTeamId == ((App)App.Current).CurrentCoach.Id).ToList()); }
+                    }
+
+                }
+            }
+        }
+
+
+
         #region ServerStatus
         private string serverStatus;
         public string ServerStatus
@@ -67,7 +95,7 @@ namespace BasketballGameApp.ViewModels
 
             if (listRequestsGame != null)
             {
-                ObservableCollectionRequestsGame = new ObservableCollection<RequestGame>(listRequestsGame);
+                ObservableCollectionRequestsGame = new ObservableCollection<RequestGame>(listRequestsGame.Where(r=>r.AwayTeamId==theApp.CurrentCoach.TeamId).ToList());
             }
         }
         #endregion
