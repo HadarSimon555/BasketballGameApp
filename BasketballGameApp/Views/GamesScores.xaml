@@ -74,8 +74,8 @@
                 <Image Grid.Column="0" Aspect="AspectFill" Source="basketballPic" Opacity="0.6"></Image>
                 <Label Text="תוצאות של משחקים" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Style="{StaticResource FormTitle}"></Label>
             </Grid>
-
-            <CollectionView EmptyView="אין כרגע משחקים באתר!" ItemsSource="{Binding ObservableCollectionGames}">
+            <Frame Style="{StaticResource logInSignUp}">
+                <CollectionView EmptyView="אין כרגע משחקים באתר!" ItemsSource="{Binding ObservableCollectionGames}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Game">
                         <Grid Padding="10">
@@ -98,7 +98,7 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            
+            </Frame>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
