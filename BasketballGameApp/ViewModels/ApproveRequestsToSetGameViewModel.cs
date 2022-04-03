@@ -58,7 +58,7 @@ namespace BasketballGameApp.ViewModels
             }
             set
             {
-                if(this.requestType != value)
+                if (this.requestType != value)
                 {
                     this.requestType = value;
                     OnPropertyChanged("RequestType");
@@ -66,9 +66,15 @@ namespace BasketballGameApp.ViewModels
                     if (listRequestsGame != null)
                     {
                         if (requestType == 0)
-                        { ObservableCollectionRequestsGame = new ObservableCollection<RequestGame>(listRequestsGame.Where(r => r.AwayTeamId == ((App)App.Current).CurrentCoach.TeamId).ToList()); }
+                        {
+                            CanToApproveRequests = true;
+                            ObservableCollectionRequestsGame = new ObservableCollection<RequestGame>(listRequestsGame.Where(r => r.AwayTeamId == ((App)App.Current).CurrentCoach.TeamId).ToList());
+                        }
                         else
-                        { ObservableCollectionRequestsGame = new ObservableCollection<RequestGame>(listRequestsGame.Where(r => r.CoachHomeTeamId == ((App)App.Current).CurrentCoach.Id).ToList()); }
+                        {
+                            CanToApproveRequests = false;
+                            ObservableCollectionRequestsGame = new ObservableCollection<RequestGame>(listRequestsGame.Where(r => r.CoachHomeTeamId == ((App)App.Current).CurrentCoach.Id).ToList());
+                        }
                     }
 
                 }
@@ -93,6 +99,7 @@ namespace BasketballGameApp.ViewModels
         public ApproveRequestsToSetGameViewModel()
         {
             ObservableCollectionRequestsGame = new ObservableCollection<RequestGame>();
+            CanToApproveRequests = true;
             ApproveCommand = new Command<RequestGame>(ApproveRequest);
             DeleteCommand = new Command<RequestGame>(DeleteRequest);
         }
@@ -108,7 +115,7 @@ namespace BasketballGameApp.ViewModels
 
             if (listRequestsGame != null)
             {
-                ObservableCollectionRequestsGame = new ObservableCollection<RequestGame>(listRequestsGame.Where(r=>r.AwayTeamId==theApp.CurrentCoach.TeamId).ToList());
+                ObservableCollectionRequestsGame = new ObservableCollection<RequestGame>(listRequestsGame.Where(r => r.AwayTeamId == theApp.CurrentCoach.TeamId).ToList());
             }
         }
         #endregion
@@ -118,7 +125,6 @@ namespace BasketballGameApp.ViewModels
         private async void ApproveRequest(RequestGame request)
         {
             App theApp = (App)App.Current;
-            //Coach coach = request.AwayTeam.Coach;
 
             ServerStatus = "מתחבר לשרת...";
             await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatusPage(this));
@@ -129,6 +135,7 @@ namespace BasketballGameApp.ViewModels
             if (!approved)
             {
                 await App.Current.MainPage.DisplayAlert("שגיאה", "אישור קביעת המשחק נכשלה!", "בסדר");
+                await App.Current.MainPage.Navigation.PopModalAsync();
             }
             else
             {
@@ -147,8 +154,29 @@ namespace BasketballGameApp.ViewModels
         public ICommand DeleteCommand { get; protected set; }
         private async void DeleteRequest(RequestGame request)
         {
+            App theApp = (App)App.Current;
 
-          
+            ServerStatus = "מתחבר לשרת...";
+            await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatusPage(this));
+
+            BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
+            bool deleted = await proxy.DeleteRequestToGameAsync(request);
+
+            if (!deleted)
+            {
+                await App.Current.MainPage.DisplayAlert("שגיאה", "דחיית הבקשה לקביעת משחק נכשלה!", "בסדר");
+                await App.Current.MainPage.Navigation.PopModalAsync();
+            }
+            else
+            {
+                ServerStatus = "קורא נתונים...";
+
+                await App.Current.MainPage.DisplayAlert("התחברות", "דחיית הבקשה לקביעת משחק בוצעה בהצלחה!", "אישור", FlowDirection.RightToLeft);
+                await App.Current.MainPage.Navigation.PopModalAsync();
+                NavigationPage p = new NavigationPage(new GamesScores());
+                NavigationPage.SetHasNavigationBar(p, false);
+                await App.Current.MainPage.Navigation.PushAsync(p);
+            }
         }
         #endregion
     }

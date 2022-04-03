@@ -26,10 +26,10 @@
                     <x:String>"בקשות ששלחתי"</x:String>
                 </Picker.Items>
             </Picker>
-            <CollectionView x:Name="collectionView" EmptyView="אין כרגע בקשות לקביעת משחק!" ItemsSource="{Binding ObservableCollectionRequestsGame}">
+            <CollectionView x:Name="collectionView" IsVisible="{Binding CanToApproveRequests}" EmptyView="אין כרגע בקשות לקביעת משחק!" ItemsSource="{Binding ObservableCollectionRequestsGame}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:RequestGame">
-                        <SwipeView IsVisible="{Binding CanToApproveRequests}" >
+                        <SwipeView>
                             <SwipeView.LeftItems>
                                 <SwipeItems>
                                     <SwipeItem Text="אישור"
