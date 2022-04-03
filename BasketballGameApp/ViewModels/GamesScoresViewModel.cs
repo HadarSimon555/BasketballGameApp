@@ -282,6 +282,7 @@ namespace BasketballGameApp.ViewModels
 
             if (listGames != null)
             {
+                this.ObservableCollectionGames.Clear();
                 foreach (Game item in listGames)
                 {
                     this.observableCollectionGames.Add(item);

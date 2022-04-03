@@ -28,6 +28,19 @@ namespace BasketballGameApp.ViewModels
         }
         #endregion
 
+        #region CanNotToApproveRequests
+        private bool canNotToApproveRequests;
+        public bool CanNotToApproveRequests
+        {
+            get => canNotToApproveRequests;
+            set
+            {
+                canNotToApproveRequests = value;
+                OnPropertyChanged("CanNotToApproveRequests");
+            }
+        }
+        #endregion
+
         #region ObservableCollectionRequestsGame
         private List<RequestGame> listRequestsGame;
         private ObservableCollection<RequestGame> observableCollectionRequestsGame;
@@ -68,10 +81,12 @@ namespace BasketballGameApp.ViewModels
                         if (requestType == 0)
                         {
                             CanToApproveRequests = true;
+                            canNotToApproveRequests = false;
                             ObservableCollectionRequestsGame = new ObservableCollection<RequestGame>(listRequestsGame.Where(r => r.AwayTeamId == ((App)App.Current).CurrentCoach.TeamId).ToList());
                         }
                         else
                         {
+                            canNotToApproveRequests = true;
                             CanToApproveRequests = false;
                             ObservableCollectionRequestsGame = new ObservableCollection<RequestGame>(listRequestsGame.Where(r => r.CoachHomeTeamId == ((App)App.Current).CurrentCoach.Id).ToList());
                         }
@@ -100,6 +115,7 @@ namespace BasketballGameApp.ViewModels
         {
             ObservableCollectionRequestsGame = new ObservableCollection<RequestGame>();
             CanToApproveRequests = true;
+            CanNotToApproveRequests = false;
             ApproveCommand = new Command<RequestGame>(ApproveRequest);
             DeleteCommand = new Command<RequestGame>(DeleteRequest);
         }

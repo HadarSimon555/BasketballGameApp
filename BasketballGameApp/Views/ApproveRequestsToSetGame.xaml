@@ -20,12 +20,14 @@
                 <Image Grid.Column="0" Aspect="AspectFill" Source="basketballPic" Opacity="0.6"></Image>
                 <Label Text="אישור בקשות לקביעת משחק" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Style="{StaticResource FormTitle}"></Label>
             </Grid>
-            <Picker SelectedIndex="{Binding RequestType}"   >
+            
+            <Picker SelectedIndex="{Binding RequestType}">
                 <Picker.Items>
                     <x:String >"בקשות לאישור"</x:String>
                     <x:String>"בקשות ששלחתי"</x:String>
                 </Picker.Items>
             </Picker>
+            
             <CollectionView x:Name="collectionView" IsVisible="{Binding CanToApproveRequests}" EmptyView="אין כרגע בקשות לקביעת משחק!" ItemsSource="{Binding ObservableCollectionRequestsGame}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:RequestGame">
@@ -55,6 +57,22 @@
                                 <Label Text="{Binding CoachHomeTeam.Team.Name}" Grid.Column="0" />
                             </Grid>
                         </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <CollectionView x:Name="collectionView2" IsVisible="{Binding CanNotToApproveRequests}" EmptyView="לא שלחת בקשות לקביעת משחק!" ItemsSource="{Binding ObservableCollectionRequestsGame}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:RequestGame">
+                        <Grid Padding="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Label Text="{Binding AwayTeam.Name}" Grid.Column="0" />
+                        </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
