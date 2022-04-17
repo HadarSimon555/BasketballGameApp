@@ -50,13 +50,15 @@
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="*" />
-                                    <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
+                                <Label Text="שם השחקן: " Grid.Row="0" />
                                 <Label Text="{Binding Player.User.Name}" Grid.Row="0" />
+                                <Label Text="גובה: " Grid.Row="1" />
                                 <Label Text="{Binding Player.Height}" Grid.Row="1" />
+                                <Label Text="תאריך לידה: " Grid.Row="2" />
                                 <Label Text="{Binding Player.User.BirthDate}" Grid.Row="2" />
-                                <Label Text="{Binding Player.User.Gender}" Grid.Row="3" />
-                                <Label Text="{Binding Player.User.Image}" Grid.Row="4" />
+                                <Label Text="מין: " Grid.Row="3" />
+                                <Label HorizontalOptions="EndAndExpand" Text="{Binding Player.User.Gender}" Grid.Row="3" />
                             </Grid>
                         </SwipeView>
                     </DataTemplate>

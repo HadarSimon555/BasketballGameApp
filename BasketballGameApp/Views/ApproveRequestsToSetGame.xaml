@@ -80,7 +80,9 @@
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
+                            <Label Text="שם הקבוצה: " Grid.Row="0" />
                             <Label Text="{Binding AwayTeam.Name}" Grid.Row="0" />
+                            <Label Text="תאריך" Grid.Row="1" />
                             <Label Text="{Binding Date}" Grid.Row="1" />
                             <Label Text="{Binding Time}" Grid.Row="2" />
                             <Label Text="{Binding Position}" Grid.Row="3" />
