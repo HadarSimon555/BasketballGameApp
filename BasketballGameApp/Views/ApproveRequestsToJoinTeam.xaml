@@ -47,8 +47,16 @@
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
-                                <Label Text="{Binding Player.User.Name}" Grid.Column="0" />
+                                <Label Text="{Binding Player.User.Name}" Grid.Row="0" />
+                                <Label Text="{Binding Player.Height}" Grid.Row="1" />
+                                <Label Text="{Binding Player.User.BirthDate}" Grid.Row="2" />
+                                <Label Text="{Binding Player.User.Gender}" Grid.Row="3" />
+                                <Label Text="{Binding Player.User.Image}" Grid.Row="4" />
                             </Grid>
                         </SwipeView>
                     </DataTemplate>
