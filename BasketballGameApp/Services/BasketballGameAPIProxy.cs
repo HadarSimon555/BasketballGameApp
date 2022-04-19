@@ -735,6 +735,34 @@ namespace BasketballGameApp.Services
             }
         }
         #endregion
+
+        #region GetMyRequestToJoinTeamAsync
+        public async Task<RequestToJoinTeam> GetMyRequestToJoinTeamAsync(Player player)
+        {
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync($"{this.baseUri}/GetMyRequestToJoinTeam?playerId={player.Id}");
+                if (response.IsSuccessStatusCode)
+                {
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        ReferenceHandler = ReferenceHandler.Preserve,
+                        PropertyNameCaseInsensitive = true
+                    };
+
+                    string res = await response.Content.ReadAsStringAsync();
+                    return JsonSerializer.Deserialize<RequestToJoinTeam>(res, options);
+                }
+                else
+                    return null;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+        #endregion
     }
 }
 
