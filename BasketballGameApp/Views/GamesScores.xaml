@@ -11,32 +11,32 @@
 
     <NavigationPage.TitleView>
         <StackLayout Orientation="Horizontal">
-            <Button  IsVisible="{Binding IsLoggedOut}" VerticalOptions="Start" Style="{StaticResource Button}" Command="{Binding NavigateToLogOutPageCommand}">
+            <Button  IsVisible="{Binding IsLoggedIn}" VerticalOptions="Start" Style="{StaticResource Button}" Command="{Binding NavigateToLogOutPageCommand}">
                 <Button.ImageSource>
                     <FileImageSource File="logout"/>
                 </Button.ImageSource>
             </Button>
-            <Button  IsVisible="{Binding IsLoggedIn}" VerticalOptions="Start" Style="{StaticResource Button}" Command="{Binding NavigateToPageCommand}" CommandParameter="Login">
+            <Button  IsVisible="{Binding IsNotLoggedIn}" VerticalOptions="Start" Style="{StaticResource Button}" Command="{Binding NavigateToPageCommand}" CommandParameter="Login">
                 <Button.ImageSource>
                     <FileImageSource File="login"/>
                 </Button.ImageSource>
             </Button>
-            <Button  IsVisible="{Binding IsLoggedIn}" VerticalOptions="Start" Style="{StaticResource Button}" Command="{Binding NavigateToPageCommand}" CommandParameter="Signup">
+            <Button  IsVisible="{Binding IsNotLoggedIn}" VerticalOptions="Start" Style="{StaticResource Button}" Command="{Binding NavigateToPageCommand}" CommandParameter="Signup">
                 <Button.ImageSource>
                     <FileImageSource File="signup"/>
                 </Button.ImageSource>
             </Button>
-            <Button  IsVisible="{Binding IsCoach}" VerticalOptions="Start" Style="{StaticResource Button}" Command="{Binding NavigateToCreateTeamPageCommand}">
+            <Button  IsVisible="{Binding IsCoachWithoutTeam}" VerticalOptions="Start" Style="{StaticResource Button}" Command="{Binding NavigateToCreateTeamPageCommand}">
                 <Button.ImageSource>
                     <FileImageSource File="createTeam"/>
                 </Button.ImageSource>
             </Button>
-            <Button  IsVisible="{Binding IsPlayer}" VerticalOptions="Start" Style="{StaticResource Button}" Command="{Binding NavigateToJoinToGroupCommand}">
+            <Button  IsVisible="{Binding IsPlayerWithoutRequest}" VerticalOptions="Start" Style="{StaticResource Button}" Command="{Binding NavigateToJoinToGroupCommand}">
                 <Button.ImageSource>
                     <FileImageSource File="joinToGroup"/>
                 </Button.ImageSource>
             </Button>
-            <Button  IsVisible="{Binding HaveTeam}" VerticalOptions="Start" Style="{StaticResource Button}" Command="{Binding NavigateToApproveRequestsToJoinTeamCommand}">
+            <Button  IsVisible="{Binding IsCoachWithTeam}" VerticalOptions="Start" Style="{StaticResource Button}" Command="{Binding NavigateToApproveRequestsToJoinTeamCommand}">
                 <Button.ImageSource>
                     <FileImageSource File="approveRequestsToJoinGroup"/>
                 </Button.ImageSource>

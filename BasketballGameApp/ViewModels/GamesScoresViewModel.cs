@@ -15,67 +15,80 @@ namespace BasketballGameApp.ViewModels
 {
     class GamesScoresViewModel : BaseViewModel
     {
-        #region IsLoggedOut
-        private bool isLoggedOut;
-        public bool IsLoggedOut
-        {
-            get => isLoggedOut;
-            set
-            {
-                isLoggedOut = value;
-                OnPropertyChanged("IsLoggedOut");
-            }
-        }
-        #endregion
-
-        #region IsLoggedin
-        private bool isLoggedin;
+        #region IsLoggedIn
+        private bool isLoggedIn;
         public bool IsLoggedIn
         {
-            get => isLoggedin;
+            get => isLoggedIn;
             set
             {
-                isLoggedin = value;
-                OnPropertyChanged("IsLoggedin");
+                isLoggedIn = value;
+                OnPropertyChanged("IsLoggedIn");
             }
         }
         #endregion
 
-        #region IsCoach
-        private bool isCoach;
-        public bool IsCoach
+        #region IsNotLoggedin
+        private bool isNotLoggedin;
+        public bool IsNotLoggedIn
         {
-            get => isCoach;
+            get => isNotLoggedin;
             set
             {
-                isCoach = value;
-                OnPropertyChanged("IsCoach");
+                isNotLoggedin = value;
+                OnPropertyChanged("IsNotLoggedin");
             }
         }
         #endregion
 
-        #region IsPlayer
-        private bool isPlayer;
-        public bool IsPlayer
+        #region IsCoachWithoutTeam
+        private bool isCoachWithoutTeam;
+        public bool IsCoachWithoutTeam
         {
-            get => isPlayer;
+            get => isCoachWithoutTeam;
             set
             {
-                isPlayer = value;
-                OnPropertyChanged("IsPlayer");
+                isCoachWithoutTeam = value;
+                OnPropertyChanged("IsCoachWithoutTeam");
             }
         }
         #endregion
 
-        #region HaveTeam
-        private bool haveTeam;
-        public bool HaveTeam
+        #region IsPlayerWithoutRequest
+        private bool isPlayerWithoutRequest;
+        public bool IsPlayerWithoutRequest
         {
-            get => haveTeam;
+            get => isPlayerWithoutRequest;
             set
             {
-                haveTeam = value;
-                OnPropertyChanged("HaveTeam");
+                isPlayerWithoutRequest = value;
+                OnPropertyChanged("IsPlayerWithoutRequest");
+            }
+        }
+        #endregion
+
+        #region IsCoachWithTeam
+        private bool isCoachWithTeam;
+        public bool IsCoachWithTeam
+        {
+            get => isCoachWithTeam;
+            set
+            {
+                isCoachWithTeam = value;
+                OnPropertyChanged("IsCoachWithTeam");
+            }
+        }
+        #endregion
+
+        #region IsPlayerWithRequest
+        private bool isPlayerWithRequest;
+        public bool IsPlayerWithRequest
+        {
+            get => isPlayerWithRequest;
+            set
+            {
+                isPlayerWithRequest = value;
+                OnPropertyChanged("IsPlayerWithRequest");
             }
         }
         #endregion
@@ -126,45 +139,69 @@ namespace BasketballGameApp.ViewModels
             NavigateToApproveRequestsToSetGameCommand = new Command(NavigateToApproveRequestsToSetGamePage);
             observableCollectionGames = new ObservableCollection<Game>();
             App theApp = (App)App.Current;
+
+            // אם המשתמש לא מחובר
             if (theApp.CurrentUser == null)
             {
-                IsLoggedOut = !true;
-                IsLoggedIn = !false;
-            }
-            else
-            {
-                IsLoggedOut = !false;
                 IsLoggedIn = !true;
+                IsNotLoggedIn = true;
+            }
+            else // אם המשתמש מחובר
+            {
+                IsLoggedIn = !false;
+                IsNotLoggedIn = false;
 
+                // האם המשתמש הוא מאמן ללא קבוצה
                 if (theApp.CurrentCoach != null && TheApp.CurrentCoach.Team == null)
                 {
-                    IsCoach = true;
-                    IsPlayer = false;
-                    HaveTeam = false;
+                    IsCoachWithoutTeam = true;
+                    IsPlayerWithoutRequest = false;
+                    IsCoachWithTeam = false;
+                    IsPlayerWithRequest = false;
                     HaveMinPlayers = false;
                 }
-                else if(TheApp.CurrentPlayer != null && TheApp.CurrentPlayer.RequestToJoinTeams.Count == 0)//להוסיף בדיקה אם כבר הגיש בקשה להצטרפות לקבוצה
+
+                // האם המשתמש הוא שחקן שלא הגיש בקשה להצטרפות לקבוצה
+                else if(TheApp.CurrentPlayer != null && TheApp.CurrentPlayer.RequestToJoinTeams.Count == 0 && TheApp.CurrentPlayer.Team == null)
                 {
-                    IsPlayer = true;
-                    IsCoach = false;
-                    HaveTeam = false;
+                    IsPlayerWithoutRequest = true;
+                    IsCoachWithoutTeam = false;
+                    IsCoachWithTeam = false;
+                    IsPlayerWithRequest = false;
                     HaveMinPlayers = false;
                 }
+
+                // האם המשתמש הוא מאמן עם קבוצה
                 else if(theApp.CurrentCoach != null && TheApp.CurrentCoach.Team != null)//לבדוק האם הקבוצה כבר מלאה
                 {
-                    IsCoach = !true;
-                    IsPlayer = false;
-                    HaveTeam = true;
+                    IsCoachWithoutTeam = false;
+                    IsPlayerWithoutRequest = false;
+                    IsCoachWithTeam = true;
+                    IsPlayerWithRequest = false;
+                    // האם בקבוצה יש מספר שחקנים מינימלי
                     if (TheApp.CurrentCoach.Team.Players.Count() >= 0)//לשנות
                         HaveMinPlayers = true;
                     else
                         HaveMinPlayers = false;
                 }
+
+                // האם המשתמש הוא שחקן שהגיש בקשת הצטרפות לקבוצה
+                else if (TheApp.CurrentPlayer != null && TheApp.CurrentPlayer.RequestToJoinTeams.Count != 0 && TheApp.CurrentPlayer.Team == null)
+                {
+                    IsPlayerWithoutRequest = false;
+                    IsCoachWithoutTeam = false;
+                    IsCoachWithTeam = false;
+                    IsPlayerWithRequest = true;
+                    HaveMinPlayers = false;
+                }
+
+                // אם לא מתקיים שום תנאי
                 else
                 {
-                    IsCoach = false;
-                    IsPlayer = false;
-                    HaveTeam = false;
+                    IsCoachWithoutTeam = false;
+                    IsPlayerWithoutRequest = false;
+                    IsCoachWithTeam = false;
+                    IsPlayerWithRequest = false;
                     HaveMinPlayers = false;
                 }    
             }
@@ -251,7 +288,7 @@ namespace BasketballGameApp.ViewModels
         }
         #endregion
 
-        #region NavigateToRequestToSetGame
+        #region NavigateToRequestToSetGamePage
         public ICommand NavigateToRequestToSetGameCommand { protected set; get; }
         public void NavigateToRequestToSetGamePage()
         {
@@ -267,6 +304,16 @@ namespace BasketballGameApp.ViewModels
         {
             Page p = new ApproveRequestsToSetGame();
             p.BindingContext = new ApproveRequestsToSetGameViewModel();
+            App.Current.MainPage.Navigation.PushAsync(p);
+        }
+        #endregion
+
+        #region NavigateToViewRequestToJoinTeamPage
+        public ICommand NavigateToViewRequestToJoinTeamCommand { protected set; get; }
+        public void NavigateToViewRequestToJoinTeamPage()
+        {
+            Page p = new ViewRequestToJoinTeam();
+            p.BindingContext = new ViewRequestToJoinTeamViewModel();
             App.Current.MainPage.Navigation.PushAsync(p);
         }
         #endregion
