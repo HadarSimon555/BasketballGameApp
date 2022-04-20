@@ -137,6 +137,7 @@ namespace BasketballGameApp.ViewModels
             NavigateToApproveRequestsToJoinTeamCommand = new Command(NavigateToApproveRequestsToJoinTeamPage);
             NavigateToRequestToSetGameCommand = new Command(NavigateToRequestToSetGamePage);
             NavigateToApproveRequestsToSetGameCommand = new Command(NavigateToApproveRequestsToSetGamePage);
+            NavigateToViewRequestToJoinTeamCommand = new Command(NavigateToViewRequestToJoinTeamPage);
             observableCollectionGames = new ObservableCollection<Game>();
             App theApp = (App)App.Current;
 
@@ -162,7 +163,7 @@ namespace BasketballGameApp.ViewModels
                 }
 
                 // האם המשתמש הוא שחקן שלא הגיש בקשה להצטרפות לקבוצה
-                else if(TheApp.CurrentPlayer != null && TheApp.CurrentPlayer.RequestToJoinTeams.Count == 0 && TheApp.CurrentPlayer.Team == null)
+                else if(TheApp.CurrentPlayer != null && TheApp.CurrentPlayer.RequestToJoinTeams.Count == 0)
                 {
                     IsPlayerWithoutRequest = true;
                     IsCoachWithoutTeam = false;
@@ -186,7 +187,7 @@ namespace BasketballGameApp.ViewModels
                 }
 
                 // האם המשתמש הוא שחקן שהגיש בקשת הצטרפות לקבוצה
-                else if (TheApp.CurrentPlayer != null && TheApp.CurrentPlayer.RequestToJoinTeams.Count != 0 && TheApp.CurrentPlayer.Team == null)
+                else if (TheApp.CurrentPlayer != null && TheApp.CurrentPlayer.RequestToJoinTeams.Count != 0)
                 {
                     IsPlayerWithoutRequest = false;
                     IsCoachWithoutTeam = false;

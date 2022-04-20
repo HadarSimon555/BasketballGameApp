@@ -51,7 +51,11 @@
                     <FileImageSource File="approveRequestToSetGame"/>
                 </Button.ImageSource>
             </Button>
-
+            <Button  IsVisible="{Binding IsPlayerWithRequest}" VerticalOptions="Start" Style="{StaticResource Button}" Command="{Binding NavigateToViewRequestToJoinTeamCommand}">
+                <Button.ImageSource>
+                    <FileImageSource File="viewRequestToJoinTeam"/>
+                </Button.ImageSource>
+            </Button>
         </StackLayout>
     </NavigationPage.TitleView>
     
