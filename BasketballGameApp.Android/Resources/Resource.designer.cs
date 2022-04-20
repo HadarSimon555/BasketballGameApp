@@ -11830,10 +11830,13 @@ namespace BasketballGameApp.Droid
 			public const int tooltip_frame_light = 2131165341;
 			
 			// aapt resource value: 0x7F07009E
-			public const int viewRequestToJoinTeam = 2131165342;
+			public const int viewFutureGames = 2131165342;
 			
 			// aapt resource value: 0x7F07009F
-			public const int x = 2131165343;
+			public const int viewRequestToJoinTeam = 2131165343;
+			
+			// aapt resource value: 0x7F0700A0
+			public const int x = 2131165344;
 			
 			static Drawable()
 			{

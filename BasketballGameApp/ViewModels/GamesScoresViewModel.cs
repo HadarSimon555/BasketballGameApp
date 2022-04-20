@@ -138,6 +138,7 @@ namespace BasketballGameApp.ViewModels
             NavigateToRequestToSetGameCommand = new Command(NavigateToRequestToSetGamePage);
             NavigateToApproveRequestsToSetGameCommand = new Command(NavigateToApproveRequestsToSetGamePage);
             NavigateToViewRequestToJoinTeamCommand = new Command(NavigateToViewRequestToJoinTeamPage);
+            NavigateToViewFutureGamesCommand = new Command(NavigateToViewFutureGamesPage);
             observableCollectionGames = new ObservableCollection<Game>();
             App theApp = (App)App.Current;
 
@@ -163,7 +164,7 @@ namespace BasketballGameApp.ViewModels
                 }
 
                 // האם המשתמש הוא שחקן שלא הגיש בקשה להצטרפות לקבוצה
-                else if(TheApp.CurrentPlayer != null && TheApp.CurrentPlayer.RequestToJoinTeams.Count == 0)
+                else if(TheApp.CurrentPlayer != null && TheApp.CurrentPlayer.RequestToJoinTeams.Count == 0 && TheApp.CurrentPlayer.Team == null)
                 {
                     IsPlayerWithoutRequest = true;
                     IsCoachWithoutTeam = false;
@@ -187,7 +188,7 @@ namespace BasketballGameApp.ViewModels
                 }
 
                 // האם המשתמש הוא שחקן שהגיש בקשת הצטרפות לקבוצה
-                else if (TheApp.CurrentPlayer != null && TheApp.CurrentPlayer.RequestToJoinTeams.Count != 0)
+                else if (TheApp.CurrentPlayer != null && TheApp.CurrentPlayer.RequestToJoinTeams.Count != 0 && TheApp.CurrentPlayer.Team == null)
                 {
                     IsPlayerWithoutRequest = false;
                     IsCoachWithoutTeam = false;
@@ -315,6 +316,16 @@ namespace BasketballGameApp.ViewModels
         {
             Page p = new ViewRequestToJoinTeam();
             p.BindingContext = new ViewRequestToJoinTeamViewModel();
+            App.Current.MainPage.Navigation.PushAsync(p);
+        }
+        #endregion
+
+        #region NavigateToViewFutureGamesPage
+        public ICommand NavigateToViewFutureGamesCommand { protected set; get; }
+        public void NavigateToViewFutureGamesPage()
+        {
+            Page p = new ViewFutureGames();
+            p.BindingContext = new ViewFutureGamesViewModel();
             App.Current.MainPage.Navigation.PushAsync(p);
         }
         #endregion
