@@ -337,7 +337,7 @@ namespace BasketballGameApp.ViewModels
             //if (isLoggedin)
             //{
 
-            listGames = await proxy.GetGamesAsync();
+            listGames = await proxy.GetGamesAsync(null);
 
             if (listGames != null)
             {
