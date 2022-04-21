@@ -57,14 +57,14 @@
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
-                                <Label Text="שם הקבוצה: " Grid.Row="0" />
-                                <Label Text="{Binding CoachHomeTeam.Team.Name}" Grid.Row="0" />
-                                <Label Text="תאריך: " Grid.Row="1" />
-                                <Label Text="{Binding Date}" Grid.Row="1" />
-                                <Label Text="שעה: " Grid.Row="2" />
-                                <Label Text="{Binding Time}" Grid.Row="2" />
-                                <Label Text="מיקום: " Grid.Row="3" />
-                                <Label Text="{Binding Position}" Grid.Row="3" />
+                                <Label HorizontalOptions="StartAndExpand" Text="שם הקבוצה: " Grid.Row="0" />
+                                <Label HorizontalOptions="EndAndExpand" Text="{Binding CoachHomeTeam.Team.Name}" Grid.Row="0" />
+                                <Label HorizontalOptions="StartAndExpand" Text="תאריך: " Grid.Row="1" />
+                                <Label HorizontalOptions="EndAndExpand" Text="{Binding Date}" Grid.Row="1" />
+                                <Label HorizontalOptions="StartAndExpand" Text="שעה: " Grid.Row="2" />
+                                <Label HorizontalOptions="EndAndExpand" Text="{Binding Time}" Grid.Row="2" />
+                                <Label HorizontalOptions="StartAndExpand" Text="מיקום: " Grid.Row="3" />
+                                <Label HorizontalOptions="EndAndExpand" Text="{Binding Position}" Grid.Row="3" />
                             </Grid>
                         </SwipeView>
                     </DataTemplate>

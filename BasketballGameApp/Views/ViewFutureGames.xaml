@@ -7,7 +7,7 @@
              NavigationPage.HasNavigationBar="True"
              FlowDirection="RightToLeft" 
              Title="צפייה במשחקים עתידיים"
-             x:DataType="local:ViewFutureGames">
+             x:DataType="local:ViewFutureGamesViewModel">
     <ContentPage.Content>
         <StackLayout Style="{StaticResource Stack}" Padding="0">
             <Grid Margin="0,0,0,0" Padding="0">
@@ -20,6 +20,36 @@
                 <Image Grid.Column="0" Aspect="AspectFill" Source="basketballPic" Opacity="0.6"></Image>
                 <Label Text="צפייה בבקשה להצטרפות לקבוצה" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Style="{StaticResource FormTitle}"></Label>
             </Grid>
+
+            <CollectionView x:Name="collectionView" EmptyView="לא קיימים משחקים עתידיים באתר!" ItemsSource="{Binding ObservableCollectionGames}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Game">
+                        <Grid Padding="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Label HorizontalOptions="StartAndExpand"  Text="קבוצת הבית: " Grid.Row="0" />
+                            <Label HorizontalOptions="EndAndExpand" Text="{Binding HomeTeam.Name}" Grid.Row="0" />
+                            <Label HorizontalOptions="StartAndExpand" Text="קבוצת החוץ: " Grid.Row="1" />
+                            <Label HorizontalOptions="EndAndExpand" Text="{Binding AwayTeam.Name}" Grid.Row="1" />
+                            <Label HorizontalOptions="StartAndExpand" Text="תאריך: " Grid.Row="2" />
+                            <Label HorizontalOptions="EndAndExpand" Text="{Binding Date}" Grid.Row="2" />
+                            <Label HorizontalOptions="StartAndExpand" Text="שעה: " Grid.Row="3" />
+                            <Label HorizontalOptions="EndAndExpand" Text="{Binding Time}" Grid.Row="3" />
+                            <Label HorizontalOptions="StartAndExpand" Text="מיקום: " Grid.Row="4" />
+                            <Label HorizontalOptions="EndAndExpand" Text="{Binding Position}" Grid.Row="4" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
