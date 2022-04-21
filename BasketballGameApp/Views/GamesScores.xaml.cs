@@ -16,8 +16,6 @@ namespace BasketballGameApp.Views
         private GamesScoresViewModel vm;
         public GamesScores()
         {
-            
-            
             InitializeComponent();
             vm = new GamesScoresViewModel();
             this.BindingContext = vm;
