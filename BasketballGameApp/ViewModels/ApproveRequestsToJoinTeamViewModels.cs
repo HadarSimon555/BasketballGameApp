@@ -67,6 +67,7 @@ namespace BasketballGameApp.ViewModels
 
             if (listRequestsToJoinTeam != null)
             {
+                this.ObservableCollectionRequestsToJoinTeam.Clear();
                 ObservableCollectionRequestsToJoinTeam = new ObservableCollection<RequestToJoinTeam>(listRequestsToJoinTeam);
             }
         }

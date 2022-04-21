@@ -131,6 +131,7 @@ namespace BasketballGameApp.ViewModels
 
             if (listRequestsGame != null)
             {
+                this.ObservableCollectionRequestsGame.Clear();
                 ObservableCollectionRequestsGame = new ObservableCollection<RequestGame>(listRequestsGame.Where(r => r.AwayTeamId == theApp.CurrentCoach.TeamId).ToList());
             }
         }

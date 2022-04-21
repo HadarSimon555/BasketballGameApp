@@ -64,6 +64,7 @@ namespace BasketballGameApp.ViewModels
 
             if (myRequestToJoinTeam != null)
             {
+                this.MyRequestToJoinTeam = null;
                 MyRequestToJoinTeam = myRequestToJoinTeam;
             }
         }

@@ -15,6 +15,8 @@ namespace BasketballGameApp.ViewModels
 {
     class GamesScoresViewModel : BaseViewModel
     {
+        private App TheApp = (App)Application.Current;
+
         #region IsLoggedIn
         private bool isLoggedIn;
         public bool IsLoggedIn
@@ -107,7 +109,6 @@ namespace BasketballGameApp.ViewModels
         #endregion
 
         #region ObservableCollectionGames
-        private App TheApp = (App)Application.Current;
         private List<Game> listGames;
         private ObservableCollection<Game> observableCollectionGames;
         public ObservableCollection<Game> ObservableCollectionGames
@@ -342,10 +343,7 @@ namespace BasketballGameApp.ViewModels
             if (listGames != null)
             {
                 this.ObservableCollectionGames.Clear();
-                foreach (Game item in listGames)
-                {
-                    this.observableCollectionGames.Add(item);
-                }
+                ObservableCollectionGames = new ObservableCollection<Game>(listGames.Where(g => g.GameStatusId == 3).ToList());
             }
             //TheApp.Leagues = await proxy.GetLeaguesAsync();
             //}
