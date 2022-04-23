@@ -131,6 +131,7 @@ namespace BasketballGameApp.ViewModels
         #region Constructor
         public GamesScoresViewModel()
         {
+            MenuItems = GetMenu();
             NavigateToPageCommand = new Command<string>(NavigateToPage);
             NavigateToLogOutPageCommand = new Command(NavigateToLogOutPage);
             NavigateToCreateTeamPageCommand = new Command(NavigateToCreateTeamPage);
@@ -360,5 +361,20 @@ namespace BasketballGameApp.ViewModels
             //}
         }
         #endregion
+
+        public ObservableCollection<Menu> MenuItems { get; set; }
+        private ObservableCollection<Menu> GetMenu()
+        {
+            return new ObservableCollection<Menu>
+            {
+                new Menu{Title = "התנתקות" ,Icon="logout"},
+                new Menu{Title = "התנתקות" ,Icon="logout"}
+            };
+        }
+    }
+    public class Menu
+    {
+        public string Title { get; set; }
+        public string Icon { get; set; }
     }
 }

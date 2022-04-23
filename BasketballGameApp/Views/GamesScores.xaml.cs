@@ -7,6 +7,7 @@ using BasketballGameApp.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using BasketballGameApp.Services;
+using System.Collections.ObjectModel;
 
 namespace BasketballGameApp.Views
 {
@@ -27,5 +28,9 @@ namespace BasketballGameApp.Views
                 await vm.LoadGames();
         }
 
+        private void ShowMenu(object sender, EventArgs e)
+        {
+
+        }
     }
 }

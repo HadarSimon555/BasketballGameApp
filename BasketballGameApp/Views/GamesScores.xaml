@@ -8,10 +8,32 @@
              FlowDirection="RightToLeft"
              x:DataType="local:GamesScoresViewModel">
 
-    <NavigationPage.TitleView>
+   <NavigationPage.TitleView>
         <ScrollView>
             <StackLayout Orientation="Horizontal">
-                <Button IsVisible="{Binding IsLoggedIn}" VerticalOptions="Start" Style="{StaticResource Button}" Command="{Binding NavigateToLogOutPageCommand}">
+                <ImageButton IsVisible="{Binding IsLoggedIn}" Source="logout.png" BackgroundColor="Transparent" WidthRequest="20" HeightRequest="20"
+                                     HorizontalOptions="EndAndExpand" Margin="0,5,0,0" Command="{Binding NavigateToLogOutPageCommand}"></ImageButton>
+                <ImageButton IsVisible="{Binding IsNotLoggedIn}" Source="login.png" BackgroundColor="Transparent" WidthRequest="20" HeightRequest="20"
+                                     HorizontalOptions="EndAndExpand" Margin="0,5,0,0" Command="{Binding NavigateToPageCommand}" CommandParameter="Login"></ImageButton>
+                <ImageButton IsVisible="{Binding IsNotLoggedIn}" Source="signup.png" BackgroundColor="Transparent" WidthRequest="20" HeightRequest="20"
+                                     HorizontalOptions="EndAndExpand" Margin="0,5,0,0" Command="{Binding NavigateToPageCommand}" CommandParameter="Signup"></ImageButton>
+                <ImageButton IsVisible="{Binding IsCoachWithoutTeam}" Source="createTeam.png" BackgroundColor="Transparent" WidthRequest="20" HeightRequest="20"
+                                     HorizontalOptions="EndAndExpand" Margin="0,5,0,0" Command="{Binding NavigateToCreateTeamPageCommand}"></ImageButton>
+                <ImageButton IsVisible="{Binding IsPlayerWithoutRequest}" Source="joinToGroup.png" BackgroundColor="Transparent" WidthRequest="20" HeightRequest="20"
+                                     HorizontalOptions="EndAndExpand" Margin="0,5,0,0" Command="{Binding NavigateToJoinToGroupCommand}"></ImageButton>
+                <ImageButton IsVisible="{Binding IsCoachWithTeam}" Source="approveRequestsToJoinGroup.png" BackgroundColor="Transparent" WidthRequest="20" HeightRequest="20"
+                                     HorizontalOptions="EndAndExpand" Margin="0,5,0,0" Command="{Binding NavigateToApproveRequestsToJoinTeamCommand}"></ImageButton>
+                <ImageButton IsVisible="{Binding HaveMinPlayers}" Source="requestToSetGame.png" BackgroundColor="Transparent" WidthRequest="20" HeightRequest="20"
+                                     HorizontalOptions="EndAndExpand" Margin="0,5,0,0" Command="{Binding NavigateToRequestToSetGameCommand}"></ImageButton>
+                <ImageButton IsVisible="{Binding HaveMinPlayers}" Source="approveRequestToSetGame.png" BackgroundColor="Transparent" WidthRequest="20" HeightRequest="20"
+                                     HorizontalOptions="EndAndExpand" Margin="0,5,0,0" Command="{Binding NavigateToApproveRequestsToSetGameCommand}"></ImageButton>
+                <ImageButton IsVisible="{Binding IsPlayerWithRequest}" Source="viewRequestToJoinTeam.png" BackgroundColor="Transparent" WidthRequest="20" HeightRequest="20"
+                                     HorizontalOptions="EndAndExpand" Margin="0,5,0,0" Command="{Binding NavigateToViewRequestToJoinTeamCommand}"></ImageButton>
+                <ImageButton Source="viewFutureGames.png" BackgroundColor="Transparent" WidthRequest="20" HeightRequest="20"
+                                     HorizontalOptions="EndAndExpand" Margin="0,5,0,0" Command="{Binding NavigateToViewFutureGamesCommand}"></ImageButton>
+                <ImageButton IsVisible="{Binding HaveMinPlayers}" Source="selectGameToEnterScore.png" BackgroundColor="Transparent" WidthRequest="20" HeightRequest="20"
+                                     HorizontalOptions="EndAndExpand" Margin="0,5,0,0" Command="{Binding NavigateToSelectGameToEnterScoreCommand}"></ImageButton>
+                <!-- <Button IsVisible="{Binding IsLoggedIn}" VerticalOptions="Start" Style="{StaticResource Button}" Command="{Binding NavigateToLogOutPageCommand}">
                     <Button.ImageSource>
                         <FileImageSource File="logout"/>
                     </Button.ImageSource>
@@ -65,21 +87,55 @@
                     <Button.ImageSource>
                         <FileImageSource File="selectGameToEnterScore"/>
                     </Button.ImageSource>
-                </Button>
+                </Button>-->
             </StackLayout>
         </ScrollView>
     </NavigationPage.TitleView>
 
-    <!--<ContentPage.ToolbarItems>
+  <!--  <ContentPage.ToolbarItems>
         <ToolbarItem Text="הירשם" Priority="0" Order="Primary" Command="{Binding NavigateToPageCommand}" CommandParameter="Signup"></ToolbarItem>
-        <ToolbarItem Text="התחבר" Priority="0" Order="Primary"  Command="{Binding NavigateToPageCommand}" CommandParameter="Login"></ToolbarItem> 
+        <ToolbarItem Text="התחבר" Priority="0" Order="Primary"  Command="{Binding NavigateToPageCommand}" CommandParameter="Login"></ToolbarItem>
         <ToolbarItem Text="דירוגי השחקנים" Priority="0" Order="Secondary"></ToolbarItem>
         <ToolbarItem Text="דירוגי הקבוצות" Priority="0" Order="Secondary"></ToolbarItem>
     </ContentPage.ToolbarItems>-->
     <ContentPage.Content>
-
         <StackLayout Style="{StaticResource Stack}" Padding="0">
 
+           <!--<Grid ColumnDefinitions="Auto, *" BackgroundColor="LightSalmon" HeightRequest="5000" VerticalOptions="Start" 
+                  AnchorX="0.08" AnchorY="0.08" Rotation="-90">
+                <Grid AnchorX="0.08" AnchorY="0.08" Rotation="90">
+                    <StackLayout Orientation="Horizontal" Spacing="20">
+                        <ImageButton Source="menu.png" BackgroundColor="Transparent" WidthRequest="20" HeightRequest="20"
+                                     VerticalOptions="Start" HorizontalOptions="Center" Margin="0,5,0,0" Clicked="ShowMenu"></ImageButton>
+                    </StackLayout>
+                </Grid>
+                <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" TranslationX="150">
+                    <StackLayout Margin="0,70,0,0" Spacing="20">
+                        <ImageButton IsVisible="{Binding IsLoggedIn}" Source="logout.png" BackgroundColor="Transparent" WidthRequest="20" HeightRequest="20"
+                                     VerticalOptions="Start" HorizontalOptions="Center" Margin="0,5,0,0" Command="{Binding NavigateToLogOutPageCommand}"></ImageButton>
+                        <ImageButton IsVisible="{Binding IsNotLoggedIn}" Source="login.png" BackgroundColor="Transparent" WidthRequest="20" HeightRequest="20"
+                                     VerticalOptions="Center" HorizontalOptions="Center" Margin="0,5,0,0" Command="{Binding NavigateToPageCommand}" CommandParameter="Login"></ImageButton>
+                        <ImageButton IsVisible="{Binding IsNotLoggedIn}" Source="signup.png" BackgroundColor="Transparent" WidthRequest="20" HeightRequest="20"
+                                     VerticalOptions="Start" HorizontalOptions="Center" Margin="0,5,0,0" Command="{Binding NavigateToPageCommand}" CommandParameter="Signup"></ImageButton>
+                        <ImageButton IsVisible="{Binding IsCoachWithoutTeam}" Source="createTeam.png" BackgroundColor="Transparent" WidthRequest="20" HeightRequest="20"
+                                     VerticalOptions="Start" HorizontalOptions="Center" Margin="0,5,0,0" Command="{Binding NavigateToCreateTeamPageCommand}"></ImageButton>
+                        <ImageButton IsVisible="{Binding IsPlayerWithoutRequest}" Source="joinToGroup.png" BackgroundColor="Transparent" WidthRequest="20" HeightRequest="20"
+                                     VerticalOptions="Start" HorizontalOptions="Center" Margin="0,5,0,0" Command="{Binding NavigateToJoinToGroupCommand}"></ImageButton>
+                        <ImageButton IsVisible="{Binding IsCoachWithTeam}" Source="approveRequestsToJoinGroup.png" BackgroundColor="Transparent" WidthRequest="20" HeightRequest="20"
+                                     VerticalOptions="Start" HorizontalOptions="Center" Margin="0,5,0,0" Command="{Binding NavigateToApproveRequestsToJoinTeamCommand}"></ImageButton>
+                        <ImageButton IsVisible="{Binding HaveMinPlayers}" Source="requestToSetGame.png" BackgroundColor="Transparent" WidthRequest="20" HeightRequest="20"
+                                     VerticalOptions="Start" HorizontalOptions="Center" Margin="0,5,0,0" Command="{Binding NavigateToRequestToSetGameCommand}"></ImageButton>
+                        <ImageButton IsVisible="{Binding HaveMinPlayers}" Source="approveRequestToSetGame.png" BackgroundColor="Transparent" WidthRequest="20" HeightRequest="20"
+                                     VerticalOptions="Start" HorizontalOptions="Center" Margin="0,5,0,0" Command="{Binding NavigateToApproveRequestsToSetGameCommand}"></ImageButton>
+                        <ImageButton IsVisible="{Binding IsPlayerWithRequest}" Source="viewRequestToJoinTeam.png" BackgroundColor="Transparent" WidthRequest="20" HeightRequest="20"
+                                     VerticalOptions="Start" HorizontalOptions="Center" Margin="0,5,0,0" Command="{Binding NavigateToViewRequestToJoinTeamCommand}"></ImageButton>
+                        <ImageButton Source="viewFutureGames.png" BackgroundColor="Transparent" WidthRequest="20" HeightRequest="20"
+                                     VerticalOptions="Start" HorizontalOptions="Center" Margin="0,5,0,0" Command="{Binding NavigateToViewFutureGamesCommand}"></ImageButton>
+                        <ImageButton IsVisible="{Binding HaveMinPlayers}" Source="selectGameToEnterScore.png" BackgroundColor="Transparent" WidthRequest="20" HeightRequest="20"
+                                     VerticalOptions="Start" HorizontalOptions="Center" Margin="0,5,0,0" Command="{Binding NavigateToSelectGameToEnterScoreCommand}"></ImageButton>
+                    </StackLayout>
+                </Grid>
+            </Grid> -->
             <Grid Margin="0,0,0,0" Padding="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>

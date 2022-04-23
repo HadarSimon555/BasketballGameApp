@@ -6,7 +6,7 @@
              xmlns:models="clr-namespace:BasketballGameApp.Models"
              NavigationPage.HasNavigationBar="True"
              FlowDirection="RightToLeft" 
-             Title="בחירת קבוצה להכנסת תוצאות משחק"
+             Title="בחירת משחק להכנסת תוצאות"
              x:DataType="local:SelectGameToEnterScoreViewModel">
     <ContentPage.Content>
         <StackLayout Style="{StaticResource Stack}" Padding="0">
@@ -18,11 +18,11 @@
                     <RowDefinition Height="150"/>
                 </Grid.RowDefinitions>
                 <Image Grid.Column="0" Aspect="AspectFill" Source="basketballPic" Opacity="0.6"></Image>
-                <Label Text="בחירת קבוצה להכנסת תוצאות משחק" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Style="{StaticResource FormTitle}"></Label>
+                <Label Text="בחירת משחק להכנסת תוצאות" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Style="{StaticResource FormTitle}"></Label>
             </Grid>
 
             <ScrollView>
-                <CollectionView x:Name="collectionView" EmptyView="לא קיימים כרגע משחקים עתידיים באתר!" ItemsSource="{Binding ObservableCollectionGames}" SelectedItem="">
+                <CollectionView x:Name="collectionView" EmptyView="לא קיימים כרגע משחקים להכנסת תוצאות!" ItemsSource="{Binding ObservableCollectionGames}" SelectedItem="">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:Game">
                             <Grid Padding="10">
