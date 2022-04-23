@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:BasketballGameApp.ViewModels"
+             x:Class="BasketballGameApp.Views.SelectGameToEnterScore"
+             xmlns:models="clr-namespace:BasketballGameApp.Models"
+             NavigationPage.HasNavigationBar="True"
+             FlowDirection="RightToLeft" 
+             Title="בחירת קבוצה להכנסת תוצאות משחק"
+             x:DataType="local:SelectGameToEnterScoreViewModel">
+    <ContentPage.Content>
+        <StackLayout Style="{StaticResource Stack}" Padding="0">
+            <Grid Margin="0,0,0,0" Padding="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="150"/>
+                </Grid.RowDefinitions>
+                <Image Grid.Column="0" Aspect="AspectFill" Source="basketballPic" Opacity="0.6"></Image>
+                <Label Text="בחירת קבוצה להכנסת תוצאות משחק" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Style="{StaticResource FormTitle}"></Label>
+            </Grid>
+
+            <ScrollView>
+                <CollectionView x:Name="collectionView" EmptyView="לא קיימים כרגע משחקים עתידיים באתר!" ItemsSource="{Binding ObservableCollectionGames}" SelectedItem="">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Game">
+                            <Grid Padding="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Label HorizontalOptions="StartAndExpand"  Text="קבוצת הבית: " Grid.Row="0" />
+                                <Label HorizontalOptions="EndAndExpand" Text="{Binding HomeTeam.Name}" Grid.Row="0" />
+                                <Label HorizontalOptions="StartAndExpand" Text="קבוצת החוץ: " Grid.Row="1" />
+                                <Label HorizontalOptions="EndAndExpand" Text="{Binding AwayTeam.Name}" Grid.Row="1" />
+                                <Label HorizontalOptions="StartAndExpand" Text="תאריך: " Grid.Row="2" />
+                                <Label HorizontalOptions="EndAndExpand" Text="{Binding Date}" Grid.Row="2" />
+                                <Label HorizontalOptions="StartAndExpand" Text="שעה: " Grid.Row="3" />
+                                <Label HorizontalOptions="EndAndExpand" Text="{Binding Time}" Grid.Row="3" />
+                                <Label HorizontalOptions="StartAndExpand" Text="מיקום: " Grid.Row="4" />
+                                <Label HorizontalOptions="EndAndExpand" Text="{Binding Position}" Grid.Row="4" />
+                                <Label HorizontalOptions="Center" Text="________________________________________________________________" Grid.Row="5" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

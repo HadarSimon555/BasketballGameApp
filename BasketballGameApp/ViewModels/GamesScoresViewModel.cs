@@ -140,6 +140,7 @@ namespace BasketballGameApp.ViewModels
             NavigateToApproveRequestsToSetGameCommand = new Command(NavigateToApproveRequestsToSetGamePage);
             NavigateToViewRequestToJoinTeamCommand = new Command(NavigateToViewRequestToJoinTeamPage);
             NavigateToViewFutureGamesCommand = new Command(NavigateToViewFutureGamesPage);
+            NavigateToSelectGameToEnterScoreCommand = new Command(NavigateToSelectGameToEnterScorePage);
             observableCollectionGames = new ObservableCollection<Game>();
             App theApp = (App)App.Current;
 
@@ -331,6 +332,16 @@ namespace BasketballGameApp.ViewModels
         }
         #endregion
 
+        #region NavigateToSelectGameToEnterScorePage
+        public ICommand NavigateToSelectGameToEnterScoreCommand { protected set; get; }
+        public void NavigateToSelectGameToEnterScorePage()
+        {
+            Page p = new SelectGameToEnterScore();
+            p.BindingContext = new SelectGameToEnterScoreViewModel();
+            App.Current.MainPage.Navigation.PushAsync(p);
+        }
+        #endregion
+
         #region LoadGames
         public async Task LoadGames()
         {
@@ -343,7 +354,7 @@ namespace BasketballGameApp.ViewModels
             if (listGames != null)
             {
                 this.ObservableCollectionGames.Clear();
-                ObservableCollectionGames = new ObservableCollection<Game>(listGames.Where(g => g.GameStatusId == 3).ToList());
+                ObservableCollectionGames = new ObservableCollection<Game>(listGames.Where(g => g.GameStatusId == 3 && g.ScoreAwayTeam != -1 && g.ScoreHomeTeam != -1).ToList());
             }
             //TheApp.Leagues = await proxy.GetLeaguesAsync();
             //}

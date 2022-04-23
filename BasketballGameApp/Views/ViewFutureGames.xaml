@@ -20,8 +20,16 @@
                 <Image Grid.Column="0" Aspect="AspectFill" Source="basketballPic" Opacity="0.6"></Image>
                 <Label Text="צפייה בבקשה להצטרפות לקבוצה" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Style="{StaticResource FormTitle}"></Label>
             </Grid>
+
+            <Picker SelectedIndex="{Binding LoadType}">
+                <Picker.Items>
+                    <x:String >"משחקים עתידיים"</x:String>
+                    <x:String>"משחקים המתקיימים היום"</x:String>
+                </Picker.Items>
+            </Picker>
+
             <ScrollView>
-                <CollectionView x:Name="collectionView" EmptyView="לא קיימים כרגע משחקים עתידיים באתר!" ItemsSource="{Binding ObservableCollectionGames}">
+                <CollectionView x:Name="collectionView" EmptyView="לא קיימים כרגע משחקים עתידיים באתר!" ItemsSource="{Binding ObservableCollectionGames}" SelectedItem="">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:Game">
                             <Grid Padding="10">
@@ -46,7 +54,7 @@
                                     <Label HorizontalOptions="EndAndExpand" Text="{Binding Time}" Grid.Row="3" />
                                     <Label HorizontalOptions="StartAndExpand" Text="מיקום: " Grid.Row="4" />
                                     <Label HorizontalOptions="EndAndExpand" Text="{Binding Position}" Grid.Row="4" />
-                                <Label HorizontalOptions="Center"  Text="________________________________________________________________" Grid.Row="5" />
+                                <Label HorizontalOptions="Center" Text="________________________________________________________________" Grid.Row="5" />
                                 </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
