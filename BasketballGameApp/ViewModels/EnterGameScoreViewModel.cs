@@ -19,22 +19,48 @@ namespace BasketballGameApp.ViewModels
     {
         private App theApp { get; set; }
 
-        #region ObservableCollectionPlayers
-        private List<Player> listPlayers;
-        private ObservableCollection<Player> observableCollectionPlayers;
-        public ObservableCollection<Player> ObservableCollectionPlayers
+        #region ObservableCollectionGameStats
+        private List<GameStat> listGameStats;
+        private ObservableCollection<GameStat> observableCollectionGameStats;
+        public ObservableCollection<GameStat> ObservableCollectionGameStats
         {
             get
             {
-                return this.observableCollectionPlayers;
+                return this.observableCollectionGameStats;
             }
             set
             {
-                if (this.observableCollectionPlayers != value)
+                if (this.observableCollectionGameStats != value)
                 {
-                    this.observableCollectionPlayers = value;
-                    OnPropertyChanged("ObservableCollectionPlayers");
+                    this.observableCollectionGameStats = value;
+                    OnPropertyChanged("ObservableCollectionGameStats");
                 }
+            }
+        }
+        #endregion
+
+        #region PlayerShots
+        private int playerShots;
+        public int PlayerShots
+        {
+            get => playerShots;
+            set
+            {
+                playerShots = value;
+                OnPropertyChanged("PlayerShots");
+            }
+        }
+        #endregion
+
+        #region Game
+        private Game game;
+        public Game Game
+        {
+            get => game;
+            set
+            {
+                game = value;
+                OnPropertyChanged("Game");
             }
         }
         #endregion
@@ -55,46 +81,45 @@ namespace BasketballGameApp.ViewModels
         #region Constructor
         public EnterGameScoreViewModel(Game game)
         {
-            ObservableCollectionPlayers = new ObservableCollection<Player>();
+            ObservableCollectionGameStats = new ObservableCollection<GameStat>();
+            Game = game;
             theApp = (App)App.Current;
             this.SaveDataCommand = new Command(() => SaveData());
         }
         #endregion
 
-        #region LoadPlayers
-        public async Task LoadPlayers()
+        #region LoadGameStats
+        public async Task LoadGameStats()
         {
             BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
 
-            listPlayers = await proxy.GetPlayersAsync(theApp.CurrentUser);
+            listGameStats = await proxy.GetGameStatsAsync(Game, theApp.CurrentCoach.Team);
 
-            if (listPlayers != null)
+            if (listGameStats != null)
             {
-                this.ObservableCollectionPlayers.Clear();
-                ObservableCollectionPlayers = new ObservableCollection<Player>(listPlayers);
+                this.ObservableCollectionGameStats.Clear();
+                ObservableCollectionGameStats = new ObservableCollection<GameStat>(listGameStats);
             }
         }
         #endregion
 
         #region SaveData
-        //This event is fired after the new contact is generated in the system so it can be added to the list of contacts
-        //public event Action<Player, Player> PlayerUpdatedEvent;
 
         //The command for saving the contact
         public Command SaveDataCommand { protected set; get; }
         private async void SaveData()
         {
-            foreach(Player p in listPlayers)
-            {
-
-            }
+            //foreach(GameStat x in listGameStats)
+            //{
+            //    x.PlayerShots = this.playerShots;
+            //}
 
             ServerStatus = "מתחבר לשרת...";
             await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatusPage(this));
             BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
 
-            bool savePlayersShots = await proxy.SavePlayerShotsAsync(listPlayers);
-            if (!savePlayersShots)
+            bool saveGameStats = await proxy.SaveGameStatsAsync(listGameStats);
+            if (!saveGameStats)
             {
                 await App.Current.MainPage.DisplayAlert("שגיאה", "שמירת מספר הקליעות של השחקנים נכשלה!", "בסדר");
                 await App.Current.MainPage.Navigation.PopModalAsync();

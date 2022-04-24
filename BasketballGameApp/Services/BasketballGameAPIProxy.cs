@@ -795,6 +795,70 @@ namespace BasketballGameApp.Services
             }
         }
         #endregion
+
+        #region GetGameStatsAsync
+
+        public async Task<List<GameStat>> GetGameStatsAsync(Game game, Team team)
+        {
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync($"{this.baseUri}/GetGameStats?userId={user.Id}");
+                if (response.IsSuccessStatusCode)
+                {
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        ReferenceHandler = ReferenceHandler.Preserve,
+                        PropertyNameCaseInsensitive = true
+                    };
+
+                    string res = await response.Content.ReadAsStringAsync();
+                    return JsonSerializer.Deserialize<List<GameStat>>(res, options);
+                }
+                else
+                    return null;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+        #endregion
+
+        #region SaveGameStatsAsync
+        public async Task<bool> SaveGameStatsAsync(List<GameStat> listGameStats)
+        {
+            try
+            {
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    ReferenceHandler = ReferenceHandler.Preserve,
+                    Encoder = JavaScriptEncoder.Create(UnicodeRanges.Hebrew, UnicodeRanges.BasicLatin),
+                    PropertyNameCaseInsensitive = true
+                };
+                string jsonObject = JsonSerializer.Serialize<List<GameStat>>(listGameStats, options);
+                StringContent content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/AddRequestToGame", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    jsonObject = await response.Content.ReadAsStringAsync();
+                    bool r = JsonSerializer.Deserialize<bool>(jsonObject, options);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+        }
+        #endregion
     }
 }
 

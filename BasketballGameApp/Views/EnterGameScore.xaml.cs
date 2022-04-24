@@ -22,7 +22,7 @@ namespace BasketballGameApp.Views
         protected override async void OnAppearing()
         {
             if (this.BindingContext != null)
-                await ((EnterGameScoreViewModel)this.BindingContext).LoadPlayers();
+                await ((EnterGameScoreViewModel)this.BindingContext).LoadGameStats();
         }
     }
 }

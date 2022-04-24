@@ -24,23 +24,26 @@
             </Grid>
 
             <ScrollView>
-                <CollectionView x:Name="collectionView" EmptyView="רשימת השחקנים ריקה!" ItemsSource="{Binding ObservableCollectionPlayers}">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="models:Player">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
-                                </Grid.RowDefinitions>
-                                <Label Text="{Binding User.Name}"  Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
-                            </Grid>
-                            <Entry Placeholder="הכנס את מספר הקליעות של השחקן" MaxLength="30" Text="{Binding GameStats.PlayerShots}" Style="{StaticResource entry}" />
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                <StackLayout>
+                    <CollectionView x:Name="collectionView" EmptyView="רשימת השחקנים ריקה!" ItemsSource="{Binding ObservableCollectionGameStats}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:GameStat">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Label Text="{Binding Player.User.Name}"  Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
+                                    <Entry Grid.Column="1" Placeholder="הכנס את מספר הקליעות של השחקן" MaxLength="30" Text="{Binding PlayerShots}" Style="{StaticResource entry}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    
+                </StackLayout>
             </ScrollView>
 
             <Button Text="שלח תוצאות" Style="{StaticResource Button}" Command="{Binding SaveDataCommand}"></Button>
