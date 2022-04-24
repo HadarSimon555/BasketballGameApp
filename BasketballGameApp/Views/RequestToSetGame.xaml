@@ -23,6 +23,7 @@
                 <Label Text="שליחת בקשה לקביעת משחק" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Style="{StaticResource FormTitle}"></Label>
             </Grid>
 
+            <ScrollView>
             <CollectionView  x:Name="CvTeams" SelectionMode="Single" SelectedItem="{Binding SelectedTeam}" SelectionChangedCommand="{Binding NavigateToSendRequestToGamePageCommand}" SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference CvTeams}}" EmptyView="אין כרגע קבוצות שניתן לקבוע איתן משחקים!" ItemsSource="{Binding ObservableCollectionTeams}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Team">
@@ -38,7 +39,7 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-
+            </ScrollView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

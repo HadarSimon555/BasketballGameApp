@@ -27,50 +27,52 @@
                     <x:String>"בקשות ששלחתי"</x:String>
                 </Picker.Items>
             </Picker>
-            
-            <CollectionView x:Name="collectionView" IsVisible="{Binding CanToApproveRequests}" EmptyView="אין כרגע בקשות לקביעת משחק!" ItemsSource="{Binding ObservableCollectionRequestsGame}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="models:RequestGame">
-                        <SwipeView>
-                            <SwipeView.LeftItems>
-                                <SwipeItems>
-                                    <SwipeItem Text="אישור"
+            <ScrollView>
+                <CollectionView x:Name="collectionView" IsVisible="{Binding CanToApproveRequests}" EmptyView="אין כרגע בקשות לקביעת משחק!" ItemsSource="{Binding ObservableCollectionRequestsGame}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:RequestGame">
+                            <SwipeView>
+                                <SwipeView.LeftItems>
+                                    <SwipeItems>
+                                        <SwipeItem Text="אישור"
                                    IconImageSource="cheakMark.png"
                                    BackgroundColor="LightGreen"
                                    Command="{Binding Source={x:Reference collectionView}, Path=BindingContext.ApproveCommand}"
                                    CommandParameter="{Binding}" />
-                                    <SwipeItem Text="דחייה"
+                                        <SwipeItem Text="דחייה"
                                    IconImageSource="x.png"
                                    BackgroundColor="LightPink"
                                    Command="{Binding Source={x:Reference collectionView}, Path=BindingContext.DeleteCommand}"
                                    CommandParameter="{Binding}" />
-                                </SwipeItems>
-                            </SwipeView.LeftItems>
+                                    </SwipeItems>
+                                </SwipeView.LeftItems>
 
-                            <Grid Padding="10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="*" />
-                                </Grid.RowDefinitions>
-                                <Label HorizontalOptions="StartAndExpand" Text="שם הקבוצה: " Grid.Row="0" />
-                                <Label HorizontalOptions="EndAndExpand" Text="{Binding CoachHomeTeam.Team.Name}" Grid.Row="0" />
-                                <Label HorizontalOptions="StartAndExpand" Text="תאריך: " Grid.Row="1" />
-                                <Label HorizontalOptions="EndAndExpand" Text="{Binding Date}" Grid.Row="1" />
-                                <Label HorizontalOptions="StartAndExpand" Text="שעה: " Grid.Row="2" />
-                                <Label HorizontalOptions="EndAndExpand" Text="{Binding Time}" Grid.Row="2" />
-                                <Label HorizontalOptions="StartAndExpand" Text="מיקום: " Grid.Row="3" />
-                                <Label HorizontalOptions="EndAndExpand" Text="{Binding Position}" Grid.Row="3" />
-                            </Grid>
-                        </SwipeView>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                                <Grid Padding="10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Label HorizontalOptions="StartAndExpand" Text="שם הקבוצה: " Grid.Row="0" />
+                                    <Label HorizontalOptions="EndAndExpand" Text="{Binding CoachHomeTeam.Team.Name}" Grid.Row="0" />
+                                    <Label HorizontalOptions="StartAndExpand" Text="תאריך: " Grid.Row="1" />
+                                    <Label HorizontalOptions="EndAndExpand" Text="{Binding Date}" Grid.Row="1" />
+                                    <Label HorizontalOptions="StartAndExpand" Text="שעה: " Grid.Row="2" />
+                                    <Label HorizontalOptions="EndAndExpand" Text="{Binding Time}" Grid.Row="2" />
+                                    <Label HorizontalOptions="StartAndExpand" Text="מיקום: " Grid.Row="3" />
+                                    <Label HorizontalOptions="EndAndExpand" Text="{Binding Position}" Grid.Row="3" />
+                                </Grid>
+                            </SwipeView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
 
+            <ScrollView>
             <CollectionView x:Name="collectionView2" IsVisible="{Binding CanNotToApproveRequests}" EmptyView="לא שלחת בקשות לקביעת משחק!" ItemsSource="{Binding ObservableCollectionRequestsGame}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:RequestGame">
@@ -96,6 +98,8 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+            </ScrollView>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
