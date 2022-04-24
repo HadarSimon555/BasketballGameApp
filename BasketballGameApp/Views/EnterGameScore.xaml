@@ -1,9 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BasketballGameApp.Views.EnterGameScore">
+             xmlns:local="clr-namespace:BasketballGameApp.ViewModels"
+             x:Class="BasketballGameApp.Views.EnterGameScore"
+             xmlns:models="clr-namespace:BasketballGameApp.Models"
+             NavigationPage.HasNavigationBar="True"
+             FlowDirection="RightToLeft" 
+             Title="הכנסת תוצאות המשחק"
+             x:DataType="local:EnterGameScoreViewModel">
     <ContentPage.Content>
+
         <StackLayout Style="{StaticResource Stack}" Padding="0">
+
             <Grid Margin="0,0,0,0" Padding="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -12,8 +20,31 @@
                     <RowDefinition Height="150"/>
                 </Grid.RowDefinitions>
                 <Image Grid.Column="0" Aspect="AspectFill" Source="basketballPic" Opacity="0.6"></Image>
-                <Label Text="בחירת קבוצה להכנסת תוצאות משחק" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Style="{StaticResource FormTitle}"></Label>
+                <Label Text="הכנסת תוצאות המשחק" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Style="{StaticResource FormTitle}"></Label>
             </Grid>
+
+            <ScrollView>
+                <CollectionView x:Name="collectionView" EmptyView="רשימת השחקנים ריקה!" ItemsSource="{Binding ObservableCollectionPlayers}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Player">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Label Text="{Binding User.Name}"  Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
+                            </Grid>
+                            <Entry Placeholder="הכנס את מספר הקליעות של השחקן" MaxLength="30" Text="{Binding GameStats.PlayerShots}" Style="{StaticResource entry}" />
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
+
+            <Button Text="שלח תוצאות" Style="{StaticResource Button}" Command="{Binding SaveDataCommand}"></Button>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

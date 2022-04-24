@@ -57,6 +57,7 @@ namespace BasketballGameApp.ViewModels
         {
             ObservableCollectionPlayers = new ObservableCollection<Player>();
             theApp = (App)App.Current;
+            this.SaveDataCommand = new Command(() => SaveData());
         }
         #endregion
 
@@ -71,6 +72,42 @@ namespace BasketballGameApp.ViewModels
             {
                 this.ObservableCollectionPlayers.Clear();
                 ObservableCollectionPlayers = new ObservableCollection<Player>(listPlayers);
+            }
+        }
+        #endregion
+
+        #region SaveData
+        //This event is fired after the new contact is generated in the system so it can be added to the list of contacts
+        //public event Action<Player, Player> PlayerUpdatedEvent;
+
+        //The command for saving the contact
+        public Command SaveDataCommand { protected set; get; }
+        private async void SaveData()
+        {
+            foreach(Player p in listPlayers)
+            {
+
+            }
+
+            ServerStatus = "מתחבר לשרת...";
+            await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatusPage(this));
+            BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
+
+            bool savePlayersShots = await proxy.SavePlayerShotsAsync(listPlayers);
+            if (!savePlayersShots)
+            {
+                await App.Current.MainPage.DisplayAlert("שגיאה", "שמירת מספר הקליעות של השחקנים נכשלה!", "בסדר");
+                await App.Current.MainPage.Navigation.PopModalAsync();
+            }
+            else
+            {
+                ServerStatus = "קורא נתונים...";
+                //theApp.CurrentCoach.RequestGames.Add(requestGame);
+                await App.Current.MainPage.DisplayAlert("הכנסת תוצאות המשחק", "שמירת מספר הקליעות ש השחקנים בוצעה בהצלחה!", "אישור", FlowDirection.RightToLeft);
+                await App.Current.MainPage.Navigation.PopModalAsync();
+                NavigationPage p = new NavigationPage(new GamesScores());
+                NavigationPage.SetHasNavigationBar(p, false);
+                await App.Current.MainPage.Navigation.PushAsync(p);
             }
         }
         #endregion
