@@ -146,7 +146,7 @@
                 <Image Grid.Column="0" Aspect="AspectFill" Source="basketballPic" Opacity="0.6"></Image>
                 <Label Text="תוצאות של משחקים" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Style="{StaticResource FormTitle}"></Label>
             </Grid>
-
+            <ScrollView>
             <CollectionView EmptyView="אין כרגע משחקים באתר!" ItemsSource="{Binding ObservableCollectionGames}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Game">
@@ -170,6 +170,7 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+            </ScrollView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

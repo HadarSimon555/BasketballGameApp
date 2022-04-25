@@ -22,6 +22,7 @@
                 <Label Text="אישור בקשות הצטרפות לקבוצה" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Style="{StaticResource FormTitle}"></Label>
             </Grid>
 
+            <ScrollView>
             <CollectionView x:Name="collectionView" EmptyView="אין כרגע בקשות להצטרף לקבוצה!" ItemsSource="{Binding ObservableCollectionRequestsToJoinTeam}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:RequestToJoinTeam">
@@ -64,6 +65,7 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+            </ScrollView>
 
         </StackLayout>
     </ContentPage.Content>

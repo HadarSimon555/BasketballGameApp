@@ -797,12 +797,11 @@ namespace BasketballGameApp.Services
         #endregion
 
         #region GetGameStatsAsync
-
         public async Task<List<GameStat>> GetGameStatsAsync(Game game, Team team)
         {
             try
             {
-                HttpResponseMessage response = await client.GetAsync($"{this.baseUri}/GetGameStats?userId={user.Id}");
+                HttpResponseMessage response = await client.GetAsync($"{this.baseUri}/GetGameStats?gameId={game.Id}&&teamId={team.Id}");
                 if (response.IsSuccessStatusCode)
                 {
                     JsonSerializerOptions options = new JsonSerializerOptions
@@ -839,7 +838,7 @@ namespace BasketballGameApp.Services
                 string jsonObject = JsonSerializer.Serialize<List<GameStat>>(listGameStats, options);
                 StringContent content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
 
-                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/AddRequestToGame", content);
+                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/SaveGameStats", content);
 
                 if (response.IsSuccessStatusCode)
                 {

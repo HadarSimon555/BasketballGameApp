@@ -39,18 +39,18 @@ namespace BasketballGameApp.ViewModels
         }
         #endregion
 
-        #region PlayerShots
-        private int playerShots;
-        public int PlayerShots
-        {
-            get => playerShots;
-            set
-            {
-                playerShots = value;
-                OnPropertyChanged("PlayerShots");
-            }
-        }
-        #endregion
+        //#region PlayerShots
+        //private int playerShots;
+        //public int PlayerShots
+        //{
+        //    get => playerShots;
+        //    set
+        //    {
+        //        playerShots = value;
+        //        OnPropertyChanged("PlayerShots");
+        //    }
+        //}
+        //#endregion
 
         #region Game
         private Game game;
@@ -109,11 +109,6 @@ namespace BasketballGameApp.ViewModels
         public Command SaveDataCommand { protected set; get; }
         private async void SaveData()
         {
-            //foreach(GameStat x in listGameStats)
-            //{
-            //    x.PlayerShots = this.playerShots;
-            //}
-
             ServerStatus = "מתחבר לשרת...";
             await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatusPage(this));
             BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
