@@ -72,7 +72,7 @@
                 </CollectionView>
             </ScrollView>
 
-            
+            <ScrollView>
             <CollectionView x:Name="collectionView2" IsVisible="{Binding CanNotToApproveRequests}" EmptyView="לא שלחת בקשות לקביעת משחק!" ItemsSource="{Binding ObservableCollectionRequestsGame}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:RequestGame">
