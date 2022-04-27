@@ -21,23 +21,25 @@
                 <Label Text="צפייה בבקשה להצטרפות לקבוצה" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Style="{StaticResource FormTitle}"></Label>
             </Grid>
 
-            <CollectionView x:Name="collectionView" EmptyView="לא הגשת כרגע שום בקשה להצטרפות לקבוצה!" ItemsSource="{Binding MyRequestToJoinTeam}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="models:RequestToJoinTeam">
-                        <Grid Padding="10">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*" />
-                            </Grid.RowDefinitions>
-                            <Label Text="שם הקבוצה: " Grid.Row="0" />
-                            <Label Text="{Binding Team.Name}" Grid.Row="0" />
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-
+            <ScrollView>
+                <CollectionView x:Name="collectionView" EmptyView="לא הגשת כרגע שום בקשה להצטרפות לקבוצה!" ItemsSource="{Binding MyRequestToJoinTeam}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:RequestToJoinTeam">
+                            <Grid Padding="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Label Text="שם הקבוצה: " Grid.Row="0" />
+                                <Label Text="{Binding Team.Name}" Grid.Row="0" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

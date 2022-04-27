@@ -28,6 +28,7 @@
                 </Picker.Items>
             </Picker>
             <ScrollView>
+                <StackLayout>
                 <CollectionView x:Name="collectionView" IsVisible="{Binding CanToApproveRequests}" EmptyView="אין כרגע בקשות לקביעת משחק!" ItemsSource="{Binding ObservableCollectionRequestsGame}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:RequestGame">
@@ -70,10 +71,8 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-            </ScrollView>
-
-            <ScrollView>
-            <CollectionView x:Name="collectionView2" IsVisible="{Binding CanNotToApproveRequests}" EmptyView="לא שלחת בקשות לקביעת משחק!" ItemsSource="{Binding ObservableCollectionRequestsGame}">
+                
+                <CollectionView x:Name="collectionView2" IsVisible="{Binding CanNotToApproveRequests}" EmptyView="לא שלחת בקשות לקביעת משחק!" ItemsSource="{Binding ObservableCollectionRequestsGame}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:RequestGame">
                         <Grid Padding="10">
@@ -98,6 +97,7 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+                </StackLayout>
             </ScrollView>
 
         </StackLayout>

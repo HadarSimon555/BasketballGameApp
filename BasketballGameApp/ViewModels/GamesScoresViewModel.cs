@@ -108,6 +108,19 @@ namespace BasketballGameApp.ViewModels
         }
         #endregion
 
+        #region IsUserWithTeam
+        private bool isUserWithTeam;
+        public bool IsUserWithTeam
+        {
+            get => isUserWithTeam;
+            set
+            {
+                isUserWithTeam = value;
+                OnPropertyChanged("IsUserWithTeam");
+            }
+        }
+        #endregion
+
         #region ObservableCollectionGames
         private List<Game> listGames;
         private ObservableCollection<Game> observableCollectionGames;
@@ -131,7 +144,6 @@ namespace BasketballGameApp.ViewModels
         #region Constructor
         public GamesScoresViewModel()
         {
-            MenuItems = GetMenu();
             NavigateToPageCommand = new Command<string>(NavigateToPage);
             NavigateToLogOutPageCommand = new Command(NavigateToLogOutPage);
             NavigateToCreateTeamPageCommand = new Command(NavigateToCreateTeamPage);
@@ -142,8 +154,10 @@ namespace BasketballGameApp.ViewModels
             NavigateToViewRequestToJoinTeamCommand = new Command(NavigateToViewRequestToJoinTeamPage);
             NavigateToViewFutureGamesCommand = new Command(NavigateToViewFutureGamesPage);
             NavigateToSelectGameToEnterScoreCommand = new Command(NavigateToSelectGameToEnterScorePage);
+            NavigateToViewTeamMembersCommand = new Command(NavigateToViewTeamMembersPage);
             observableCollectionGames = new ObservableCollection<Game>();
             App theApp = (App)App.Current;
+            BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
 
             // אם המשתמש לא מחובר
             if (theApp.CurrentUser == null)
@@ -156,6 +170,12 @@ namespace BasketballGameApp.ViewModels
                 IsLoggedIn = !false;
                 IsNotLoggedIn = false;
 
+                // האם למשתמש יש קבוצה
+                if ((theApp.CurrentCoach != null && theApp.CurrentCoach.Team != null) || (theApp.CurrentPlayer.Team != null && theApp.CurrentPlayer.Team != null))
+                    IsUserWithTeam = true;
+                else
+                    IsUserWithTeam = false;
+
                 // האם המשתמש הוא מאמן ללא קבוצה
                 if (theApp.CurrentCoach != null && TheApp.CurrentCoach.Team == null)
                 {
@@ -167,17 +187,16 @@ namespace BasketballGameApp.ViewModels
                 }
 
                 // האם המשתמש הוא שחקן שלא הגיש בקשה להצטרפות לקבוצה
-                else if(TheApp.CurrentPlayer != null && TheApp.CurrentPlayer.RequestToJoinTeams.Count == 0 && TheApp.CurrentPlayer.Team == null)
+                else if (TheApp.CurrentPlayer != null && TheApp.CurrentPlayer.RequestToJoinTeams.Count == 0 && TheApp.CurrentPlayer.Team == null)
                 {
                     IsPlayerWithoutRequest = true;
                     IsCoachWithoutTeam = false;
                     IsCoachWithTeam = false;
                     IsPlayerWithRequest = false;
-                    HaveMinPlayers = false;
                 }
 
                 // האם המשתמש הוא מאמן עם קבוצה
-                else if(theApp.CurrentCoach != null && TheApp.CurrentCoach.Team != null)//לבדוק האם הקבוצה כבר מלאה
+                else if (theApp.CurrentCoach != null && TheApp.CurrentCoach.Team != null)//לבדוק האם הקבוצה כבר מלאה
                 {
                     IsCoachWithoutTeam = false;
                     IsPlayerWithoutRequest = false;
@@ -208,7 +227,7 @@ namespace BasketballGameApp.ViewModels
                     IsCoachWithTeam = false;
                     IsPlayerWithRequest = false;
                     HaveMinPlayers = false;
-                }    
+                }
             }
             //add server status page
             //LoadGames();
@@ -343,6 +362,16 @@ namespace BasketballGameApp.ViewModels
         }
         #endregion
 
+        #region NavigateToViewTeamMembersPage
+        public ICommand NavigateToViewTeamMembersCommand { protected set; get; }
+        public void NavigateToViewTeamMembersPage()
+        {
+            Page p = new ViewTeamMembers();
+            p.BindingContext = new ViewTeamMembersViewModel();
+            App.Current.MainPage.Navigation.PushAsync(p);
+        }
+        #endregion
+
         #region LoadGames
         public async Task LoadGames()
         {
@@ -362,15 +391,6 @@ namespace BasketballGameApp.ViewModels
         }
         #endregion
 
-        public ObservableCollection<Menu> MenuItems { get; set; }
-        private ObservableCollection<Menu> GetMenu()
-        {
-            return new ObservableCollection<Menu>
-            {
-                new Menu{Title = "התנתקות" ,Icon="logout"},
-                new Menu{Title = "התנתקות" ,Icon="logout"}
-            };
-        }
     }
     public class Menu
     {
