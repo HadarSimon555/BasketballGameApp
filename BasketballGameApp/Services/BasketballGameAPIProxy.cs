@@ -773,7 +773,10 @@ namespace BasketballGameApp.Services
         {
             try
             {
-                HttpResponseMessage response = await client.GetAsync($"{this.baseUri}/GetPlayers?userId={user.Id}");
+                int userId = -1;
+                if (user != null)
+                    userId = user.Id;
+                HttpResponseMessage response = await client.GetAsync($"{this.baseUri}/GetPlayers?userId={userId}");
                 if (response.IsSuccessStatusCode)
                 {
                     JsonSerializerOptions options = new JsonSerializerOptions

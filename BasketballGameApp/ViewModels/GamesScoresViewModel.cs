@@ -155,6 +155,8 @@ namespace BasketballGameApp.ViewModels
             NavigateToViewFutureGamesCommand = new Command(NavigateToViewFutureGamesPage);
             NavigateToSelectGameToEnterScoreCommand = new Command(NavigateToSelectGameToEnterScorePage);
             NavigateToViewTeamMembersCommand = new Command(NavigateToViewTeamMembersPage);
+            NavigateToPlayersRankingCommand = new Command(NavigateToPlayersRankingPage);
+            NavigateToTeamsRankingCommand = new Command(NavigateToTeamsRankingPage);
             observableCollectionGames = new ObservableCollection<Game>();
             
             BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
@@ -162,12 +164,12 @@ namespace BasketballGameApp.ViewModels
             // אם המשתמש לא מחובר
             if (TheApp.CurrentUser == null)
             {
-                IsLoggedIn = !true;
+                IsLoggedIn = false;
                 IsNotLoggedIn = true;
             }
             else // אם המשתמש מחובר
             {
-                IsLoggedIn = !false;
+                IsLoggedIn = true;
                 IsNotLoggedIn = false;
 
                 // האם למשתמש יש קבוצה
@@ -377,6 +379,26 @@ namespace BasketballGameApp.ViewModels
         }
         #endregion
 
+        #region NavigateToPlayersRankingPage
+        public ICommand NavigateToPlayersRankingCommand { protected set; get; }
+        public void NavigateToPlayersRankingPage()
+        {
+            Page p = new PlayersRanking();
+            p.BindingContext = new PlayersRankingViewModel();
+            App.Current.MainPage.Navigation.PushAsync(p);
+        }
+        #endregion
+
+        #region NavigateToTeamsRankingPage
+        public ICommand NavigateToTeamsRankingCommand { protected set; get; }
+        public void NavigateToTeamsRankingPage()
+        {
+            Page p = new TeamsRanking();
+            p.BindingContext = new TeamsRankingViewModel();
+            App.Current.MainPage.Navigation.PushAsync(p);
+        }
+        #endregion
+
         #region LoadGames
         public async Task LoadGames()
         {
@@ -396,10 +418,5 @@ namespace BasketballGameApp.ViewModels
         }
         #endregion
 
-    }
-    public class Menu
-    {
-        public string Title { get; set; }
-        public string Icon { get; set; }
     }
 }

@@ -35,6 +35,12 @@
                                      HorizontalOptions="EndAndExpand" Margin="0,5,0,0" Command="{Binding NavigateToSelectGameToEnterScoreCommand}"></ImageButton>
                 <ImageButton IsVisible="{Binding IsUserWithTeam}" Source="viewTeamMembers.png" BackgroundColor="Transparent" WidthRequest="20" HeightRequest="20"
                                      HorizontalOptions="EndAndExpand" Margin="0,5,0,0" Command="{Binding NavigateToViewTeamMembersCommand}"></ImageButton>
+                <ImageButton Source="playersRanking.png" BackgroundColor="Transparent" WidthRequest="20" HeightRequest="20"
+                                     HorizontalOptions="EndAndExpand" Margin="0,5,0,0" Command="{Binding NavigateToPlayersRankingCommand}"></ImageButton>
+                <ImageButton Source="teamsRanking.png" BackgroundColor="Transparent" WidthRequest="20" HeightRequest="20"
+                                     HorizontalOptions="EndAndExpand" Margin="0,5,0,0" Command="{Binding NavigateToTeamsRankingCommand}"></ImageButton>
+                
+                
                 <!-- <Button IsVisible="{Binding IsLoggedIn}" VerticalOptions="Start" Style="{StaticResource Button}" Command="{Binding NavigateToLogOutPageCommand}">
                     <Button.ImageSource>
                         <FileImageSource File="logout"/>
