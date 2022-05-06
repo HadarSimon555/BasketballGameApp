@@ -11842,7 +11842,10 @@ namespace BasketballGameApp.Droid
 			public const int viewRequestToJoinTeam = 2131165345;
 			
 			// aapt resource value: 0x7F0700A2
-			public const int x = 2131165346;
+			public const int viewTeamMembers = 2131165346;
+			
+			// aapt resource value: 0x7F0700A3
+			public const int x = 2131165347;
 			
 			static Drawable()
 			{

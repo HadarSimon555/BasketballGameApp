@@ -114,8 +114,6 @@ namespace BasketballGameApp.ViewModels
         public ApproveRequestsToSetGameViewModel()
         {
             ObservableCollectionRequestsGame = new ObservableCollection<RequestGame>();
-            CanToApproveRequests = true;
-            CanNotToApproveRequests = false;
             ApproveCommand = new Command<RequestGame>(ApproveRequest);
             DeleteCommand = new Command<RequestGame>(DeleteRequest);
         }
@@ -128,7 +126,8 @@ namespace BasketballGameApp.ViewModels
             App theApp = (App)App.Current;
 
             listRequestsGame = await proxy.GetRequestsGameAsync(theApp.CurrentCoach.Team);
-
+            CanToApproveRequests = true;
+            CanNotToApproveRequests = false;
             if (listRequestsGame != null)
             {
                 this.ObservableCollectionRequestsGame.Clear();

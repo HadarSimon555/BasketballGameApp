@@ -156,11 +156,11 @@ namespace BasketballGameApp.ViewModels
             NavigateToSelectGameToEnterScoreCommand = new Command(NavigateToSelectGameToEnterScorePage);
             NavigateToViewTeamMembersCommand = new Command(NavigateToViewTeamMembersPage);
             observableCollectionGames = new ObservableCollection<Game>();
-            App theApp = (App)App.Current;
+            
             BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
 
             // אם המשתמש לא מחובר
-            if (theApp.CurrentUser == null)
+            if (TheApp.CurrentUser == null)
             {
                 IsLoggedIn = !true;
                 IsNotLoggedIn = true;
@@ -171,13 +171,13 @@ namespace BasketballGameApp.ViewModels
                 IsNotLoggedIn = false;
 
                 // האם למשתמש יש קבוצה
-                if ((theApp.CurrentCoach != null && theApp.CurrentCoach.Team != null) || (theApp.CurrentPlayer.Team != null && theApp.CurrentPlayer.Team != null))
+                if ((TheApp.CurrentCoach != null && TheApp.CurrentCoach.Team != null) || (TheApp.CurrentPlayer != null && TheApp.CurrentPlayer.Team != null))
                     IsUserWithTeam = true;
                 else
                     IsUserWithTeam = false;
 
                 // האם המשתמש הוא מאמן ללא קבוצה
-                if (theApp.CurrentCoach != null && TheApp.CurrentCoach.Team == null)
+                if (TheApp.CurrentCoach != null && TheApp.CurrentCoach.Team == null)
                 {
                     IsCoachWithoutTeam = true;
                     IsPlayerWithoutRequest = false;
@@ -196,7 +196,7 @@ namespace BasketballGameApp.ViewModels
                 }
 
                 // האם המשתמש הוא מאמן עם קבוצה
-                else if (theApp.CurrentCoach != null && TheApp.CurrentCoach.Team != null)//לבדוק האם הקבוצה כבר מלאה
+                else if (TheApp.CurrentCoach != null && TheApp.CurrentCoach.Team != null)//לבדוק האם הקבוצה כבר מלאה
                 {
                     IsCoachWithoutTeam = false;
                     IsPlayerWithoutRequest = false;
@@ -366,8 +366,13 @@ namespace BasketballGameApp.ViewModels
         public ICommand NavigateToViewTeamMembersCommand { protected set; get; }
         public void NavigateToViewTeamMembersPage()
         {
+            Team team = new Team();
+            if (TheApp.CurrentCoach != null)
+                team = TheApp.CurrentCoach.Team;
+            else
+                team = TheApp.CurrentPlayer.Team;
             Page p = new ViewTeamMembers();
-            p.BindingContext = new ViewTeamMembersViewModel();
+            p.BindingContext = new ViewTeamMembersViewModel(team);
             App.Current.MainPage.Navigation.PushAsync(p);
         }
         #endregion

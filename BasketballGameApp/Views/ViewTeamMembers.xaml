@@ -1,12 +1,70 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BasketballGameApp.Views.ViewTeamMembers">
+             xmlns:local="clr-namespace:BasketballGameApp.ViewModels"
+             x:Class="BasketballGameApp.Views.ViewTeamMembers"
+             xmlns:models="clr-namespace:BasketballGameApp.Models"
+             NavigationPage.HasNavigationBar="True"
+             FlowDirection="RightToLeft" 
+             Title="צפייה בחברי הקבוצה"
+             x:DataType="local:ViewTeamMembersViewModel">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Style="{StaticResource Stack}" Padding="0">
+            <Grid Margin="0,0,0,0" Padding="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="150"/>
+                </Grid.RowDefinitions>
+                <Image Grid.Column="0" Aspect="AspectFill" Source="basketballPic" Opacity="0.6"></Image>
+                <Label Text="צפייה בחברי הקבוצה" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Style="{StaticResource FormTitle}"></Label>
+            </Grid>
+
+            <Grid Padding="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label HorizontalOptions="StartAndExpand" Text="שם המאמן: " Grid.Row="0" />
+                <Label HorizontalOptions="EndAndExpand" Text="{Binding SelectedTeam.Coach.User.Name}" Grid.Row="0" />
+                <Label HorizontalOptions="StartAndExpand" Text="תאריך לידה: " Grid.Row="1" />
+                <Label HorizontalOptions="EndAndExpand" Text="{Binding SelectedTeam.Coach.User.BirthDate}" Grid.Row="1" />
+                <Label HorizontalOptions="StartAndExpand" Text="מין: " Grid.Row="2" />
+                <Label HorizontalOptions="EndAndExpand" Text="{Binding SelectedTeam.Coach.User.Gender}" Grid.Row="2" />
+            </Grid>
+
+            <ScrollView>
+                <CollectionView x:Name="collectionView" EmptyView="אין כרגע חברים בקבוצה זו!" ItemsSource="{Binding SelectedTeam.Players}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Player">
+                            <Grid Padding="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Label HorizontalOptions="StartAndExpand" Text="שם השחקן: " Grid.Row="0" />
+                                <Label HorizontalOptions="EndAndExpand" Text="{Binding User.Name}" Grid.Row="0" />
+                                <Label HorizontalOptions="StartAndExpand" Text="גובה: " Grid.Row="1" />
+                                <Label HorizontalOptions="EndAndExpand" Text="{Binding Height}" Grid.Row="1" />
+                                <Label HorizontalOptions="StartAndExpand" Text="תאריך לידה: " Grid.Row="2" />
+                                <Label HorizontalOptions="EndAndExpand" Text="{Binding User.BirthDate}" Grid.Row="2" />
+                                <Label HorizontalOptions="StartAndExpand" Text="מין: " Grid.Row="3" />
+                                <Label HorizontalOptions="EndAndExpand" Text="{Binding User.Gender}" Grid.Row="3" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
