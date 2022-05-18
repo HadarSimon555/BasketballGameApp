@@ -21,6 +21,7 @@ namespace BasketballGameApp.Views
 
         protected override async void OnAppearing()
         {
+            base.OnAppearing();
             if (this.BindingContext != null)
                 await ((ViewRequestToJoinTeamViewModel)this.BindingContext).LoadMyRequestToJoinTeam();
         }

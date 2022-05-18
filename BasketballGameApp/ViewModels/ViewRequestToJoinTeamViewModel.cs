@@ -60,12 +60,9 @@ namespace BasketballGameApp.ViewModels
             BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
             App theApp = (App)App.Current;
 
-            myRequestToJoinTeam = await proxy.GetMyRequestToJoinTeamAsync(theApp.CurrentPlayer);
+           MyRequestToJoinTeam = await proxy.GetMyRequestToJoinTeamAsync(theApp.CurrentPlayer);
 
-            if (myRequestToJoinTeam != null)
-            {
-                MyRequestToJoinTeam = myRequestToJoinTeam;
-            }
+           
         }
         #endregion
     }

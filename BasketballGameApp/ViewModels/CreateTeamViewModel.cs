@@ -221,14 +221,16 @@ namespace BasketballGameApp.ViewModels
                     ServerStatus = "שומר נתונים...";
 
                     //close the message and add contact windows!
-                    await App.Current.MainPage.Navigation.PopAsync();
+                  //  await App.Current.MainPage.Navigation.PopAsync();
                     await App.Current.MainPage.Navigation.PopModalAsync();
 
                     theApp = (App)App.Current;
                     theApp.CurrentCoach.Team = team;
-                    Page page = new GamesScores();
-                    await App.Current.MainPage.Navigation.PushAsync(page);
+                    Page page = new GamesScores(); 
                     await App.Current.MainPage.DisplayAlert("יצירת קבוצה", "יצירת הקבוצה בוצעה בהצלחה", "אישור", FlowDirection.RightToLeft);
+                    await App.Current.MainPage.Navigation.PopAsync();
+                  //  await App.Current.MainPage.Navigation.PushAsync(page);
+                  
                 }
             }
             else

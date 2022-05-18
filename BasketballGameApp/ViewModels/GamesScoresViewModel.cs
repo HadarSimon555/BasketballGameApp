@@ -160,8 +160,15 @@ namespace BasketballGameApp.ViewModels
             observableCollectionGames = new ObservableCollection<Game>();
             
             BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
-
+            InitButtons();
             // אם המשתמש לא מחובר
+           
+            //add server status page
+            //LoadGames();
+        }
+        #endregion
+        public void InitButtons()
+        {
             if (TheApp.CurrentUser == null)
             {
                 IsLoggedIn = false;
@@ -231,11 +238,7 @@ namespace BasketballGameApp.ViewModels
                     HaveMinPlayers = false;
                 }
             }
-            //add server status page
-            //LoadGames();
         }
-        #endregion
-
         #region ServerStatus
         private string serverStatus;
         public string ServerStatus

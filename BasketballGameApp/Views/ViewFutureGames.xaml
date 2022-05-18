@@ -21,7 +21,7 @@
                 <Label Text="צפייה בבקשה להצטרפות לקבוצה" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Style="{StaticResource FormTitle}"></Label>
             </Grid>
 
-            <Picker SelectedIndex="{Binding LoadType}">
+            <Picker SelectedIndex="{Binding LoadType}" >
                 <Picker.Items>
                     <x:String >"משחקים עתידיים"</x:String>
                     <x:String>"משחקים המתקיימים היום"</x:String>

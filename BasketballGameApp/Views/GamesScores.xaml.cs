@@ -17,15 +17,20 @@ namespace BasketballGameApp.Views
         private GamesScoresViewModel vm;
         public GamesScores()
         {
-            InitializeComponent();
             vm = new GamesScoresViewModel();
             this.BindingContext = vm;
+            InitializeComponent();
+           
         }
 
         protected override async void OnAppearing()
         {
+            base.OnAppearing();
             if (this.BindingContext != null)
+            {
                 await vm.LoadGames();
+                vm.InitButtons();
+            }
         }
 
         private void ShowMenu(object sender, EventArgs e)
