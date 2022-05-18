@@ -29,6 +29,7 @@ namespace BasketballGameApp.Views
             if (this.BindingContext != null)
             {
                 await vm.LoadGames();
+
                 vm.InitButtons();
             }
         }
