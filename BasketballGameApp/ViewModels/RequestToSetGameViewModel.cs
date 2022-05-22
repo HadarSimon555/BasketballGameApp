@@ -90,6 +90,7 @@ namespace BasketballGameApp.ViewModels
 
             if (listTeams != null)
             {
+                ObservableCollectionTeams.Clear();
                 foreach (Team item in listTeams)
                 {
                     if (item.Coach.Id != theApp.CurrentCoach.Id)

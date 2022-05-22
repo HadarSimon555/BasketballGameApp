@@ -13,14 +13,14 @@ namespace BasketballGameApp.ViewModels
         #region Constructor
         public PlayerCardViewModel()
         {
-            currentPlayer = new PlayerOnTeamForSeason();
-            //add server status page
-            LoadPlayer();
+            BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
+            App cur = (App)Application.Current;
+            CurrentPlayer = cur.CurrentPlayer;
         }
         #endregion
 
-        private PlayerOnTeamForSeason currentPlayer;
-        public PlayerOnTeamForSeason CurrentPlayer
+        private Player currentPlayer;
+        public Player CurrentPlayer
         {
             get
             {
@@ -35,13 +35,6 @@ namespace BasketballGameApp.ViewModels
                     OnPropertyChanged("CurrentPlayer");
                 }
             }
-        }
-
-        public async void LoadPlayer()
-        {
-            BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
-            App cur = (App)Application.Current;
-            currentPlayer = await proxy.GetPlayerOnTeamForSeasonAsync(cur.CurrentUser.Id);
         }
     }
 }

@@ -95,6 +95,19 @@ namespace BasketballGameApp.ViewModels
         }
         #endregion
 
+        #region IsPlayer
+        private bool isPlayer;
+        public bool IsPlayer
+        {
+            get => isPlayer;
+            set
+            {
+                isPlayer = value;
+                OnPropertyChanged("IsPlayer");
+            }
+        }
+        #endregion
+
         #region HaveMinPlayers
         private bool haveMinPlayers;
         public bool HaveMinPlayers
@@ -157,6 +170,7 @@ namespace BasketballGameApp.ViewModels
             NavigateToViewTeamMembersCommand = new Command(NavigateToViewTeamMembersPage);
             NavigateToPlayersRankingCommand = new Command(NavigateToPlayersRankingPage);
             NavigateToTeamsRankingCommand = new Command(NavigateToTeamsRankingPage);
+            NavigateToPlayerCardCommand = new Command(NavigateToPlayerCardPage);
             observableCollectionGames = new ObservableCollection<Game>();
             
             BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
@@ -184,6 +198,11 @@ namespace BasketballGameApp.ViewModels
                     IsUserWithTeam = true;
                 else
                     IsUserWithTeam = false;
+
+                if (TheApp.CurrentPlayer != null)
+                    IsPlayer = true;
+                else
+                    IsPlayer = false;
 
                 // האם המשתמש הוא מאמן ללא קבוצה
                 if (TheApp.CurrentCoach != null && TheApp.CurrentCoach.Team == null)
@@ -398,6 +417,16 @@ namespace BasketballGameApp.ViewModels
         {
             Page p = new TeamsRanking();
             p.BindingContext = new TeamsRankingViewModel();
+            App.Current.MainPage.Navigation.PushAsync(p);
+        }
+        #endregion
+
+        #region NavigateToPlayerCardPage
+        public ICommand NavigateToPlayerCardCommand { protected set; get; }
+        public void NavigateToPlayerCardPage()
+        {
+            Page p = new PlayerCard();
+            p.BindingContext = new PlayerCardViewModel();
             App.Current.MainPage.Navigation.PushAsync(p);
         }
         #endregion
