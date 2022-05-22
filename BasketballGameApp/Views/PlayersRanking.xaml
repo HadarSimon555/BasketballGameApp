@@ -8,6 +8,7 @@
              FlowDirection="RightToLeft" 
              Title="רשימת דירוגי השחקנים"
              x:DataType="local:PlayersRankingViewModel">
+
     <ContentPage.Content>
         <StackLayout Style="{StaticResource Stack}" Padding="0">
             <Grid Margin="0,0,0,0" Padding="0">
@@ -20,6 +21,25 @@
                 <Image Grid.Column="0" Aspect="AspectFill" Source="basketballPic" Opacity="0.6"></Image>
                 <Label Text="רשימת דירוגי השחקנים" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Style="{StaticResource FormTitle}"></Label>
             </Grid>
+
+            <ScrollView>
+                <CollectionView x:Name="collectionView" EmptyView="לא קיימים כרגע דירוגי שחקנים באתר!" ItemsSource="{Binding ObservableCollectionPlayers}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Player">
+                            <Grid Padding="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Label HorizontalOptions="StartAndExpand"  Text="שם השחקן: " Grid.Row="0" />
+                                <Label HorizontalOptions="EndAndExpand" Text="{Binding User.Name}" Grid.Row="0" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -8,6 +8,7 @@
              FlowDirection="RightToLeft" 
              Title="צפייה במשחקים עתידיים"
              x:DataType="local:ViewFutureGamesViewModel">
+    
     <ContentPage.Content>
         <StackLayout Style="{StaticResource Stack}" Padding="0">
             <Grid Margin="0,0,0,0" Padding="0">
@@ -29,7 +30,7 @@
             </Picker>
 
             <ScrollView>
-                <CollectionView x:Name="collectionView" EmptyView="לא קיימים כרגע משחקים עתידיים באתר!" ItemsSource="{Binding ObservableCollectionGames}" SelectedItem="">
+                <CollectionView x:Name="collectionView" EmptyView="לא קיימים כרגע משחקים עתידיים באתר!" ItemsSource="{Binding ObservableCollectionGames}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:Game">
                             <Grid Padding="10">
