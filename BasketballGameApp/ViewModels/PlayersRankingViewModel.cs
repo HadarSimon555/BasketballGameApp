@@ -16,7 +16,7 @@ namespace BasketballGameApp.ViewModels
     class PlayersRankingViewModel : BaseViewModel
     {
         #region ObservableCollectionPlayers
-        private List<Player> listPlayers;
+        private IDictionary<Player, double> dictionaryPlayers;
         private ObservableCollection<Player> observableCollectionPlayers;
         public ObservableCollection<Player> ObservableCollectionPlayers
         {
@@ -30,6 +30,25 @@ namespace BasketballGameApp.ViewModels
                 {
                     this.observableCollectionPlayers = value;
                     OnPropertyChanged("ObservableCollectionPlayers");
+                }
+            }
+        }
+        #endregion
+
+        #region ObservableCollectionValues
+        private ObservableCollection<double> observableCollectionValues;
+        public ObservableCollection<double> ObservableCollectionValues
+        {
+            get
+            {
+                return this.observableCollectionValues;
+            }
+            set
+            {
+                if (this.observableCollectionValues != value)
+                {
+                    this.observableCollectionValues = value;
+                    OnPropertyChanged("ObservableCollectionValues");
                 }
             }
         }
@@ -61,12 +80,14 @@ namespace BasketballGameApp.ViewModels
             BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
             App theApp = (App)App.Current;
 
-            listPlayers = await proxy.GetPlayersAsync(null);
+            dictionaryPlayers = await proxy.GetPlayersRankingAsync();
 
-            if (listPlayers != null)
+            if (dictionaryPlayers != null)
             {
                 this.ObservableCollectionPlayers.Clear();
-                ObservableCollectionPlayers = new ObservableCollection<Player>(listPlayers);
+                this.ObservableCollectionValues.Clear();
+                ObservableCollectionPlayers = new ObservableCollection<Player>(dictionaryPlayers.Keys);
+                ObservableCollectionValues = new ObservableCollection<double>(dictionaryPlayers.Values);
             }
         }
         #endregion

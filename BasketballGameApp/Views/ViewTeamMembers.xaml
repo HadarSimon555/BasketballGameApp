@@ -26,9 +26,9 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="50" />
-                    <RowDefinition Height="50" />
-                    <RowDefinition Height="50" />
+                    <RowDefinition Height="20" />
+                    <RowDefinition Height="20" />
+                    <RowDefinition Height="20" />
                 </Grid.RowDefinitions>
                 <Label HorizontalOptions="StartAndExpand" Text="שם המאמן: " Grid.Row="0" />
                 <Label HorizontalOptions="EndAndExpand" Text="{Binding SelectedTeam.Coach.User.Name}" Grid.Row="0" />
