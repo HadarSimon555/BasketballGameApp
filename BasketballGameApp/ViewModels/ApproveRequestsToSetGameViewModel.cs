@@ -81,12 +81,12 @@ namespace BasketballGameApp.ViewModels
                         if (requestType == 0)
                         {
                             CanToApproveRequests = true;
-                            canNotToApproveRequests = false;
+                           CanNotToApproveRequests = false;
                             ObservableCollectionRequestsGame = new ObservableCollection<RequestGame>(listRequestsGame.Where(r => r.AwayTeamId == ((App)App.Current).CurrentCoach.TeamId).ToList());
                         }
                         else
                         {
-                            canNotToApproveRequests = true;
+                            CanNotToApproveRequests = true;
                             CanToApproveRequests = false;
                             ObservableCollectionRequestsGame = new ObservableCollection<RequestGame>(listRequestsGame.Where(r => r.CoachHomeTeamId == ((App)App.Current).CurrentCoach.Id).ToList());
                         }

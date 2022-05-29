@@ -27,9 +27,14 @@
                     <x:String>"בקשות ששלחתי"</x:String>
                 </Picker.Items>
             </Picker>
-            <ScrollView>
+            <!--<ScrollView>-->
                 <StackLayout>
-                <CollectionView x:Name="collectionView" IsVisible="{Binding CanToApproveRequests}" EmptyView="אין כרגע בקשות לקביעת משחק!" ItemsSource="{Binding ObservableCollectionRequestsGame}">
+                <CollectionView x:Name="collectionView" IsVisible="{Binding CanToApproveRequests}"  ItemsSource="{Binding ObservableCollectionRequestsGame}">
+                    <CollectionView.EmptyView>
+                        <StackLayout IsVisible="{Binding CanToApproveRequests}">
+                            <Label Text="אין כרגע בקשות לקביעת משחק!"/>
+                        </StackLayout>
+                    </CollectionView.EmptyView>
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:RequestGame">
                                 <SwipeView>
@@ -72,7 +77,12 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
                 
-                <CollectionView x:Name="collectionView2" IsVisible="{Binding CanNotToApproveRequests}" EmptyView="לא שלחת בקשות לקביעת משחק!" ItemsSource="{Binding ObservableCollectionRequestsGame}">
+                <CollectionView x:Name="collectionView2" IsVisible="{Binding CanNotToApproveRequests}"  ItemsSource="{Binding ObservableCollectionRequestsGame}">
+                    <CollectionView.EmptyView>
+                        <StackLayout IsVisible="{Binding CanNotToApproveRequests}">
+                            <Label Text="לא שלחת בקשות לקביעת משחק!"/>
+                        </StackLayout>
+                    </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:RequestGame">
                         <Grid Padding="10">
@@ -98,7 +108,7 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
                 </StackLayout>
-            </ScrollView>
+            <!--</ScrollView>-->
 
         </StackLayout>
     </ContentPage.Content>
