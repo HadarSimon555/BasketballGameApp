@@ -56,7 +56,37 @@ namespace BasketballGameApp.ViewModels
             set
             {
                 position = value;
+                ValidatePosition();
                 OnPropertyChanged("Position");
+            }
+        }
+        private string positionError;
+
+        public string PositionError
+        {
+            get => positionError;
+            set
+            {
+                positionError = value;
+                OnPropertyChanged("PositionError");
+            }
+        }
+
+        private void ValidatePosition()
+        {
+            this.ShowPositionError = string.IsNullOrEmpty(Position);
+            if (this.ShowPositionError)
+                this.PositionError = ERROR_MESSAGES.REQUIRED_FIELD;
+        }
+
+        private bool showPositionError;
+        public bool ShowPositionError
+        {
+            get => showPositionError;
+            set
+            {
+                showPositionError = value;
+                OnPropertyChanged("ShowPositionError");
             }
         }
         #endregion
@@ -110,6 +140,20 @@ namespace BasketballGameApp.ViewModels
         }
         #endregion
 
+        #region ValidateForm
+        //This function validate the entire form upon submit!
+        private bool ValidateForm()
+        {
+            //Validate all fields first
+            ValidatePosition();
+
+            //check if any validation failed
+            if (ShowPositionError)
+                return false;
+            return true;
+        }
+        #endregion
+
         #region SaveData
         //This event is fired after the new contact is generated in the system so it can be added to the list of contacts
         //public event Action<Player, Player> PlayerUpdatedEvent;
@@ -118,45 +162,50 @@ namespace BasketballGameApp.ViewModels
         public Command SaveDataCommand { protected set; get; }
         private async void SaveData()
         {
-            requestGame = new RequestGame
+            if (ValidateForm())
             {
-                CoachHomeTeam = theApp.CurrentCoach,
-                AwayTeam = SelectedTeam,
-                Time = this.Time,
-                Date = this.Date,
-                Position = this.Position
-            };
-
-            ServerStatus = "מתחבר לשרת...";
-            await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatusPage(this));
-            BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
-
-            bool HasGame = await proxy.HasGameAsync(SelectedTeam.Id, date);
-
-            if (!HasGame)
-            {
-                bool addRequest = await proxy.AddRequestToGameAsync(requestGame);
-                if (!addRequest)
+                requestGame = new RequestGame
                 {
-                    await App.Current.MainPage.DisplayAlert("שגיאה", "הגשת הבקשה לקביעת משחק נכשלה!", "בסדר");
-                    await App.Current.MainPage.Navigation.PopModalAsync();
+                    CoachHomeTeam = theApp.CurrentCoach,
+                    AwayTeam = SelectedTeam,
+                    Time = this.Time,
+                    Date = this.Date,
+                    Position = this.Position
+                };
+
+                ServerStatus = "מתחבר לשרת...";
+                await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatusPage(this));
+                BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
+
+                bool HasGame = await proxy.HasGameAsync(theApp.CurrentCoach.Team.Id,SelectedTeam.Id, date);
+
+                if (!HasGame)
+                {
+                    bool addRequest = await proxy.AddRequestToGameAsync(requestGame);
+                    if (!addRequest)
+                    {
+                        await App.Current.MainPage.DisplayAlert("שגיאה", "הגשת הבקשה לקביעת משחק נכשלה!", "בסדר");
+                        await App.Current.MainPage.Navigation.PopModalAsync();
+                    }
+                    else
+                    {
+                        ServerStatus = "קורא נתונים...";
+                        theApp.CurrentCoach.RequestGames.Add(requestGame);
+                        await App.Current.MainPage.DisplayAlert("שליחת בקשה למשחק", "הגשת הבקשה לקביעת משחק נשלחה למאמן הקבוצה המתחרה!", "אישור", FlowDirection.RightToLeft);
+                        await App.Current.MainPage.Navigation.PopModalAsync();
+                        NavigationPage p = new NavigationPage(new GamesScores());
+                        NavigationPage.SetHasNavigationBar(p, false);
+                        await App.Current.MainPage.Navigation.PushAsync(p);
+                    }
                 }
                 else
                 {
-                    ServerStatus = "קורא נתונים...";
-                    theApp.CurrentCoach.RequestGames.Add(requestGame);
-                    await App.Current.MainPage.DisplayAlert("שליחת בקשה למשחק", "הגשת הבקשה לקביעת משחק נשלחה למאמן הקבוצה המתחרה!", "אישור", FlowDirection.RightToLeft);
+                    await App.Current.MainPage.DisplayAlert("שגיאה", "לאחת מהקבוצות כבר יש משחק בתאריך זה, בחר תאריך חדש לקביעת משחק!", "אישור", FlowDirection.RightToLeft);
                     await App.Current.MainPage.Navigation.PopModalAsync();
-                    NavigationPage p = new NavigationPage(new GamesScores());
-                    NavigationPage.SetHasNavigationBar(p, false);
-                    await App.Current.MainPage.Navigation.PushAsync(p);
                 }
             }
             else
-            {
-                await App.Current.MainPage.DisplayAlert("שגיאה", "לאחת מהקבוצות כבר יש משחק בתאריך זה, בחר תאריך חדש לקביעת משחק!", "אישור", FlowDirection.RightToLeft);
-                await App.Current.MainPage.Navigation.PopModalAsync();
-            }
+                await App.Current.MainPage.DisplayAlert("שמירת נתונים", " יש בעיה עם הנתונים בדוק ונסה שוב", "אישור", FlowDirection.RightToLeft);
         }
         #endregion
     }

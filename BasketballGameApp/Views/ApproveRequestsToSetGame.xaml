@@ -29,10 +29,10 @@
             </Picker>
             <!--<ScrollView>-->
                 <StackLayout>
-                <CollectionView x:Name="collectionView" IsVisible="{Binding CanToApproveRequests}"  ItemsSource="{Binding ObservableCollectionRequestsGame}">
+                <CollectionView x:Name="collectionView" IsVisible="{Binding CanToApproveRequests}" ItemsSource="{Binding ObservableCollectionRequestsGame}">
                     <CollectionView.EmptyView>
                         <StackLayout IsVisible="{Binding CanToApproveRequests}">
-                            <Label Text="אין כרגע בקשות לקביעת משחק!"/>
+                            <Label HorizontalOptions="CenterAndExpand" Text="אין כרגע בקשות לקביעת משחק!"/>
                         </StackLayout>
                     </CollectionView.EmptyView>
                     <CollectionView.ItemTemplate>
@@ -62,6 +62,7 @@
                                         <RowDefinition Height="*" />
                                         <RowDefinition Height="*" />
                                         <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
                                     </Grid.RowDefinitions>
                                     <Label HorizontalOptions="StartAndExpand" Text="שם הקבוצה: " Grid.Row="0" />
                                     <Label HorizontalOptions="EndAndExpand" Text="{Binding CoachHomeTeam.Team.Name}" Grid.Row="0" />
@@ -80,7 +81,7 @@
                 <CollectionView x:Name="collectionView2" IsVisible="{Binding CanNotToApproveRequests}"  ItemsSource="{Binding ObservableCollectionRequestsGame}">
                     <CollectionView.EmptyView>
                         <StackLayout IsVisible="{Binding CanNotToApproveRequests}">
-                            <Label Text="לא שלחת בקשות לקביעת משחק!"/>
+                            <Label HorizontalOptions="CenterAndExpand" Text="לא שלחת בקשות לקביעת משחק!"/>
                         </StackLayout>
                     </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
@@ -94,7 +95,8 @@
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="*" />
-                            </Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
                             <Label Text="שם הקבוצה: " Grid.Row="0" />
                             <Label Text="{Binding AwayTeam.Name}" Grid.Row="0" />
                             <Label Text="תאריך" Grid.Row="1" />

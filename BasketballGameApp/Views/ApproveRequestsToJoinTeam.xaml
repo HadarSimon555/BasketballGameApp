@@ -51,7 +51,8 @@
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="*" />
-                                </Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
                                 <Label HorizontalOptions="StartAndExpand" Text="שם השחקן: " Grid.Row="0" />
                                 <Label HorizontalOptions="EndAndExpand" Text="{Binding Player.User.Name}" Grid.Row="0" />
                                 <Label HorizontalOptions="StartAndExpand" Text="גובה: " Grid.Row="1" />

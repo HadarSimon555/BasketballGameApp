@@ -75,6 +75,7 @@ namespace BasketballGameApp.ViewModels
             if (user == null)
             {
                 await App.Current.MainPage.DisplayAlert("שגיאה", "התחברות נכשלה, בדוק אימייל וסיסמה ונסה שוב", "בסדר");
+                await App.Current.MainPage.Navigation.PopModalAsync();
             }
             else
             {

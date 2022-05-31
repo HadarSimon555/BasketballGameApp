@@ -6,7 +6,7 @@
              xmlns:models="clr-namespace:BasketballGameApp.Models"
              NavigationPage.HasNavigationBar="True"
              FlowDirection="RightToLeft" 
-             Title="שליחת בקשה לקביעת משחק"
+             Title="בחירת קבוצה לקביעת משחק"
              x:DataType="local:RequestToSetGameViewModel">
     
     <ContentPage.Content>
@@ -20,7 +20,7 @@
                     <RowDefinition Height="150"/>
                 </Grid.RowDefinitions>
                 <Image Grid.Column="0" Aspect="AspectFill" Source="basketballPic" Opacity="0.6"></Image>
-                <Label Text="שליחת בקשה לקביעת משחק" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Style="{StaticResource FormTitle}"></Label>
+                <Label Text="בחירת קבוצה לקביעת משחק" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Style="{StaticResource FormTitle}"></Label>
             </Grid>
 
             <ScrollView>

@@ -6,7 +6,7 @@
              xmlns:models="clr-namespace:BasketballGameApp.Models"
              NavigationPage.HasNavigationBar="True"
              FlowDirection="RightToLeft" 
-             Title="בחירת קבוצה לקביעת משחק"
+             Title="שליחת בקשה לקביעת משחק"
              x:DataType="local:SendRequestToSetGameViewModel">
 
     <ContentPage.Content>
@@ -19,7 +19,7 @@
                     <RowDefinition Height="150"/>
                 </Grid.RowDefinitions>
                 <Image Grid.Column="0" Aspect="AspectFill" Source="basketballPic" Opacity="0.6"></Image>
-                <Label Text="בחירת קבוצה לקביעת משחק" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Style="{StaticResource FormTitle}"></Label>
+                <Label Text="שליחת בקשה לקביעת משחק" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Style="{StaticResource FormTitle}"></Label>
             </Grid>
 
             <ScrollView>
@@ -62,6 +62,7 @@
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
                                 <Label Text="מיקום" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
+                                <Label Text="{Binding PositionError}" IsVisible="{Binding ShowPositionError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
                             </Grid>
                             <Entry Placeholder="הכנס מיקום" MaxLength="30" Text="{Binding Position}" Style="{StaticResource entry}" />
                         </StackLayout>
