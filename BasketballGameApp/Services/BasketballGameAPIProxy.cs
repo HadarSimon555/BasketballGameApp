@@ -602,7 +602,7 @@ namespace BasketballGameApp.Services
         {
             try
             {
-                HttpResponseMessage response = await client.GetAsync($"{this.baseUri}/HasGame?teamId1={teamId1}&&teamId2={teamId2}&& date={date}");
+                HttpResponseMessage response = await client.GetAsync($"{this.baseUri}/HasGame?teamId1={teamId1}&&teamId2={teamId2}&&date={date}");
                 if (response.IsSuccessStatusCode)
                 {
                     return true;

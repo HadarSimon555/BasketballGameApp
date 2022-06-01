@@ -31,11 +31,11 @@
                     <RowDefinition Height="20" />
                 </Grid.RowDefinitions>
                 <Label HorizontalOptions="StartAndExpand" Text="שם המאמן: " Grid.Row="0" />
-                <Label HorizontalOptions="EndAndExpand" Text="{Binding SelectedTeam.Coach.User.Name}" Grid.Row="0" />
+                <Label HorizontalOptions="EndAndExpand" Text="{Binding Coach.User.Name}" Grid.Row="0" />
                 <Label HorizontalOptions="StartAndExpand" Text="תאריך לידה: " Grid.Row="1" />
-                <Label HorizontalOptions="EndAndExpand" Text="{Binding SelectedTeam.Coach.User.BirthDate}" Grid.Row="1" />
+                <Label HorizontalOptions="EndAndExpand" Text="{Binding Coach.User.BirthDate}" Grid.Row="1" />
                 <Label HorizontalOptions="StartAndExpand" Text="מין: " Grid.Row="2" />
-                <Label HorizontalOptions="EndAndExpand" Text="{Binding SelectedTeam.Coach.User.Gender}" Grid.Row="2" />
+                <Label HorizontalOptions="EndAndExpand" Text="{Binding Coach.User.Gender}" Grid.Row="2" />
             </Grid>
 
             <ScrollView>

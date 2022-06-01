@@ -396,7 +396,7 @@ namespace BasketballGameApp.ViewModels
             else
                 team = TheApp.CurrentPlayer.Team;
             Page p = new ViewTeamMembers();
-            p.BindingContext = new ViewTeamMembersViewModel(team);
+            p.BindingContext = new ViewTeamMembersViewModel();
             App.Current.MainPage.Navigation.PushAsync(p);
         }
         #endregion

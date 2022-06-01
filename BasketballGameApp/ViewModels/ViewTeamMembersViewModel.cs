@@ -17,6 +17,18 @@ namespace BasketballGameApp.ViewModels
     {
         #region SelectedTeam
         private Team selectedTeam;
+        private Coach coach;
+        public Coach Coach { get => coach; set
+            {
+                if (coach != value)
+                {
+                    coach = value;
+                    OnPropertyChanged("Coach");
+                }
+            } }
+
+        private App CurrentApp { get; set; }            
+      
         public Team SelectedTeam
         {
             get
@@ -51,6 +63,22 @@ namespace BasketballGameApp.ViewModels
         public ViewTeamMembersViewModel(Team team)
         {
             SelectedTeam = team;
+            CurrentApp = (App)Application.Current;
+        }
+
+        public ViewTeamMembersViewModel()
+        {
+            CurrentApp = (App)Application.Current;
+            if (CurrentApp.CurrentPlayer != null)
+            {
+                SelectedTeam = CurrentApp.CurrentPlayer.Team;
+                Coach = SelectedTeam.Coach;
+            }
+            else
+            {
+                SelectedTeam = CurrentApp.CurrentCoach.Team;
+                Coach = CurrentApp.CurrentCoach;
+            }
         }
         #endregion
     }
