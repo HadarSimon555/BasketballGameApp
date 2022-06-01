@@ -10,45 +10,27 @@ using BasketballGameApp.Models;
 using System.Collections.ObjectModel;
 using System.Linq;
 using BasketballGameApp.Views;
+using BasketballGameApp.DTO;
 
 namespace BasketballGameApp.ViewModels
 {
     class PlayersRankingViewModel : BaseViewModel
     {
-        #region ObservableCollectionPlayers
-        private IDictionary<Player, double> dictionaryPlayers;
-        private ObservableCollection<Player> observableCollectionPlayers;
-        public ObservableCollection<Player> ObservableCollectionPlayers
+        #region ObservableCollectionGames
+        private List<PlayerStatistics> listPlayerStatistics;
+        private ObservableCollection<PlayerStatistics> observableCollectionPlayerStatistics;
+        public ObservableCollection<PlayerStatistics> ObservableCollectionPlayerStatistics
         {
             get
             {
-                return this.observableCollectionPlayers;
+                return this.observableCollectionPlayerStatistics;
             }
             set
             {
-                if (this.observableCollectionPlayers != value)
+                if (this.observableCollectionPlayerStatistics != value)
                 {
-                    this.observableCollectionPlayers = value;
-                    OnPropertyChanged("ObservableCollectionPlayers");
-                }
-            }
-        }
-        #endregion
-
-        #region ObservableCollectionValues
-        private ObservableCollection<double> observableCollectionValues;
-        public ObservableCollection<double> ObservableCollectionValues
-        {
-            get
-            {
-                return this.observableCollectionValues;
-            }
-            set
-            {
-                if (this.observableCollectionValues != value)
-                {
-                    this.observableCollectionValues = value;
-                    OnPropertyChanged("ObservableCollectionValues");
+                    this.observableCollectionPlayerStatistics = value;
+                    OnPropertyChanged("ObservableCollectionPlayerStatistics");
                 }
             }
         }
@@ -70,7 +52,7 @@ namespace BasketballGameApp.ViewModels
         #region Constructor
         public PlayersRankingViewModel()
         {
-            observableCollectionPlayers = new ObservableCollection<Player>();
+            observableCollectionPlayerStatistics = new ObservableCollection<PlayerStatistics>();
         }
         #endregion
 
@@ -80,14 +62,12 @@ namespace BasketballGameApp.ViewModels
             BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
             App theApp = (App)App.Current;
 
-            dictionaryPlayers = await proxy.GetPlayersRankingAsync();
+            listPlayerStatistics = await proxy.GetPlayersRankingAsync();
 
-            if (dictionaryPlayers != null)
+            if (listPlayerStatistics != null)
             {
-                this.ObservableCollectionPlayers.Clear();
-                this.ObservableCollectionValues.Clear();
-                ObservableCollectionPlayers = new ObservableCollection<Player>(dictionaryPlayers.Keys);
-                ObservableCollectionValues = new ObservableCollection<double>(dictionaryPlayers.Values);
+                this.ObservableCollectionPlayerStatistics.Clear();
+                ObservableCollectionPlayerStatistics = new ObservableCollection<PlayerStatistics>(listPlayerStatistics);
             }
         }
         #endregion

@@ -863,7 +863,7 @@ namespace BasketballGameApp.Services
         #endregion
 
         #region GetPlayersRankingAsync
-        public async Task<IDictionary<Player, double>> GetPlayersRankingAsync()
+        public async Task<List<PlayerStatistics>> GetPlayersRankingAsync()
         {
             try
             {
@@ -877,7 +877,7 @@ namespace BasketballGameApp.Services
                     };
 
                     string res = await response.Content.ReadAsStringAsync();
-                    return JsonSerializer.Deserialize<IDictionary<Player, double>>(res, options);
+                    return JsonSerializer.Deserialize<List<PlayerStatistics>>(res, options);
                 }
                 else
                     return null;
