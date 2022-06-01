@@ -13,7 +13,6 @@ namespace BasketballGameApp.DTO
         public int Games { get; set; }
 
         public int TotalScore { get; set; }
-        public int Score { get; set; }
 
         public PlayerStatistics() { }
     }

@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:BasketballGameApp.ViewModels"
              x:Class="BasketballGameApp.Views.PlayersRanking"
              xmlns:models="clr-namespace:BasketballGameApp.Models"
+             xmlns:dto="clr-namespace:BasketballGameApp.DTO"
              NavigationPage.HasNavigationBar="True"
              FlowDirection="RightToLeft" 
              Title="רשימת דירוגי השחקנים"
@@ -23,18 +24,23 @@
             </Grid>
 
             <ScrollView>
-                <CollectionView x:Name="collectionView" EmptyView="לא קיימים כרגע דירוגי שחקנים באתר!" ItemsSource="{Binding ObservableCollectionPlayers}">
+                <CollectionView x:Name="collectionView" EmptyView="לא קיימים כרגע דירוגי שחקנים באתר!" ItemsSource="{Binding ObservableCollectionPlayerStatistics}">
                     <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="models:Player">
+                        <DataTemplate x:DataType="dto:PlayerStatistics">
                             <Grid Padding="10">
                                 <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
-                                <Label HorizontalOptions="StartAndExpand"  Text="שם השחקן: " Grid.Row="0" />
-                                <Label HorizontalOptions="EndAndExpand" Text="{Binding User.Name}" Grid.Row="0" />
+                                <Label Text="{Binding Player.User.Name}" Grid.Row="0" />
+                                <Label Text="{Binding Player.Team}" Grid.Row="1" />
+                                <Label Text="{Binding Games}" Grid.Row="2" />
+                                <Label Text="{Binding TotalScore}" Grid.Row="3" />
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
