@@ -9,11 +9,8 @@ namespace BasketballGameApp.DTO
     public class PlayerStatistics
     {
         public Player Player { get; set; }
-
         public int Games { get; set; }
-
         public int TotalScore { get; set; }
-
         public PlayerStatistics() { }
     }
 }
