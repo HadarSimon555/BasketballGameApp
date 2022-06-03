@@ -19,6 +19,7 @@ namespace BasketballGameApp.ViewModels
         }
         #endregion
 
+        #region CurrentPlayer
         private Player currentPlayer;
         public Player CurrentPlayer
         {
@@ -36,5 +37,6 @@ namespace BasketballGameApp.ViewModels
                 }
             }
         }
+        #endregion
     }
 }
