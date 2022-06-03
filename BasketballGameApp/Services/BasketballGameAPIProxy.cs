@@ -211,28 +211,14 @@ namespace BasketballGameApp.Services
                 HttpResponseMessage response = await client.GetAsync($"{this.baseUri}/UserExistByEmail?email={email}");
                 if (response.IsSuccessStatusCode)
                 {
-                    return true;
-                }
-                else
-                    return false;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                return false;
-            }
-        }
-        #endregion
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        ReferenceHandler = ReferenceHandler.Preserve,
+                        PropertyNameCaseInsensitive = true
+                    };
 
-        #region UserExistByPasswordAsync
-        public async Task<bool> UserExistByPasswordAsync(string password)
-        {
-            try
-            {
-                HttpResponseMessage response = await client.GetAsync($"{this.baseUri}/UserExistByPassword?password={password}");
-                if (response.IsSuccessStatusCode)
-                {
-                    return true;
+                    string res = await response.Content.ReadAsStringAsync();
+                    return JsonSerializer.Deserialize<bool>(res, options);
                 }
                 else
                     return false;
@@ -364,34 +350,6 @@ namespace BasketballGameApp.Services
         }
         #endregion
 
-        #region GetLeaguesAsync
-        //public async Task<List<League>> GetLeaguesAsync()
-        //{
-        //    try
-        //    {
-        //        HttpResponseMessage response = await client.GetAsync($"{this.baseUri}/GetLeagues");
-        //        if (response.IsSuccessStatusCode)
-        //        {
-        //            JsonSerializerOptions options = new JsonSerializerOptions
-        //            {
-        //                ReferenceHandler = ReferenceHandler.Preserve,
-        //                PropertyNameCaseInsensitive = true
-        //            };
-
-        //            string res = await response.Content.ReadAsStringAsync();
-        //            return JsonSerializer.Deserialize<List<League>>(res, options);
-        //        }
-        //        else
-        //            return null;
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Console.WriteLine(e.Message);
-        //        return null;
-        //    }
-        //}
-        #endregion
-
         #region GetOpenTeamsAsync
         public async Task<List<Team>> GetOpenTeamsAsync()
         {
@@ -497,7 +455,6 @@ namespace BasketballGameApp.Services
                 HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/UpdatePlayer", content);
                 if (response.IsSuccessStatusCode)
                 {
-
                     string res = await response.Content.ReadAsStringAsync();
                     return JsonSerializer.Deserialize<bool>(res, options);
                 }
@@ -530,7 +487,7 @@ namespace BasketballGameApp.Services
                     string res = await response.Content.ReadAsStringAsync();
                     return JsonSerializer.Deserialize<bool>(res, options);
                 }
-                return true;
+                return false;
             }
             catch (Exception e)
             {
@@ -559,7 +516,7 @@ namespace BasketballGameApp.Services
                     string res = await response.Content.ReadAsStringAsync();
                     return JsonSerializer.Deserialize<bool>(res, options);
                 }
-                return true;
+                return false;
             }
             catch (Exception e)
             {
