@@ -21,6 +21,9 @@
                 <Label Text="צפייה בחברי הקבוצה" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Style="{StaticResource FormTitle}"></Label>
             </Grid>
 
+            <Label Text="{Binding SelectedTeam.Name}" HorizontalOptions="Center" FontSize="Large" FontFamily="Amatic" BackgroundColor="#f9b42d" TextColor="White"></Label>
+            <!--<Image HorizontalOptions="CenterAndExpand" MinimumHeightRequest="30" Source="{Binding Coach.Team.Image, FallbackValue='basketballPic.jpg'}"/>-->
+
             <Grid Padding="10" RowSpacing="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -37,7 +40,6 @@
                 <Label HorizontalOptions="StartAndExpand" Text="מין: " Grid.Row="2" />
                 <Label HorizontalOptions="EndAndExpand" Text="{Binding Coach.User.Gender}" Grid.Row="2" />
             </Grid>
-
             <ScrollView>
                 <CollectionView x:Name="collectionView" EmptyView="אין כרגע חברים בקבוצה זו!" ItemsSource="{Binding SelectedTeam.Players}">
                     <CollectionView.ItemTemplate>
@@ -47,6 +49,7 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="*" />

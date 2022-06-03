@@ -4,7 +4,9 @@
               xmlns:local="clr-namespace:BasketballGameApp.ViewModels"
              x:Class="BasketballGameApp.Views.PlayerCard"
              NavigationPage.HasNavigationBar="True"
-             FlowDirection="RightToLeft">
+             FlowDirection="RightToLeft"
+             Title="כרטיס שחקן">
+    
     <ContentPage.BindingContext>
         <local:PlayerCardViewModel></local:PlayerCardViewModel>
     </ContentPage.BindingContext>
@@ -20,61 +22,32 @@
                 <Image Grid.Column="0" Aspect="AspectFill" Source="basketballPic" Opacity="0.6"></Image>
                 <Label Text="כרטיס שחקן" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Style="{StaticResource FormTitle}"></Label>
             </Grid>
+            <Frame Style="{StaticResource logInSignUp}">
 
-            <!--  <Frame Style="{StaticResource logInSignUp}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="20" />
                     </Grid.RowDefinitions>
-                    <Label Text="קבוצה" Grid.Column="0" Grid.Row="0" Style="{StaticResource labelNameStyle}"/>
-                    <Label Text="מכבי" Grid.Column="1" Grid.Row="0" HorizontalOptions="End" Style="{StaticResource labelNameStyle}"/>
-                    <Label Text="עמדה" Grid.Column="0" Grid.Row="1" Style="{StaticResource labelNameStyle}"/>
-                    <Label Text="11" Grid.Column="1" Grid.Row="1" Style="{StaticResource labelNameStyle}"/>
-                    <Label Text="גובה" Grid.Column="0" Grid.Row="2" Style="{StaticResource labelNameStyle}"/>
-                    <Label Text="1.9" Grid.Column="1" Grid.Row="2" Style="{StaticResource labelNameStyle}"/>
-                    <Label Text="תאריך לידה" Grid.Column="0" Grid.Row="3" Style="{StaticResource labelNameStyle}"/>
-                    <Label Text="11.11.11" Grid.Column="1" Grid.Row="3" Style="{StaticResource labelNameStyle}"/>
-                    <Image Grid.Row="4" HorizontalOptions="CenterAndExpand" Source="basketballPic"/>
+                    <Label Text="שם השחקן:" HorizontalOptions="StartAndExpand" Grid.Column="0" Grid.Row="0" Style="{StaticResource labelNameStyle}"/>
+                    <Label Text="{Binding CurrentPlayer.User.Name}" HorizontalOptions="EndAndExpand" Grid.Column="1" Grid.Row="0" Style="{StaticResource labelNameStyle}"/>
+                    <Label Text="קבוצה:" HorizontalOptions="StartAndExpand" Grid.Column="0" Grid.Row="1" Style="{StaticResource labelNameStyle}"/>
+                    <Label Text="{Binding CurrentPlayer.Team.Name, FallbackValue='אין כרגע קבוצה'}" HorizontalOptions="EndAndExpand" Grid.Column="1" Grid.Row="1" Style="{StaticResource labelNameStyle}"/>
+                    <Label Text="גובה:" HorizontalOptions="StartAndExpand" Grid.Column="0" Grid.Row="2" Style="{StaticResource labelNameStyle}"/>
+                    <Label Text="{Binding CurrentPlayer.Height}" HorizontalOptions="EndAndExpand" Grid.Column="1" Grid.Row="2" Style="{StaticResource labelNameStyle}"/>
+                    <Label Text="תאריך לידה:" HorizontalOptions="StartAndExpand" Grid.Column="0" Grid.Row="3" Style="{StaticResource labelNameStyle}"/>
+                    <Label Text="{Binding CurrentPlayer.User.BirthDate}" HorizontalOptions="EndAndExpand" Grid.Column="1" Grid.Row="3" Style="{StaticResource labelNameStyle}"/>
+                    <Label Text="מין:" HorizontalOptions="StartAndExpand" Grid.Column="0" Grid.Row="4" Style="{StaticResource labelNameStyle}"/>
+                    <Label Text="{Binding CurrentPlayer.User.Gender}" HorizontalOptions="EndAndExpand" Grid.Column="1" Grid.Row="4" Style="{StaticResource labelNameStyle}"/>
+                    <Image Grid.Row="5" HorizontalOptions="Center" Source="{Binding CurrentPlayer.User.Image, FallbackValue='basketballPic.jpg'}"/>
                 </Grid>
-            </Frame> -->
-
-
-            <ScrollView>
-                <Frame Style="{StaticResource logInSignUp}">
-
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="20" />
-                            <RowDefinition Height="20" />
-                            <RowDefinition Height="20" />
-                            <RowDefinition Height="20" />
-                            <RowDefinition Height="20" />
-                        </Grid.RowDefinitions>
-                        <Label Text="שם השחקן:" HorizontalOptions="StartAndExpand" Grid.Column="0" Grid.Row="0" Style="{StaticResource labelNameStyle}"/>
-                        <Label Text="{Binding CurrentPlayer.User.Name}" HorizontalOptions="EndAndExpand" Grid.Column="1" Grid.Row="0" Style="{StaticResource labelNameStyle}"/>
-                        <Label Text="קבוצה:" HorizontalOptions="StartAndExpand" Grid.Column="0" Grid.Row="1" Style="{StaticResource labelNameStyle}"/>
-                        <Label Text="{Binding CurrentPlayer.Team.Name}" HorizontalOptions="EndAndExpand" Grid.Column="0" Grid.Row="1" Style="{StaticResource labelNameStyle}"/>
-                        <Label Text="גובה:" HorizontalOptions="StartAndExpand" Grid.Column="0" Grid.Row="2" Style="{StaticResource labelNameStyle}"/>
-                        <Label Text="{Binding CurrentPlayer.Height}" HorizontalOptions="EndAndExpand" Grid.Column="0" Grid.Row="2" Style="{StaticResource labelNameStyle}"/>
-                        <Label Text="תאריך לידה:" HorizontalOptions="StartAndExpand" Grid.Column="0" Grid.Row="3" Style="{StaticResource labelNameStyle}"/>
-                        <Label Text="{Binding CurrentPlayer.User.BirthDate}" HorizontalOptions="EndAndExpand" Grid.Column="0" Grid.Row="3" Style="{StaticResource labelNameStyle}"/>
-                        <Label Text="מין:" HorizontalOptions="StartAndExpand" Grid.Column="0" Grid.Row="4" Style="{StaticResource labelNameStyle}"/>
-                        <Label Text="{Binding CurrentPlayer.User.Gender}" HorizontalOptions="EndAndExpand" Grid.Column="0" Grid.Row="4" Style="{StaticResource labelNameStyle}"/>
-                        <Image Grid.Row="5" HorizontalOptions="CenterAndExpand" Source="{Binding CurrentPlayer.User.Image}"/>
-                    </Grid>
-                </Frame>
-            </ScrollView>
+            </Frame>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

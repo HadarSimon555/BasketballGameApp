@@ -605,7 +605,14 @@ namespace BasketballGameApp.Services
                 HttpResponseMessage response = await client.GetAsync($"{this.baseUri}/HasGame?teamId1={teamId1}&&teamId2={teamId2}&&date={date}");
                 if (response.IsSuccessStatusCode)
                 {
-                    return true;
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        ReferenceHandler = ReferenceHandler.Preserve,
+                        PropertyNameCaseInsensitive = true
+                    };
+
+                    string res = await response.Content.ReadAsStringAsync();
+                    return JsonSerializer.Deserialize<bool>(res, options);
                 }
                 else
                     return false;

@@ -39,7 +39,7 @@ namespace BasketballGameApp.ViewModels
         }
         #endregion
 
-        //#region PlayerShots
+        #region PlayerShots
         //private int playerShots;
         //public int PlayerShots
         //{
@@ -50,7 +50,7 @@ namespace BasketballGameApp.ViewModels
         //        OnPropertyChanged("PlayerShots");
         //    }
         //}
-        //#endregion
+        #endregion
 
         #region Game
         private Game game;
@@ -123,7 +123,7 @@ namespace BasketballGameApp.ViewModels
             {
                 ServerStatus = "קורא נתונים...";
                 //theApp.CurrentCoach.RequestGames.Add(requestGame);
-                await App.Current.MainPage.DisplayAlert("הכנסת תוצאות המשחק", "שמירת מספר הקליעות ש השחקנים בוצעה בהצלחה!", "אישור", FlowDirection.RightToLeft);
+                await App.Current.MainPage.DisplayAlert("הכנסת תוצאות המשחק", "שמירת מספר הקליעות של השחקנים בוצעה בהצלחה!", "אישור", FlowDirection.RightToLeft);
                 await App.Current.MainPage.Navigation.PopModalAsync();
                 NavigationPage p = new NavigationPage(new GamesScores());
                 NavigationPage.SetHasNavigationBar(p, false);

@@ -181,6 +181,8 @@ namespace BasketballGameApp.ViewModels
             //LoadGames();
         }
         #endregion
+
+        #region InitButtons
         public void InitButtons()
         {
             if (TheApp.CurrentUser == null)
@@ -258,6 +260,8 @@ namespace BasketballGameApp.ViewModels
                 }
             }
         }
+        #endregion
+
         #region ServerStatus
         private string serverStatus;
         public string ServerStatus
@@ -435,8 +439,6 @@ namespace BasketballGameApp.ViewModels
         public async Task LoadGames()
         {
             BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
-            //if (isLoggedin)
-            //{
 
             listGames = await proxy.GetGamesAsync(null);
 
@@ -445,8 +447,6 @@ namespace BasketballGameApp.ViewModels
                 this.ObservableCollectionGames.Clear();
                 ObservableCollectionGames = new ObservableCollection<Game>(listGames.Where(g => g.GameStatusId == 3 && g.ScoreAwayTeam != -1 && g.ScoreHomeTeam != -1).ToList());
             }
-            //TheApp.Leagues = await proxy.GetLeaguesAsync();
-            //}
         }
         #endregion
 

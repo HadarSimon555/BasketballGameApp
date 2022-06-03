@@ -60,12 +60,6 @@ namespace BasketballGameApp.ViewModels
         #endregion
 
         #region Constructor
-        public ViewTeamMembersViewModel(Team team)
-        {
-            SelectedTeam = team;
-            CurrentApp = (App)Application.Current;
-        }
-
         public ViewTeamMembersViewModel()
         {
             CurrentApp = (App)Application.Current;
