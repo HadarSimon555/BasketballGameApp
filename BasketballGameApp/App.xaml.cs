@@ -22,7 +22,7 @@ namespace BasketballGameApp
         public Player CurrentPlayer { get; set; }
         public Coach CurrentCoach { get; set; }
 
-        public List<League> Leagues { get; set; }
+       
 
         //The list of phone types
         //public List<PhoneType> PhoneTypes { get; set; }

@@ -99,21 +99,6 @@ namespace BasketballGameApp.ViewModels
         //    }
         //}
         #endregion
-
-        #region SelectedLeague
-        private League selectedLeague;
-        public League SelectedLeague
-        {
-            get => selectedLeague;
-            set
-            {
-                selectedLeague = value;
-                OnPropertyChanged("SelectedLeague");
-            }
-        }
-        #endregion
-
-        //public ObservableCollection<League> Leagues { get; set; }
         private App theApp { get; set; }
         private Team team { get; set; }
 

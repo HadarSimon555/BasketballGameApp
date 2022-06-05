@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BasketballGameApp.Models.Coach">
+    <Position X="0.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAADCAAAAAAAAAAABAAAAAgCAAAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>Models\Coach.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BasketballGameApp.Models.Player">
+    <Position X="2.75" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAADAAAABAAAAAAAAAAAAAgGAACAAAAAEAAAAAAAIAA=</HashCode>
+      <FileName>Models\Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BasketballGameApp.Models.User">
+    <Position X="5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAACQBAACAAAAAAAQAAAAgABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BasketballGameApp.Models.FileInfo">
+    <Position X="7.25" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAARAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\FileInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BasketballGameApp.Models.Game">
+    <Position X="7.25" Y="2" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAIAgBIAAAgAgAAAAAAABAAAQEAAhIQA=</HashCode>
+      <FileName>Models\Game.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BasketballGameApp.Models.GameStat">
+    <Position X="5" Y="3.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAEAAAAAAAgAAAAAAAAIAQAAAEA=</HashCode>
+      <FileName>Models\GameStat.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BasketballGameApp.Models.GameStatus">
+    <Position X="2.75" Y="3.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>QAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\GameStatus.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BasketballGameApp.Models.RequestGame">
+    <Position X="0.5" Y="3.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAACAIAAAAAAAAAgIIEAAAAAAAgAAAAhAAAAQAAgAQA=</HashCode>
+      <FileName>Models\RequestGame.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BasketballGameApp.Models.RequestGameStatus">
+    <Position X="2.75" Y="6" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\RequestGameStatus.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BasketballGameApp.Models.RequestToJoinTeam">
+    <Position X="5" Y="6" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAACCAAAAAACAAAAAAAAAAACAAAAAAAAEAAIAQAAAAA=</HashCode>
+      <FileName>Models\RequestToJoinTeam.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BasketballGameApp.Models.RequestToJoinTeamStatus">
+    <Position X="7.25" Y="6.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\RequestToJoinTeamStatus.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

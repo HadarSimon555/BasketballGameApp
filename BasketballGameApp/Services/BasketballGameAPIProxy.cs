@@ -232,7 +232,6 @@ namespace BasketballGameApp.Services
         #endregion
 
         #region UploadImage
-        //Upload file to server (only images!)
         public async Task<bool> UploadImage(Models.FileInfo fileInfo, string targetFileName)
         {
             try
@@ -275,35 +274,6 @@ namespace BasketballGameApp.Services
 
                     string res = await response.Content.ReadAsStringAsync();
                     return JsonSerializer.Deserialize<List<Game>>(res, options);
-                }
-                else
-                    return null;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                return null;
-            }
-        }
-        #endregion
-
-        #region GetPlayerOnTeamForSeasonAsync
-
-        public async Task<PlayerOnTeamForSeason> GetPlayerOnTeamForSeasonAsync(int userId)
-        {
-            try
-            {
-                HttpResponseMessage response = await client.GetAsync($"{this.baseUri}/GetPlayerOnTeamForSeason?userId={userId}");
-                if (response.IsSuccessStatusCode)
-                {
-                    JsonSerializerOptions options = new JsonSerializerOptions
-                    {
-                        ReferenceHandler = ReferenceHandler.Preserve,
-                        PropertyNameCaseInsensitive = true
-                    };
-
-                    string res = await response.Content.ReadAsStringAsync();
-                    return JsonSerializer.Deserialize<PlayerOnTeamForSeason>(res, options);
                 }
                 else
                     return null;
@@ -854,7 +824,7 @@ namespace BasketballGameApp.Services
         #endregion
 
         #region GetTeamsRankingAsync
-        public async Task<List<Team>> GetTeamsRankingAsync()
+        public async Task<List<TeamStatistics>> GetTeamsRankingAsync()
         {
             try
             {
@@ -868,7 +838,7 @@ namespace BasketballGameApp.Services
                     };
 
                     string res = await response.Content.ReadAsStringAsync();
-                    return JsonSerializer.Deserialize<List<Team>>(res, options);
+                    return JsonSerializer.Deserialize<List<TeamStatistics>>(res, options);
                 }
                 else
                     return null;

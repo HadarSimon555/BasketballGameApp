@@ -17,7 +17,6 @@ namespace BasketballGameApp.Models
         public int? PositionId { get; set; }
         public int? TeamId { get; set; }
 
-        public virtual Position Position { get; set; }
         public virtual Team Team { get; set; }
         public virtual User User { get; set; }
         public virtual List<GameStat> GameStats { get; set; }
