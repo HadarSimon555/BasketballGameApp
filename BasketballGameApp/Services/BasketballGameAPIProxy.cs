@@ -732,7 +732,6 @@ namespace BasketballGameApp.Services
         #endregion
 
         #region GetPlayersAsync
-
         public async Task<List<Player>> GetPlayersAsync(User user)
         {
             try
@@ -811,7 +810,7 @@ namespace BasketballGameApp.Services
                 {
                     jsonObject = await response.Content.ReadAsStringAsync();
                     bool r = JsonSerializer.Deserialize<bool>(jsonObject, options);
-                    return true;
+                    return r;
                 }
                 else
                 {
