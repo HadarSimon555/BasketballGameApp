@@ -50,7 +50,7 @@
                                     <Label HorizontalOptions="StartAndExpand" Text="קבוצת החוץ: " Grid.Row="1" />
                                     <Label HorizontalOptions="EndAndExpand" Text="{Binding AwayTeam.Name}" Grid.Row="1" />
                                     <Label HorizontalOptions="StartAndExpand" Text="תאריך: " Grid.Row="2" />
-                                    <Label HorizontalOptions="EndAndExpand" Text="{Binding Date}" Grid.Row="2" />
+                                <Label HorizontalOptions="EndAndExpand" Text="{Binding Date}" Grid.Row="2" />
                                     <Label HorizontalOptions="StartAndExpand" Text="שעה: " Grid.Row="3" />
                                     <Label HorizontalOptions="EndAndExpand" Text="{Binding Time}" Grid.Row="3" />
                                     <Label HorizontalOptions="StartAndExpand" Text="מיקום: " Grid.Row="4" />

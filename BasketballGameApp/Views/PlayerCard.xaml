@@ -33,7 +33,6 @@
                         <RowDefinition Height="20" />
                         <RowDefinition Height="20" />
                         <RowDefinition Height="20" />
-                        <RowDefinition Height="20" />
                     </Grid.RowDefinitions>
                     <Label Text="שם השחקן:" HorizontalOptions="StartAndExpand" Grid.Column="0" Grid.Row="0" Style="{StaticResource labelNameStyle}"/>
                     <Label Text="{Binding CurrentPlayer.User.Name}" HorizontalOptions="EndAndExpand" Grid.Column="1" Grid.Row="0" Style="{StaticResource labelNameStyle}"/>
@@ -45,7 +44,6 @@
                     <Label Text="{Binding CurrentPlayer.User.BirthDate}" HorizontalOptions="EndAndExpand" Grid.Column="1" Grid.Row="3" Style="{StaticResource labelNameStyle}"/>
                     <Label Text="מין:" HorizontalOptions="StartAndExpand" Grid.Column="0" Grid.Row="4" Style="{StaticResource labelNameStyle}"/>
                     <Label Text="{Binding CurrentPlayer.User.Gender}" HorizontalOptions="EndAndExpand" Grid.Column="1" Grid.Row="4" Style="{StaticResource labelNameStyle}"/>
-                    <Image Grid.Row="5" HorizontalOptions="Center" Source="{Binding CurrentPlayer.User.Image, FallbackValue='basketballPic.jpg'}"/>
                 </Grid>
             </Frame>
         </StackLayout>

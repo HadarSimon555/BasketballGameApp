@@ -23,6 +23,22 @@
                 <Label Text="רשימת דירוגי השחקנים" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Style="{StaticResource FormTitle}"></Label>
             </Grid>
 
+            <Grid Padding="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label Text="שם השחקן" Grid.Column="0" />
+                <Label Text="קבוצה" Grid.Column="1" />
+                <Label Text="מספר המשחקים" Grid.Column="2" />
+                <Label Text="מספר הנקודות הכולל" Grid.Column="3" />
+            </Grid>
+
             <ScrollView>
                 <CollectionView x:Name="collectionView" EmptyView="לא קיימים כרגע דירוגי שחקנים באתר!" ItemsSource="{Binding ObservableCollectionPlayerStatistics}">
                     <CollectionView.ItemTemplate>
@@ -30,17 +46,17 @@
                             <Grid Padding="10">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
-                                <Label Text="{Binding Player.User.Name}" Grid.Row="0" />
-                                <Label Text="{Binding Player.Team.Name}" Grid.Row="1" />
-                                <Label Text="{Binding Games}" Grid.Row="2" />
-                                <Label Text="{Binding TotalScore}" Grid.Row="3" />
+                                <Label Text="{Binding Player.User.Name}" Grid.Column="0" />
+                                <Label Text="{Binding Player.Team.Name}" Grid.Column="1" />
+                                <Label Text="{Binding Games}" Grid.Column="2" />
+                                <Label Text="{Binding TotalScore}" Grid.Column="3" />
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
