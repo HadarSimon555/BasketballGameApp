@@ -175,10 +175,6 @@ namespace BasketballGameApp.ViewModels
             
             BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
             InitButtons();
-            // אם המשתמש לא מחובר
-           
-            //add server status page
-            //LoadGames();
         }
         #endregion
 
@@ -226,14 +222,14 @@ namespace BasketballGameApp.ViewModels
                 }
 
                 // האם המשתמש הוא מאמן עם קבוצה
-                else if (TheApp.CurrentCoach != null && TheApp.CurrentCoach.Team != null)//לבדוק האם הקבוצה כבר מלאה
+                else if (TheApp.CurrentCoach != null && TheApp.CurrentCoach.Team != null)
                 {
                     IsCoachWithoutTeam = false;
                     IsPlayerWithoutRequest = false;
                     IsCoachWithTeam = true;
                     IsPlayerWithRequest = false;
                     // האם בקבוצה יש מספר שחקנים מינימלי
-                    if (TheApp.CurrentCoach.Team.Players.Count() >= 0)//לשנות
+                    if (TheApp.CurrentCoach.Team.Players.Count() >= 2)
                         HaveMinPlayers = true;
                     else
                         HaveMinPlayers = false;

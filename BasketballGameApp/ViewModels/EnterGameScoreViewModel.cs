@@ -97,7 +97,6 @@ namespace BasketballGameApp.ViewModels
 
             if (listGameStats != null)
             {
-                this.ObservableCollectionGameStats.Clear();
                 ObservableCollectionGameStats = new ObservableCollection<GameStat>(listGameStats);
             }
         }
