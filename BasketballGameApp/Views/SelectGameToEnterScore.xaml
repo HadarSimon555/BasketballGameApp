@@ -22,7 +22,7 @@
             </Grid>
 
             <ScrollView>
-                <CollectionView x:Name="collectionView" EmptyView="לא קיימים כרגע משחקים להכנסת תוצאות!" ItemsSource="{Binding ObservableCollectionGames}" SelectedItem="">
+                <CollectionView x:Name="collectionView" SelectionMode="Single" SelectedItem="{Binding SelectedGame}" SelectionChangedCommand="{Binding NavigateToEnterGameScorePageCommand}" SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference collectionView}}" EmptyView="לא קיימים כרגע משחקים להכנסת תוצאות!" ItemsSource="{Binding ObservableCollectionGames}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:Game">
                             <Grid Padding="10">
@@ -47,7 +47,6 @@
                                 <Label HorizontalOptions="EndAndExpand" Text="{Binding Time}" Grid.Row="3" />
                                 <Label HorizontalOptions="StartAndExpand" Text="מיקום: " Grid.Row="4" />
                                 <Label HorizontalOptions="EndAndExpand" Text="{Binding Position}" Grid.Row="4" />
-                                <Label HorizontalOptions="Center" Text="________________________________________________________________" Grid.Row="5" />
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

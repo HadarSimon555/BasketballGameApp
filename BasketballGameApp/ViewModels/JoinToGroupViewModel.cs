@@ -67,7 +67,6 @@ namespace BasketballGameApp.ViewModels
         {
             observableCollectionOpenTeams = new ObservableCollection<Team>();
             SelectionChangeCommand = new Command<Team>(SelectionChangedCommand);
-           // LoadOpenTeams();
         }
         #endregion
 

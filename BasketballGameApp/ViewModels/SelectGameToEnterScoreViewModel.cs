@@ -61,12 +61,20 @@ namespace BasketballGameApp.ViewModels
         }
         #endregion
 
+        #region Constructor
+        public SelectGameToEnterScoreViewModel()
+        {
+            observableCollectionGames = new ObservableCollection<Game>();
+            NavigateToEnterGameScorePageCommand = new Command(NavigateToEnterGameScorePage);
+        }
+        #endregion
+
         #region NavigateToEnterGameScorePage
         public ICommand NavigateToEnterGameScorePageCommand { protected set; get; }
         public void NavigateToEnterGameScorePage()
         {
             Page p = new EnterGameScore();
-            p.BindingContext = new EnterGameScoreViewModel(selectedGame);
+            p.BindingContext = new EnterGameScoreViewModel(SelectedGame);
             App.Current.MainPage.Navigation.PushAsync(p);
         }
         #endregion
@@ -81,8 +89,7 @@ namespace BasketballGameApp.ViewModels
 
             if (listGames != null)
             {
-                this.ObservableCollectionGames.Clear();
-                ObservableCollectionGames = new ObservableCollection<Game>(listGames.Where(g => g.GameStatusId == 3 && ((g.HomeTeam == theApp.CurrentCoach.Team && g.ScoreHomeTeam == -1) || (g.AwayTeam == theApp.CurrentCoach.Team && g.ScoreAwayTeam == -1))).ToList());
+                ObservableCollectionGames = new ObservableCollection<Game>(listGames.Where(g => g.GameStatusId == 3 && ((g.HomeTeamId == theApp.CurrentCoach.TeamId && g.ScoreHomeTeam == -1) || (g.AwayTeamId == theApp.CurrentCoach.TeamId && g.ScoreAwayTeam == -1))).ToList());
             }
         }
         #endregion

@@ -24,7 +24,7 @@
             </Grid>
 
             <ScrollView>
-                <CollectionView  x:Name="CvTeams" SelectionMode="Single" SelectedItem="{Binding SelectedTeam}" SelectionChangedCommand="{Binding SelectionChangeCommand}" SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference CvTeams}}" EmptyView="אין כרגע קבוצות פנויות!" ItemsSource="{Binding ObservableCollectionOpenTeams}">
+                <CollectionView x:Name="CvTeams" SelectionMode="Single" SelectedItem="{Binding SelectedTeam}" SelectionChangedCommand="{Binding SelectionChangeCommand}" SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference CvTeams}}" EmptyView="אין כרגע קבוצות פנויות!" ItemsSource="{Binding ObservableCollectionOpenTeams}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:Team">
                             <Grid Padding="10">

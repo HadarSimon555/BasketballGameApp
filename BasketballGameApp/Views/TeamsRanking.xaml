@@ -23,19 +23,19 @@
                 <Label Text="רשימת דירוגי הקבוצות" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Style="{StaticResource FormTitle}"></Label>
             </Grid>
 
-            <Grid Padding="10">
+           <Grid Padding="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
+                    <RowDefinition Height="20" />
                 </Grid.RowDefinitions>
                 <Label Text="קבוצה" Grid.Column="0" />
                 <Label Text="מספר המשחקים" Grid.Column="1" />
                 <Label Text="מספר הנקודות הכולל" Grid.Column="2" />
-            </Grid>
+            </Grid> 
 
             <ScrollView>
                 <CollectionView x:Name="collectionView" EmptyView="לא קיימים כרגע דירוגי קבוצות באתר!" ItemsSource="{Binding ObservableCollectionTeamStatistics}">
