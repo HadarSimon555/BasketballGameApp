@@ -10,26 +10,27 @@ using BasketballGameApp.Models;
 using System.Collections.ObjectModel;
 using System.Linq;
 using BasketballGameApp.Views;
+using BasketballGameApp.DTO;
 
 namespace BasketballGameApp.ViewModels
 {
     class TeamsRankingViewModel : BaseViewModel
     {
         #region ObservableCollectionTeams
-        private List<Team> listTeams;
-        private ObservableCollection<Team> observableCollectionTeams;
-        public ObservableCollection<Team> ObservableCollectionTeams
+        private List<TeamStatistics> listTeamStatistics;
+        private ObservableCollection<TeamStatistics> observableCollectionTeamStatistics;
+        public ObservableCollection<TeamStatistics> ObservableCollectionTeamStatistics
         {
             get
             {
-                return this.observableCollectionTeams;
+                return this.observableCollectionTeamStatistics;
             }
             set
             {
-                if (this.observableCollectionTeams != value)
+                if (this.observableCollectionTeamStatistics != value)
                 {
-                    this.observableCollectionTeams = value;
-                    OnPropertyChanged("ObservableCollectionTeams");
+                    this.observableCollectionTeamStatistics = value;
+                    OnPropertyChanged("ObservableCollectionTeamStatistics");
                 }
             }
         }
@@ -51,7 +52,7 @@ namespace BasketballGameApp.ViewModels
         #region Constructor
         public TeamsRankingViewModel()
         {
-            observableCollectionTeams = new ObservableCollection<Team>();
+            observableCollectionTeamStatistics = new ObservableCollection<TeamStatistics>();
         }
         #endregion
 
@@ -61,12 +62,12 @@ namespace BasketballGameApp.ViewModels
             BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
             App theApp = (App)App.Current;
 
-            listTeams = await proxy.GetTeamsAsync();
+            listTeamStatistics = await proxy.GetTeamsRankingAsync();
 
-            if (listTeams != null)
+            if (listTeamStatistics != null)
             {
-                this.ObservableCollectionTeams.Clear();
-                ObservableCollectionTeams = new ObservableCollection<Team>(listTeams);
+                this.ObservableCollectionTeamStatistics.Clear();
+                ObservableCollectionTeamStatistics = new ObservableCollection<TeamStatistics>(listTeamStatistics);
             }
         }
         #endregion

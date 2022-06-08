@@ -61,7 +61,7 @@ namespace BasketballGameApp.ViewModels
 
                     if (listGames != null)
                     {
-                        if (loadType == 0)
+                        if (LoadType == 0)
                         {
                             ObservableCollectionGames = new ObservableCollection<Game>(listGames.Where(g => g.GameStatusId == 1).ToList());
                         }

@@ -449,6 +449,5 @@ namespace BasketballGameApp.ViewModels
             }
         }
         #endregion
-
     }
 }

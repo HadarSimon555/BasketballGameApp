@@ -104,7 +104,6 @@ namespace BasketballGameApp.ViewModels
         #endregion
 
         #region SaveData
-        //The command for saving the contact
         public Command SaveDataCommand { protected set; get; }
         private async void SaveData()
         {
