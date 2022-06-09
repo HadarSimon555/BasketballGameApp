@@ -515,13 +515,7 @@ namespace BasketballGameApp.ViewModels
                             }
                         }
                         ServerStatus = "שומר נתונים...";
-                        ////if someone registered to get the contact added event, fire the event
-                        //if (this.ContactUpdatedEvent != null)
-                        //{
-                        //    this.ContactUpdatedEvent(((Player)o), this.p);
-                        //}
 
-                        //close the message and add contact windows!
                         await App.Current.MainPage.Navigation.PopAsync();
                         await App.Current.MainPage.Navigation.PopModalAsync();
 
