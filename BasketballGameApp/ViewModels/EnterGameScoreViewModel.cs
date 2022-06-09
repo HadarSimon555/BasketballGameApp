@@ -110,6 +110,7 @@ namespace BasketballGameApp.ViewModels
             await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatusPage(this));
             BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
 
+            
             bool saveGameStats = await proxy.SaveGameStatsAsync(listGameStats);
             if (!saveGameStats)
             {

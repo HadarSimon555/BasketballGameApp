@@ -27,7 +27,8 @@
             </Grid>
             <ScrollView>
                 <StackLayout Padding="0,20,0,0">
-                    <Label Text="אני רוצה להיות שחקן"></Label>
+                    <Label IsVisible="{Binding IsPlayer}" Text="אני רוצה להיות שחקן"></Label>
+                    <Label IsVisible="{Binding IsCoach}" Text="אני רוצה להיות מאמן"></Label>
                     <Switch x:Name="PlayerOrCoach" IsToggled="{Binding IsPlayer}" OnColor="#f5ab35" ThumbColor="#f5ab35"/>
                     <Frame Style="{StaticResource logInSignUp}">
                         <StackLayout>

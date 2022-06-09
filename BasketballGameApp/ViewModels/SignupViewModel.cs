@@ -351,16 +351,24 @@ namespace BasketballGameApp.ViewModels
         }
         #endregion
 
+        #region IsCoach
+        private bool isCoach;
+        public bool IsCoach
+        {
+            get => isCoach;
+            set
+            {
+                isCoach = value;
+                OnPropertyChanged("IsCoach");
+            }
+        }
+        #endregion
+
         #region Constructor
-        //This contact is a reference to the updated or new created contact
-        //private Player thePlayer;
-        //For adding a new contact, uc will be null
-        //For updates the user contact object should be sent to the constructor
         public SignupViewModel()
         {
             IsPlayer = true;
-
-            //create a new user contact if this is an add operation
+            IsCoach = false;
 
             App theApp = (App)App.Current;
             u = new User()
@@ -374,38 +382,10 @@ namespace BasketballGameApp.ViewModels
                 Name =""
             };
 
-            //if (IsPlayer)
-            //{
-            //    p = new Player()
-            //    {
-            //        User = u,
-            //        Height = 0,
-            //        Name = ""
-            //    };
-            //}
-            //else
-            //{
-            //    c = new Coach()
-            //    {
-            //        User = u,
-            //        Name = ""
-            //    };
-            //}
-
             //Setup default image photo
             this.UserImgSrc = DEFAULT_PHOTO_SRC;
             this.imageFileResult = null; //mark that no picture was chosen
 
-            //else
-            //{
-            //    //set the path url to the contact photo
-            //    BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
-            //    //Create a source with cache busting!
-            //    Random r = new Random();
-            //    this.UserImgSrc = proxy.GetBasePhotoUri() + p.Id + $".jpg?{r.Next()}";
-            //}
-
-            //this.thePlayer = p;
             this.NameError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.BirthDateError = ERROR_MESSAGES.BAD_DATE;
             this.HeightError = ERROR_MESSAGES.BAD_HEIGHT;
@@ -421,14 +401,6 @@ namespace BasketballGameApp.ViewModels
             this.ShowPasswordError = false;
 
             this.SaveDataCommand = new Command(() => SaveData());
-
-            //this.Name = p.Name;
-            //this.BirthDate = p.User.BirthDate;
-            //this.Height = p.Height;
-            //this.Gender = p.User.Gender;
-            //this.City = p.User.City;
-            //this.Email = p.User.Email;
-            //this.Password = p.User.Pass;
         }
         #endregion
 
@@ -468,10 +440,6 @@ namespace BasketballGameApp.ViewModels
         #endregion
 
         #region SaveData
-        //This event is fired after the new contact is generated in the system so it can be added to the list of contacts
-        //public event Action<Player, Player> PlayerUpdatedEvent;
-
-        //The command for saving the contact
         public Command SaveDataCommand { protected set; get; }
         private async void SaveData()
         {

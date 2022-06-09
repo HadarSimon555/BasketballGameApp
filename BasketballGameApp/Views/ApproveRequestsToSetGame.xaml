@@ -20,7 +20,7 @@
                 <Image Grid.Column="0" Aspect="AspectFill" Source="basketballPic" Opacity="0.6"></Image>
                 <Label Text="אישור בקשות לקביעת משחק" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Style="{StaticResource FormTitle}"></Label>
             </Grid>
-            
+
             <Picker SelectedIndex="{Binding RequestType}">
                 <Picker.Items>
                     <x:String >"בקשות לאישור"</x:String>
@@ -28,7 +28,7 @@
                 </Picker.Items>
             </Picker>
             <!--<ScrollView>-->
-                <StackLayout>
+            <StackLayout>
                 <CollectionView x:Name="collectionView" IsVisible="{Binding CanToApproveRequests}" ItemsSource="{Binding ObservableCollectionRequestsGame}">
                     <CollectionView.EmptyView>
                         <StackLayout IsVisible="{Binding CanToApproveRequests}">
@@ -37,7 +37,7 @@
                     </CollectionView.EmptyView>
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:RequestGame">
-                                <SwipeView>
+                            <SwipeView>
                                 <SwipeView.LeftItems>
                                     <SwipeItems>
                                         <SwipeItem Text="אישור"
@@ -77,39 +77,39 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-                
+
                 <CollectionView x:Name="collectionView2" IsVisible="{Binding CanNotToApproveRequests}"  ItemsSource="{Binding ObservableCollectionRequestsGame}">
                     <CollectionView.EmptyView>
                         <StackLayout IsVisible="{Binding CanNotToApproveRequests}">
                             <Label HorizontalOptions="CenterAndExpand" Text="לא שלחת בקשות לקביעת משחק!"/>
                         </StackLayout>
                     </CollectionView.EmptyView>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="models:RequestGame">
-                        <Grid Padding="10">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:RequestGame">
+                            <Grid Padding="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
-                            <Label Text="שם הקבוצה: " Grid.Row="0" />
-                            <Label Text="{Binding AwayTeam.Name}" Grid.Row="0" />
-                            <Label Text="תאריך" Grid.Row="1" />
-                            <Label Text="{Binding Date}" Grid.Row="1" />
-                            <Label Text="שעה: " Grid.Row="2" />
-                            <Label Text="{Binding Time}" Grid.Row="2" />
-                            <Label Text="מיקום: " Grid.Row="3" />
-                            <Label Text="{Binding Position}" Grid.Row="3" />
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-                </StackLayout>
+                                <Label HorizontalOptions="StartAndExpand" Text="שם הקבוצה: " Grid.Row="0" />
+                                <Label HorizontalOptions="EndAndExpand" Text="{Binding AwayTeam.Name}" Grid.Row="0" />
+                                <Label HorizontalOptions="StartAndExpand" Text="תאריך" Grid.Row="1" />
+                                <Label HorizontalOptions="EndAndExpand" Text="{Binding Date}" Grid.Row="1" />
+                                <Label HorizontalOptions="StartAndExpand" Text="שעה: " Grid.Row="2" />
+                                <Label HorizontalOptions="EndAndExpand" Text="{Binding Time}" Grid.Row="2" />
+                                <Label HorizontalOptions="StartAndExpand" Text="מיקום: " Grid.Row="3" />
+                                <Label HorizontalOptions="EndAndExpand" Text="{Binding Position}" Grid.Row="3" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
             <!--</ScrollView>-->
 
         </StackLayout>
