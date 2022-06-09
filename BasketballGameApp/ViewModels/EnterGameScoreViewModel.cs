@@ -110,22 +110,33 @@ namespace BasketballGameApp.ViewModels
             await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatusPage(this));
             BasketballGameAPIProxy proxy = BasketballGameAPIProxy.CreateProxy();
 
-            
-            bool saveGameStats = await proxy.SaveGameStatsAsync(listGameStats);
-            if (!saveGameStats)
+            bool isPositive = true;
+            foreach (GameStat g in listGameStats)
+                if (g.PlayerShots <= 0)
+                    isPositive = false;
+            if (isPositive)
             {
-                await App.Current.MainPage.DisplayAlert("שגיאה", "שמירת מספר הקליעות של השחקנים נכשלה!", "בסדר");
-                await App.Current.MainPage.Navigation.PopModalAsync();
+                bool saveGameStats = await proxy.SaveGameStatsAsync(listGameStats);
+                if (!saveGameStats)
+                {
+                    await App.Current.MainPage.DisplayAlert("שגיאה", "שמירת מספר הקליעות של השחקנים נכשלה!", "בסדר");
+                    await App.Current.MainPage.Navigation.PopModalAsync();
+                }
+                else
+                {
+                    ServerStatus = "קורא נתונים...";
+                    //theApp.CurrentCoach.RequestGames.Add(requestGame);
+                    await App.Current.MainPage.DisplayAlert("הכנסת תוצאות המשחק", "שמירת מספר הקליעות של השחקנים בוצעה בהצלחה!", "אישור", FlowDirection.RightToLeft);
+                    await App.Current.MainPage.Navigation.PopModalAsync();
+                    NavigationPage p = new NavigationPage(new GamesScores());
+                    NavigationPage.SetHasNavigationBar(p, false);
+                    await App.Current.MainPage.Navigation.PushAsync(p);
+                }
             }
             else
             {
-                ServerStatus = "קורא נתונים...";
-                //theApp.CurrentCoach.RequestGames.Add(requestGame);
-                await App.Current.MainPage.DisplayAlert("הכנסת תוצאות המשחק", "שמירת מספר הקליעות של השחקנים בוצעה בהצלחה!", "אישור", FlowDirection.RightToLeft);
+                await App.Current.MainPage.DisplayAlert("שגיאה", "הניקוד של כל השחקנים חייב להיות גדול מאפס", "בסדר");
                 await App.Current.MainPage.Navigation.PopModalAsync();
-                NavigationPage p = new NavigationPage(new GamesScores());
-                NavigationPage.SetHasNavigationBar(p, false);
-                await App.Current.MainPage.Navigation.PushAsync(p);
             }
         }
         #endregion
