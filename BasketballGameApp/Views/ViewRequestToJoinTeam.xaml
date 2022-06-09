@@ -31,7 +31,7 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <Label Text="הגשת בקשה להצטרף לקבוצה: " Grid.Row="0" />
-                    <Label Text="{Binding MyRequestToJoinTeam.Team.Name,FallbackValue='לא הגשת כרגע שום בקשה להצטרפות לקבוצה'}" Grid.Row="0" />
+                    <Label HorizontalOptions="EndAndExpand" Text="{Binding MyRequestToJoinTeam.Team.Name,FallbackValue='לא הגשת כרגע שום בקשה להצטרפות לקבוצה'}" Grid.Row="0" />
                     <Label Text="בקשתך עדיין לא אושרה או נדחתה על ידי מאמן הקבוצה, המתן לקבלת תשובה!" Grid.Row="1" />
                 </Grid>
             </ScrollView>
