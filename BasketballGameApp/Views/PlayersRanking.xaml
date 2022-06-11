@@ -35,7 +35,7 @@
                 </Grid.RowDefinitions>
                 <Label Text="שם השחקן" Grid.Column="0" />
                 <Label Text="קבוצה" Grid.Column="1" />
-                <Label Text="מספר המשחקים" Grid.Column="2" />
+                <Label Text="משחקים" Grid.Column="2" />
                 <Label Text="מספר הנקודות הכולל" Grid.Column="3" />
             </Grid>
 

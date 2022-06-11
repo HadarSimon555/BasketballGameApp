@@ -572,7 +572,7 @@ namespace BasketballGameApp.Services
                 {
                     jsonObject = await response.Content.ReadAsStringAsync();
                     bool r = JsonSerializer.Deserialize<bool>(jsonObject, options);
-                    return true;
+                    return r;
                 }
                 else
                 {
