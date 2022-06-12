@@ -345,7 +345,7 @@ namespace BasketballGameApp.ViewModels
                 isPlayer = value;
                 if (isPlayer == false)
                     Height = 0;
-
+                IsCoach = !value;
                 OnPropertyChanged("IsPlayer");
             }
         }

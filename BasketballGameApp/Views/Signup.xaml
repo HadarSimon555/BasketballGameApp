@@ -6,12 +6,6 @@
              NavigationPage.HasNavigationBar="True"
              FlowDirection="RightToLeft"
              Title="הרשמה">
-    <!-- <ContentPage.BindingContext>
-        <local:SignupViewModel></local:SignupViewModel>
-    </ContentPage.BindingContext> 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Name="AddUser" Order="Primary" Text="הרשמה" Priority="0" Command="{Binding SaveDataCommand}" />
-    </ContentPage.ToolbarItems> -->
     <ContentPage.Content>
 
         <StackLayout Style="{StaticResource Stack}" RadioButtonGroup.GroupName="Gender" RadioButtonGroup.SelectedValue="{Binding Gender}" Padding="0">
